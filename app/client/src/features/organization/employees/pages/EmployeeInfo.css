@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+/* ===================================================
+   Employee Information Page
+=================================================== */
+
+.employee-info-page{
+    width:100%;
+    min-height:100%;
+    padding:32px;
+    background:#070b17;
+    font-family:"Poppins",sans-serif;
+    box-sizing:border-box;
+}
+
+/* spacing between sections */
+
+.employee-info-page > *{
+    margin-bottom:24px;
+}
+
+.employee-info-page > *:last-child{
+    margin-bottom:0;
+}
+
+/* ===================================================
+   Content Wrapper
+=================================================== */
+
+.employee-content{
+    display:flex;
+    flex-direction:column;
+    gap:24px;
+}
+
+/* ===================================================
+   Card Style
+=================================================== */
+
+.content-card{
+    background:#111827;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:18px;
+    overflow:hidden;
+}
+
+/* ===================================================
+   Animation
+=================================================== */
+
+.employee-info-page{
+    animation:fadePage .35s ease;
+}
+
+@keyframes fadePage{
+
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+/* ===================================================
+   Responsive
+=================================================== */
+
+@media(max-width:1200px){
+
+    .employee-info-page{
+        padding:24px;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .employee-info-page{
+        padding:18px;
+    }
+
+}
+
+@media(max-width:576px){
+
+    .employee-info-page{
+        padding:14px;
+    }
+
+}

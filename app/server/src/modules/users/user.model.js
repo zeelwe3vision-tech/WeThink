@@ -4,7 +4,7 @@ const USER_ROLES = ["Admin", "HR", "Manager", "Employee"];
 
 const USER_STATUS = ["Active", "Inactive"];
 
-modules.exports = {
+module.exports = {
   USER_ROLES,
   USER_STATUS,
 };

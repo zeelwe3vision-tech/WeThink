@@ -1,10 +1,13 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+// Chetan - 23/06/2024 - start  
+// import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import "./index.css";
+import App from "./App";
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
+createRoot(document.getElementById("root")).render(
+  <BrowserRouter>
     <App />
-  </StrictMode>,
-)
+  </BrowserRouter>,
+);
+// Chetan - 23/06/2024 - end

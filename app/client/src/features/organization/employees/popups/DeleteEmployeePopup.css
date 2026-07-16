@@ -1,0 +1,177 @@
+.delete-popup-overlay {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+
+  z-index: 9999;
+}
+
+.delete-popup {
+  width: 430px;
+  max-width: calc(100% - 32px);
+
+  padding: 36px 32px;
+
+  background: #111827;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+
+  text-align: center;
+
+  animation: popupAnimation .25s ease;
+}
+
+.delete-popup-icon {
+  width: 72px;
+  height: 72px;
+
+  margin: 0 auto 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: rgba(239, 68, 68, 0.12);
+
+  color: #ef4444;
+
+  font-size: 32px;
+}
+
+.delete-popup h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.delete-popup p {
+  margin: 18px 0 10px;
+
+  color: #d1d5db;
+
+  line-height: 1.7;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+}
+
+.delete-popup strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.delete-warning {
+  display: block;
+
+  margin-bottom: 28px;
+
+  color: #f59e0b;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.delete-popup-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.cancel-btn {
+  min-width: 130px;
+  height: 46px;
+
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px;
+
+  background: transparent;
+
+  color: #ffffff;
+
+  cursor: pointer;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+
+  transition: .25s;
+}
+
+.cancel-btn:hover {
+  background: rgba(255,255,255,.05);
+}
+
+.delete-btn {
+  min-width: 160px;
+  height: 46px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: linear-gradient(
+    135deg,
+    #ef4444,
+    #dc2626
+  );
+
+  color: #ffffff;
+
+  cursor: pointer;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+
+  transition: .25s;
+}
+
+.delete-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 12px 28px rgba(239,68,68,.28);
+}
+
+@keyframes popupAnimation {
+
+  from {
+    opacity: 0;
+    transform: scale(.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+}
+
+@media (max-width: 576px) {
+
+  .delete-popup {
+    padding: 28px 22px;
+  }
+
+  .delete-popup-actions {
+    flex-direction: column;
+  }
+
+  .cancel-btn,
+  .delete-btn {
+    width: 100%;
+  }
+
+}

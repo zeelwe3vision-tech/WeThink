@@ -1,3 +1,4 @@
+/* Chetan - 23/06/2024 - start */ 
 .counter {
   font-size: 16px;
   padding: 5px 10px;
@@ -182,3 +183,5 @@
     border-right-color: var(--border);
   }
 }
+
+/* Chetan - 23/06/2024 - end */
