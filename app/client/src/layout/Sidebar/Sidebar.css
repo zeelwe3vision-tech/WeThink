@@ -64,17 +64,13 @@
   outline: none;
   background: transparent;
   border-radius: 12px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   color: #c7cad4;
   text-decoration: none;
-
   padding: 0 16px;
   margin-bottom: 8px;
-
   cursor: pointer;
   transition: all .25s ease;
 }
@@ -83,6 +79,11 @@
   display: flex;
   align-items: center;
   gap: 14px;
+  flex: 1;
+}
+
+.dropdown-btn .menu-left span {
+  padding-left: 38px;
 }
 
 .menu-item span,
@@ -113,9 +114,7 @@
     #7C3AED,
     #EC4899
   );
-
   color: #ffffff;
-
   box-shadow:
     0 0 20px rgba(124,58,237,.25);
 }
@@ -129,29 +128,40 @@
 }
 
 .submenu {
-  margin-top: 8px;
-  margin-left: 18px;
-  border-left: 1px solid rgba(255,255,255,.08);
-  padding-left: 18px;
+  margin-top: 6px;
+  margin-left: 8px;
+  padding-left: 12px;
 }
 
 .submenu-item {
-  display: block;
-
+  display: flex;
+  align-items: center;
+  gap: 10px;
   text-decoration: none;
-
   color: #A8AFBF;
-
   font-size: 14px;
   font-weight: 500;
-
-  padding: 11px 14px;
-
+  padding: 8px 10px;
+  margin-bottom: 2px;
   border-radius: 10px;
-
-  margin-bottom: 8px;
-
+  white-space: nowrap;      
+  overflow: hidden;
+  text-overflow: ellipsis;
   transition: .25s;
+}
+
+.submenu-item::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: linear-gradient(
+    90deg,
+    #7C3AED,
+    #EC1874
+  );
+  flex-shrink: 0;
+  opacity: .9;
 }
 
 .submenu-item:hover {
@@ -163,10 +173,15 @@
   background: linear-gradient(
       90deg,
       #7C3AED,
-      #EC4899
+      #EC1874
   );
 
-  color: white;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.submenu-item.active::before {
+  background: #ffffff;
 }
 
 /* ===========================
@@ -181,25 +196,16 @@
 .logout-btn {
   width: 100%;
   height: 48px;
-
   background: transparent;
-
   border: 1px solid rgba(255,255,255,.10);
-
   border-radius: 12px;
-
   display: flex;
   align-items: center;
   gap: 14px;
-
   color: #d1d5db;
-
   cursor: pointer;
-
   padding: 0 16px;
-
   transition: .25s;
-
   font-family: "Poppins", sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -220,7 +226,6 @@
 =========================== */
 
 @media (max-width:1024px) {
-
   .sidebar{
       width:250px;
   }

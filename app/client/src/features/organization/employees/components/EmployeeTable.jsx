@@ -1,5 +1,11 @@
 import { MoreVertical, Mail } from "lucide-react";
 import "./EmployeeTable.css";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+} from "lucide-react";
 
 const getStatusClass = (status) => {
   switch (status) {
@@ -52,31 +58,26 @@ function EmployeeTable({ employees = [], onOpenDrawer }) {
 
                   <td className="employee-cell">
                     <div className="employee-info">
-                      {/* Avatar */}
-
                       <div className="employee-avatar-wrapper">
                         <img
                           src={
-                            employee.avatar ||
-                            `https://ui-avatars.com/api/?name=${employee.firstName}+${employee.lastName}&background=7C3AED&color=ffffff`
+                            employee.profile_image ||
+                            `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                              employee.full_name,
+                            )}&background=7C3AED&color=ffffff`
                           }
-                          alt={`${employee.firstName} ${employee.lastName}`}
+                          alt={employee.full_name}
                           className="employee-avatar"
                         />
                       </div>
 
-                      {/* Details */}
-
                       <div className="employee-details">
-                        <h4 className="employee-name">
-                          {employee.firstName} {employee.lastName}
-                        </h4>
+                        <h4 className="employee-name">{employee.full_name}</h4>
 
-                        <p className="employee-id">{employee.employeeId}</p>
+                        <p className="employee-id">{employee.employee_id}</p>
 
                         <p className="employee-email">
                           <Mail size={13} />
-
                           <span>{employee.email}</span>
                         </p>
                       </div>
@@ -103,33 +104,25 @@ function EmployeeTable({ employees = [], onOpenDrawer }) {
 
                   <td>
                     <div className="designation-block">
-                      <div className="designation-name">{employee.role}</div>
+                      <div className="designation-name">
+                        {employee.designation}
+                      </div>
 
                       <div className="designation-subtitle">Reporting To</div>
 
                       <div className="designation-manager">
-                        {employee.manager}
+                        {employee.reporting_manager}
                       </div>
                     </div>
                   </td>
+
                   {/* ===========================
                       Skills
                   ============================ */}
 
                   <td>
                     <div className="skills-list">
-                      {employee.skills &&
-                        employee.skills.slice(0, 3).map((skill, index) => (
-                          <span key={index} className="skill-chip">
-                            {skill}
-                          </span>
-                        ))}
-
-                      {employee.skills && employee.skills.length > 3 && (
-                        <span className="skill-chip more-chip">
-                          +{employee.skills.length - 3}
-                        </span>
-                      )}
+                      <span className="skill-chip">-</span>
                     </div>
                   </td>
 
@@ -180,15 +173,24 @@ function EmployeeTable({ employees = [], onOpenDrawer }) {
         </div>
 
         <div className="pagination-buttons">
-          <button className="pagination-btn">{"<"}</button>
+          <button className="pagination-btn">
+            <ChevronsLeft size={18} />
+          </button>
+
+          <button className="pagination-btn">
+            <ChevronLeft size={18} />
+          </button>
 
           <button className="pagination-btn active">1</button>
-
           <button className="pagination-btn">2</button>
 
-          <button className="pagination-btn">3</button>
+          <button className="pagination-btn">
+            <ChevronRight size={18} />
+          </button>
 
-          <button className="pagination-btn">{">"}</button>
+          <button className="pagination-btn">
+            <ChevronsRight size={18} />
+          </button>
         </div>
       </div>
     </div>

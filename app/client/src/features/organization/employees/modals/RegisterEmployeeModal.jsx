@@ -1,110 +1,353 @@
+import { useEffect, useState } from "react";
 import { X } from "lucide-react";
+
+import {
+  getOrganizations,
+  getDepartments,
+  getRoles,
+  getManagers,
+} from "../services/employeeService";
+
 import "./RegisterEmployeeModal.css";
 
 function RegisterEmployeeModal({ open, onClose, onSubmit }) {
+  const [employeeId, setEmployeeId] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [password, setPassword] = useState("");
+  const [organizations, setOrganizations] = useState([]);
+  const [departments, setDepartments] = useState([]);
+  const [roles, setRoles] = useState([]);
+  const [managers, setManagers] = useState([]);
+  const [managerSearch, setManagerSearch] = useState("");
+  const [showManagerList, setShowManagerList] = useState(false);
+
+  const [organizationId, setOrganizationId] = useState("");
+  const [departmentId, setDepartmentId] = useState("");
+  const [roleId, setRoleId] = useState("");
+  const [managerId, setManagerId] = useState("");
+
+  const [designation, setDesignation] = useState("");
+  const [joiningDate, setJoiningDate] = useState("");
+  const [employmentType, setEmploymentType] = useState("Full Time");
+  const [status, setStatus] = useState(true);
+
+  const resetForm = () => {
+    setEmployeeId("");
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setMobile("");
+    setPassword("");
+
+    setOrganizationId("");
+    setDepartmentId("");
+    setRoleId("");
+    setManagerId("");
+
+    setDesignation("");
+    setJoiningDate("");
+
+    setEmploymentType("Full Time");
+    setStatus(true);
+
+    setManagerSearch("");
+    setShowManagerList(false);
+  };
+
+  useEffect(() => {
+    if (!open) return;
+
+    // resetForm();
+
+    const loadDropdowns = async () => {
+      try {
+        const organizationRes = await getOrganizations();
+        console.log("Organizations API", organizationRes);
+        const managerRes = await getManagers();
+
+        const departmentRes = await getDepartments();
+        const roleRes = await getRoles();
+
+        if (organizationRes.success) {
+          console.log(organizationRes.organizations);
+          setOrganizations(organizationRes.organizations);
+        }
+
+        if (departmentRes.success) {
+          console.log(departmentRes.departments);
+          setDepartments(departmentRes.departments);
+        }
+
+        if (roleRes.success) {
+          setRoles(roleRes.roles);
+        }
+        if (managerRes.success) {
+          setManagers(managerRes.managers);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    loadDropdowns();
+  }, [open]);
+
   if (!open) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (onSubmit) {
-      onSubmit();
+    const employeeData = {
+      employeeId,
+      firstName,
+      lastName,
+      email,
+      mobile,
+      password,
+
+      organizationId,
+      departmentId,
+      roleId,
+      managerId,
+
+      designation,
+      joiningDate,
+      employmentType,
+      status,
+    };
+
+    const success = await onSubmit(employeeData);
+
+    if (success) {
+      resetForm();
+      onClose();
     }
+  };
+
+  const handleClose = () => {
+    resetForm();
+    onClose();
   };
 
   return (
     <>
       {/* Overlay */}
-
-      <div className="modal-overlay" onClick={onClose} />
+      <div className="modal-overlay" onClick={handleClose} />
 
       {/* Modal */}
-
       <div className="register-modal">
         {/* Header */}
-
         <div className="register-modal-header">
-          <div>
+          <div className="header-content">
             <h2>Register Employee</h2>
-
             <p>Enter employee details to create a new account.</p>
           </div>
 
-          <button className="modal-close-btn" onClick={onClose}>
+          <button className="modal-close-btn">
             <X size={20} />
           </button>
         </div>
 
         {/* Form */}
-
         <form className="register-form" onSubmit={handleSubmit}>
           <div className="register-grid">
             <div className="form-group">
               <label>Employee ID</label>
-              <input type="text" placeholder="EMP0001" />
-            </div>
-
-            <div className="form-group">
-              <label>First Name</label>
-              <input type="text" placeholder="First Name" />
-            </div>
-
-            <div className="form-group">
-              <label>Last Name</label>
-              <input type="text" placeholder="Last Name" />
-            </div>
-
-            <div className="form-group">
-              <label>Email</label>
-              <input type="email" placeholder="Email Address" />
+              <input
+                type="text"
+                placeholder="EMP0001"
+                value={employeeId}
+                onChange={(e) => setEmployeeId(e.target.value)}
+              />
             </div>
 
             <div className="form-group">
               <label>Mobile</label>
-              <input type="text" placeholder="Mobile Number" />
+              <input
+                type="text"
+                placeholder="Mobile Number"
+                value={mobile}
+                onChange={(e) => setMobile(e.target.value)}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>First Name</label>
+              <input
+                type="text"
+                placeholder="First Name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Last Name</label>
+              <input
+                type="text"
+                placeholder="Last Name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Email</label>
+              <input
+                type="email"
+                placeholder="Email Address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
 
             <div className="form-group">
               <label>Password</label>
-              <input type="password" placeholder="Password" />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Organization</label>
+              <select
+                value={organizationId}
+                onChange={(e) => setOrganizationId(e.target.value)}
+              >
+                <option value="">Select Organization</option>
+
+                {organizations.map((organization) => (
+                  <option key={organization.id} value={organization.id}>
+                    {organization.organization_name}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className="form-group">
               <label>Department</label>
+              <select
+                value={departmentId}
+                onChange={(e) => setDepartmentId(e.target.value)}
+              >
+                <option value="">Select Department</option>
 
-              <select>
-                <option>HR</option>
-                <option>IT</option>
-                <option>Finance</option>
-                <option>Sales</option>
+                {departments.map((department) => (
+                  <option key={department.id} value={department.id}>
+                    {department.department_name}
+                  </option>
+                ))}
               </select>
             </div>
 
             <div className="form-group">
               <label>Role</label>
+              <select
+                value={roleId}
+                onChange={(e) => setRoleId(e.target.value)}
+              >
+                <option value="">Select Role</option>
 
-              <select>
-                <option>CEO</option>
-                <option>Admin</option>
-                <option>HR</option>
-                <option>Manager</option>
-                <option>Employee</option>
-                <option>Intern</option>
+                {roles.map((role) => (
+                  <option key={role.id} value={role.id}>
+                    {role.role_name}
+                  </option>
+                ))}
               </select>
             </div>
 
             <div className="form-group">
+              <label>Designation</label>
+              <input
+                type="text"
+                value={designation}
+                onChange={(e) => setDesignation(e.target.value)}
+              />
+            </div>
+
+            <div className="form-group manager-search">
               <label>Reporting Manager</label>
 
-              <input type="text" placeholder="Reporting Manager" />
+              <input
+                type="text"
+                placeholder="Search Manager"
+                value={managerSearch}
+                onChange={(e) => {
+                  setManagerSearch(e.target.value);
+                  setShowManagerList(true);
+                }}
+              />
+
+              {showManagerList && managerSearch && (
+                <div className="manager-dropdown">
+                  {managers
+                    .filter((manager) =>
+                      `${manager.first_name} ${manager.last_name}`
+                        .toLowerCase()
+                        .includes(managerSearch.toLowerCase()),
+                    )
+                    .map((manager) => (
+                      <div
+                        key={manager.id}
+                        className="manager-item"
+                        onClick={() => {
+                          setManagerSearch(
+                            `${manager.first_name} ${manager.last_name}`,
+                          );
+                          setManagerId(manager.id);
+                          setShowManagerList(false);
+                        }}
+                      >
+                        <strong>
+                          {manager.first_name} {manager.last_name}
+                        </strong>
+
+                        <br />
+
+                        <small>{manager.designation}</small>
+                      </div>
+                    ))}
+                </div>
+              )}
+            </div>
+
+            <div className="form-group">
+              <label>Joining Date</label>
+              <input
+                type="date"
+                value={joiningDate}
+                onChange={(e) => setJoiningDate(e.target.value)}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Employment Type</label>
+              <select
+                value={employmentType}
+                onChange={(e) => setEmploymentType(e.target.value)}
+              >
+                <option>Full Time</option>
+                <option>Part Time</option>
+                <option>Intern</option>
+                <option>Contract</option>
+              </select>
             </div>
 
             <div className="form-group">
               <label>Status</label>
 
-              <select>
-                <option>Active</option>
-                <option>Inactive</option>
+              <select
+                value={status}
+                onChange={(e) => setStatus(e.target.value === "true")}
+              >
+                <option value={true}>Active</option>
+                <option value={false}>Inactive</option>
               </select>
             </div>
           </div>
@@ -112,7 +355,7 @@ function RegisterEmployeeModal({ open, onClose, onSubmit }) {
           {/* Footer */}
 
           <div className="register-modal-footer">
-            <button type="button" className="cancel-btn" onClick={onClose}>
+            <button type="button" className="cancel-btn" onClick={handleClose}>
               Cancel
             </button>
 

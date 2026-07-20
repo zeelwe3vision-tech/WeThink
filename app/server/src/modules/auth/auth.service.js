@@ -26,7 +26,7 @@ exports.login = async (email, password) => {
   }
 
   // Account Active
-  if (user.status !== "Active") {
+  if (!user.status) {
     return {
       success: false,
       message: "Account Inactive",
@@ -108,4 +108,4 @@ exports.login = async (email, password) => {
 
     user,
   };
-};
+};;

@@ -132,7 +132,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 3px;
+  gap: 10px;
 }
 
 .employee-name {
@@ -146,7 +146,7 @@
 .employee-id {
   margin: 0;
   color: #9CA3AF;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.2;
 }
 
@@ -154,12 +154,10 @@
   display: flex;
   align-items: center;
   gap: 6px;
-
-  margin: 2px 0 0;
+  margin: 0px -2px 0;
   padding: 0;
-
   color: #94A3B8;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.2;
 }
 

@@ -1,25 +1,8 @@
-const userService = require("./user.service");
+const roleService = require("./role.service");
 
-exports.createUser = async (req, res) => {
+exports.getRoles = async (req, res) => {
   try {
-    const result = await userService.createUser(req.body);
-
-    if (!result.success) {
-      return res.status(400).json(result);
-    }
-
-    return res.status(201).json(result);
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-  }
-};
-
-exports.getAllUsers = async (req, res) => {
-  try {
-    const result = await userService.getAllUsers();
+    const result = await roleService.getRoles();
 
     if (!result.success) {
       return res.status(500).json(result);
@@ -34,9 +17,9 @@ exports.getAllUsers = async (req, res) => {
   }
 };
 
-exports.getUserById = async (req, res) => {
+exports.getRoleById = async (req, res) => {
   try {
-    const result = await userService.getUserById(req.params.id);
+    const result = await roleService.getRoleById(req.params.id);
 
     if (!result.success) {
       return res.status(404).json(result);
@@ -51,9 +34,26 @@ exports.getUserById = async (req, res) => {
   }
 };
 
-exports.updateUser = async (req, res) => {
+exports.createRole = async (req, res) => {
   try {
-    const result = await userService.updateUser(req.params.id, req.body);
+    const result = await roleService.createRole(req.body);
+
+    if (!result.success) {
+      return res.status(400).json(result);
+    }
+
+    return res.status(201).json(result);
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+exports.updateRole = async (req, res) => {
+  try {
+    const result = await roleService.updateRole(req.params.id, req.body);
 
     if (!result.success) {
       return res.status(400).json(result);
@@ -68,26 +68,9 @@ exports.updateUser = async (req, res) => {
   }
 };
 
-exports.deleteUser = async (req, res) => {
+exports.deleteRole = async (req, res) => {
   try {
-    const result = await userService.deleteUser(req.params.id);
-
-    if (!result.success) {
-      return res.status(400).json(result);
-    }
-
-    return res.status(200).json(result);
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-  }
-};
-
-exports.getManagers = async (req, res) => {
-  try {
-    const result = await userService.getManagers();
+    const result = await roleService.deleteRole(req.params.id);
 
     if (!result.success) {
       return res.status(400).json(result);

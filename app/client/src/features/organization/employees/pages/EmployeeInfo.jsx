@@ -1,80 +1,40 @@
-import { useMemo, useState } from "react";
+import { getEmployees, createEmployee } from "../services/employeeService";
+import { useEffect, useMemo, useState } from "react";
 import EmployeeHeader from "../components/EmployeeHeader";
 import EmployeeFilters from "../components/EmployeeFilters";
 import EmployeeTable from "../components/EmployeeTable";
 import EmployeeActions from "../components/EmployeeActions";
-
 import RegisterEmployeeModal from "../modals/RegisterEmployeeModal";
 import AssignSkillsModal from "../modals/AssignSkillsModal";
-
 import EditEmployeeDrawer from "../drawers/EditEmployeeDrawer";
-
 import DeleteEmployeePopup from "../popups/DeleteEmployeePopup";
-
 import "./EmployeeInfo.css";
 
 function EmployeeInfo() {
   /* ===========================================================
      Employee Data
   =========================================================== */
+  const [employees, setEmployees] = useState([]);
 
-  const [employees, setEmployees] = useState([
-    {
-      id: 1,
-      employeeId: "EMP001",
-      firstName: "Chetan",
-      lastName: "Jain",
-      email: "chetan@wethink.com",
-      mobile: "9876543210",
-      department: "IT",
-      role: "Admin",
-      manager: "Rahul Sharma",
-      status: "Active",
-      skills: ["React", "Node"],
-    },
+  /* ===========================================================
+     Load Employees
+  =========================================================== */
 
-    {
-      id: 2,
-      employeeId: "EMP002",
-      firstName: "Priya",
-      lastName: "Sharma",
-      email: "priya@wethink.com",
-      mobile: "9123456780",
-      department: "HR",
-      role: "HR",
-      manager: "Amit Kapoor",
-      status: "Active",
-      skills: ["Recruitment"],
-    },
+  useEffect(() => {
+    const fetchEmployees = async () => {
+      try {
+        const response = await getEmployees();
 
-    {
-      id: 3,
-      employeeId: "EMP003",
-      firstName: "Rohan",
-      lastName: "Patel",
-      email: "rohan@wethink.com",
-      mobile: "9988776655",
-      department: "Sales",
-      role: "Manager",
-      manager: "Vikas Mehta",
-      status: "Inactive",
-      skills: ["Sales"],
-    },
+        if (response.success) {
+          setEmployees(response.users || []);
+        }
+      } catch (error) {
+        console.error("Load Employees Error:", error);
+      }
+    };
 
-    {
-      id: 4,
-      employeeId: "EMP004",
-      firstName: "Neha",
-      lastName: "Gupta",
-      email: "neha@wethink.com",
-      mobile: "9000011111",
-      department: "Finance",
-      role: "Employee",
-      manager: "Karan Shah",
-      status: "On Leave",
-      skills: ["Accounting"],
-    },
-  ]);
+    fetchEmployees();
+  }, []);
 
   /* ===========================================================
      Search & Filters
@@ -110,14 +70,14 @@ function EmployeeInfo() {
     let data = [...employees];
 
     if (search.trim() !== "") {
-      data = data.filter((employee) => {
-        const keyword = search.toLowerCase();
+      const keyword = search.toLowerCase();
 
+      data = data.filter((employee) => {
         return (
-          employee.firstName.toLowerCase().includes(keyword) ||
-          employee.lastName.toLowerCase().includes(keyword) ||
-          employee.email.toLowerCase().includes(keyword) ||
-          employee.employeeId.toLowerCase().includes(keyword)
+          (employee.first_name || "").toLowerCase().includes(keyword) ||
+          (employee.last_name || "").toLowerCase().includes(keyword) ||
+          (employee.email || "").toLowerCase().includes(keyword) ||
+          (employee.employee_id || "").toLowerCase().includes(keyword)
         );
       });
     }
@@ -133,22 +93,50 @@ function EmployeeInfo() {
     }
 
     if (sortBy === "A-Z") {
-      data.sort((a, b) => a.firstName.localeCompare(b.firstName));
+      data.sort((a, b) =>
+        (a.first_name || "").localeCompare(b.first_name || ""),
+      );
     }
 
     if (sortBy === "Z-A") {
-      data.sort((a, b) => b.firstName.localeCompare(a.firstName));
+      data.sort((a, b) =>
+        (b.first_name || "").localeCompare(a.first_name || ""),
+      );
     }
 
     return data;
   }, [employees, search, statusFilter, departmentFilter, sortBy]);
-
   /* ===========================================================
      Event Handlers
   =========================================================== */
 
   const handleAddEmployee = () => {
     setShowRegisterModal(true);
+  };
+
+  const handleRegisterEmployee = async (employeeData) => {
+    try {
+      const response = await createEmployee(employeeData);
+
+      if (!response.success) {
+        alert(response.message);
+        return false;
+      }
+
+      const responseUsers = await getEmployees();
+
+      if (responseUsers.success) {
+        setEmployees(responseUsers.users || []);
+      }
+
+      alert("Employee Registered Successfully");
+
+      return true;
+    } catch (error) {
+      console.error(error);
+      alert("Registration Failed");
+      return false;
+    }
   };
 
   const handleEditEmployee = (employee) => {
@@ -166,6 +154,11 @@ function EmployeeInfo() {
     setShowDeletePopup(true);
   };
 
+  const handleOpenDrawer = (employee) => {
+    setSelectedEmployee(employee);
+    setShowDrawer(true);
+  };
+
   const handleCloseAll = () => {
     setShowRegisterModal(false);
     setShowSkillModal(false);
@@ -181,14 +174,8 @@ function EmployeeInfo() {
     setSortBy("Newest");
   };
 
-  const handleOpenDrawer = (employee) => {
-    setSelectedEmployee(employee);
-    setShowDrawer(true);
-  };
-
   const handleApplyFilters = () => {
-    // Filtering is already reactive through useMemo.
-    // Reserved for future API-based filtering.
+    // Reserved for future server-side filtering
   };
 
   return (
@@ -224,12 +211,11 @@ function EmployeeInfo() {
           />
         )}
       />
+
       <RegisterEmployeeModal
         open={showRegisterModal}
         onClose={handleCloseAll}
-        onSubmit={() => {
-          setShowRegisterModal(false);
-        }}
+        onSubmit={handleRegisterEmployee}
       />
 
       <AssignSkillsModal
@@ -245,6 +231,13 @@ function EmployeeInfo() {
         open={showDrawer}
         employee={selectedEmployee}
         onClose={handleCloseAll}
+        onRefresh={async () => {
+          const response = await getEmployees();
+
+          if (response.success) {
+            setEmployees(response.users || []);
+          }
+        }}
       />
 
       <DeleteEmployeePopup
