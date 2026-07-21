@@ -15,15 +15,13 @@ import axios from "axios";
    PRODUCTION (UNCOMMENT AFTER DEPLOYMENT)
 ========================================================== */
 
-// const API = "https://wethink.onrender.com";
+const API = "https://wethink.onrender.com/api";
 
-const API_URL = `${"https://wethink.onrender.com"}/users`;
-
-const ORGANIZATION_API = `${"https://wethink.onrender.com"}/organizations`;
-
-const DEPARTMENT_API = `${"https://wethink.onrender.com"}/departments`;
-
-const ROLE_API = `${"https://wethink.onrender.com"}/roles`;
+const API_URL = `${API}/users`;
+const ORGANIZATION_API = `${API}/organizations`;
+const DEPARTMENT_API = `${API}/departments`;
+const ROLE_API = `${API}/roles`;
+const MANAGER_API = `${API}/users/managers`;
 
 /* ==========================================================
    Employees
@@ -86,6 +84,6 @@ export const getRoles = async () => {
 ========================================================== */
 
 export const getManagers = async () => {
-  const response = await axios.get(`${API_URL}/managers`);
+  const response = await axios.get(MANAGER_API);
   return response.data;
 };

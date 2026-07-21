@@ -23,19 +23,25 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log("Email:", email);
+    console.log("Password:", password);
+
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "https://wethink.onrender.com/api/auth/login",
         {
-          email,
+          email: email.trim(),
           password,
         },
       );
+
+      console.log(response.data);
 
       if (response.data.success) {
         navigate("/dashboard");
       }
     } catch (error) {
+      console.log(error.response?.data);
       alert(error.response?.data?.message || "Login Failed");
     }
   };
