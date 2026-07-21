@@ -15,15 +15,15 @@ import axios from "axios";
    PRODUCTION (UNCOMMENT AFTER DEPLOYMENT)
 ========================================================== */
 
-const API = import.meta.env.VITE_API_URL;
+// const API = "https://wethink.onrender.com";
 
-const API_URL = `${API}/users`;
+const API_URL = `${"https://wethink.onrender.com"}/users`;
 
-const ORGANIZATION_API = `${API}/organizations`;
+const ORGANIZATION_API = `${"https://wethink.onrender.com"}/organizations`;
 
-const DEPARTMENT_API = `${API}/departments`;
+const DEPARTMENT_API = `${"https://wethink.onrender.com"}/departments`;
 
-const ROLE_API = `${API}/roles`;
+const ROLE_API = `${"https://wethink.onrender.com"}/roles`;
 
 /* ==========================================================
    Employees
