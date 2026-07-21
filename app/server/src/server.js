@@ -1,11 +1,22 @@
-// Chetan - 23/06/2026 - start
-
 require("dotenv").config();
-
 const app = require("./app");
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server running on ${process.env.PORT}`);
+// Port
+// Local  : 5000
+// Render : process.env.PORT
+
+const PORT = process.env.PORT || 5000;
+
+// Start Server
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
 });
 
-// Chetan - 23/06/2026 - end
+// Global Error Handling
+process.on("unhandledRejection", (err) => {
+  console.error("Unhandled Rejection:", err);
+});
+
+process.on("uncaughtException", (err) => {
+  console.error("Uncaught Exception:", err);
+});
