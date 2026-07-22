@@ -5,8 +5,9 @@ import Dashboard from "./features/dashboard/pages/Dashboard";
 import RequestAccess from "./features/auth/pages/RequestAccess";
 import Layout from "./layout/Layout";
 import EmployeeInfo from "./features/organization/employees/pages/EmployeeInfo";
-
-
+ // dev-22.07.26-start
+import Department from "./features/organization/departments/pages/Department";
+// dev-22.07.26-end
 function App() {
   return (
     <Routes>
@@ -17,6 +18,12 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
 
         <Route path="/organization/employees" element={<EmployeeInfo />} />
+        {/* dev-22.07.26-start  */}
+        <Route
+          path="/organization/departments"
+          element={<Department />}
+        />
+       {/* dev-22.07.26-end */}
       </Route>
     </Routes>
   );
