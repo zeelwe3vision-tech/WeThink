@@ -49,6 +49,49 @@ exports.createUser = async (userData) => {
   }
 
   /* ----------------------------------------
+   First User Check
+---------------------------------------- */
+
+  const { count, error: countError } = await supabase
+    .from("users")
+    .select("*", {
+      count: "exact",
+      head: true,
+    });
+
+  if (countError) {
+    return {
+      success: false,
+      message: countError.message,
+    };
+  }
+
+  /* ----------------------------------------
+   First User becomes CEO
+---------------------------------------- */
+
+  let finalRoleId = roleId;
+  let finalManagerId = managerId;
+
+  if (count === 0) {
+    const { data: ceoRole, error: roleError } = await supabase
+      .from("roles")
+      .select("id")
+      .ilike("role_name", "CEO")
+      .single();
+
+    if (roleError || !ceoRole) {
+      return {
+        success: false,
+        message: "CEO role not found.",
+      };
+    }
+
+    finalRoleId = ceoRole.id;
+    finalManagerId = null;
+  }
+
+  /* ----------------------------------------
      Hash Password
   ---------------------------------------- */
 
@@ -71,8 +114,8 @@ exports.createUser = async (userData) => {
 
         organization_id: organizationId || null,
         department_id: departmentId || null,
-        role_id: roleId || null,
-        manager_id: managerId || null,
+        role_id: finalRoleId || null,
+        manager_id: finalManagerId || null,
 
         designation,
         joining_date: joiningDate,
@@ -96,7 +139,7 @@ exports.createUser = async (userData) => {
     message: "User created successfully",
     user: data,
   };
-};
+};;
 
 exports.getAllUsers = async () => {
   const [usersResult, organizationsResult, departmentsResult, rolesResult] =
