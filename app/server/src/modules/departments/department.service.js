@@ -3,8 +3,11 @@ const supabase = require("../../config/supabase");
 exports.getDepartments = async () => {
   const { data, error } = await supabase
     .from("departments")
-    .select("*")
-    .order("department_name");
+    .select("*");
+  //const { data, error } = await supabase
+   // .from("departments")
+    //.select("*")
+    //.order("department_name");
 
   if (error) {
     return {
