@@ -1,0 +1,314 @@
+/* ==========================================================
+   Assign Role Overlay
+========================================================== */
+
+.assign-role-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.65);
+  backdrop-filter:blur(8px);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  padding:24px;
+}
+
+/* ==========================================================
+   Modal
+========================================================== */
+
+.assign-role-modal{
+  width:680px;
+  max-width:100%;
+  background:var(--bg-card);
+  border:1px solid var(--border-color);
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,.45);
+}
+
+/* ==========================================================
+   Header
+========================================================== */
+
+.assign-role-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:24px 28px;
+  border-bottom:1px solid var(--border-color);
+}
+
+.assign-role-title{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+.assign-role-title svg{
+  width:48px;
+  height:48px;
+  padding:12px;
+  border-radius:14px;
+  background:rgba(124,58,237,.12);
+  color:var(--primary-color);
+}
+
+.assign-role-title h2{
+  font-size:22px;
+  font-weight:600;
+  color:var(--text-primary);
+}
+
+.assign-role-title p{
+  margin-top:4px;
+  font-size:14px;
+  color:var(--text-secondary);
+}
+
+.assign-close-btn{
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:12px;
+  background:transparent;
+  color:var(--text-secondary);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.assign-close-btn:hover{
+  background:rgba(239,68,68,.12);
+  color:#EF4444;
+}
+
+/* ==========================================================
+   Body
+========================================================== */
+
+.assign-role-body{
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+  padding:28px;
+}
+
+/* ==========================================================
+   Employee Card
+========================================================== */
+
+.employee-card{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:18px;
+  border:1px solid var(--border-color);
+  border-radius:16px;
+  background:var(--bg-main);
+}
+
+.employee-card svg{
+  width:46px;
+  height:46px;
+  padding:12px;
+  border-radius:12px;
+  background:rgba(124,58,237,.12);
+  color:var(--primary-color);
+}
+
+.employee-card strong{
+  display:block;
+  font-size:16px;
+  color:var(--text-primary);
+}
+
+.employee-card span{
+  display:block;
+  margin-top:5px;
+  font-size:13px;
+  color:var(--text-secondary);
+}
+
+/* ==========================================================
+   Form
+========================================================== */
+
+.assign-form-group{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.assign-form-group label{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:14px;
+  font-weight:500;
+  color:var(--text-secondary);
+}
+
+.assign-form-group label svg{
+  color:var(--primary-color);
+}
+
+.assign-form-group input,
+.assign-form-group select,
+.assign-form-group textarea{
+  width:100%;
+  border:1px solid var(--border-color);
+  border-radius:14px;
+  background:var(--bg-main);
+  color:var(--text-primary);
+  outline:none;
+  transition:.25s;
+}
+
+.assign-form-group input,
+.assign-form-group select{
+  height:48px;
+  padding:0 16px;
+}
+
+.assign-form-group textarea{
+  resize:none;
+  min-height:120px;
+  padding:14px 16px;
+}
+
+.assign-form-group input:disabled{
+  background:rgba(255,255,255,.04);
+  color:var(--text-secondary);
+  cursor:not-allowed;
+}
+
+.assign-form-group input::placeholder,
+.assign-form-group textarea::placeholder{
+  color:var(--text-muted);
+}
+
+.assign-form-group input:hover,
+.assign-form-group select:hover,
+.assign-form-group textarea:hover{
+  border-color:var(--primary-color);
+}
+
+.assign-form-group input:focus,
+.assign-form-group select:focus,
+.assign-form-group textarea:focus{
+  border-color:var(--primary-color);
+  box-shadow:0 0 0 3px rgba(124,58,237,.15);
+}
+
+/* ==========================================================
+   Notify Employee
+========================================================== */
+
+.notify-switch{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  cursor:pointer;
+  color:var(--text-primary);
+  font-size:14px;
+}
+
+.notify-switch input{
+  display:none;
+}
+
+.notify-checkbox{
+  width:22px;
+  height:22px;
+  border-radius:6px;
+  border:1px solid var(--border-color);
+  background:var(--bg-main);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:transparent;
+  transition:.25s;
+}
+
+.notify-switch input:checked + .notify-checkbox{
+  background:linear-gradient(90deg,#7C3AED,#EC4899);
+  border-color:transparent;
+  color:#fff;
+}
+
+/* ==========================================================
+   Footer
+========================================================== */
+
+.assign-role-footer{
+  display:flex;
+  justify-content:flex-end;
+  gap:14px;
+  padding:24px 28px;
+  border-top:1px solid var(--border-color);
+}
+
+.cancel-btn{
+  min-width:130px;
+  height:46px;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  background:transparent;
+  color:var(--text-primary);
+  font-size:14px;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.cancel-btn:hover{
+  border-color:#EF4444;
+  color:#EF4444;
+}
+
+.assign-btn{
+  min-width:170px;
+  height:46px;
+  border:none;
+  border-radius:12px;
+  background:linear-gradient(90deg,#7C3AED,#EC4899);
+  color:#fff;
+  font-size:14px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.assign-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 28px rgba(124,58,237,.35);
+}
+
+/* ==========================================================
+   Responsive
+========================================================== */
+
+@media(max-width:768px){
+
+.assign-role-modal{
+  width:100%;
+}
+
+.assign-role-header,
+.assign-role-body,
+.assign-role-footer{
+  padding:20px;
+}
+
+.assign-role-footer{
+  flex-direction:column-reverse;
+}
+
+.cancel-btn,
+.assign-btn{
+  width:100%;
+}
+}

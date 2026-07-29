@@ -1,0 +1,101 @@
+/* ======================================================
+   Permission Toolbar
+======================================================== */
+
+.permission-toolbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  padding:18px 24px;
+  margin-bottom:20px;
+  background:var(--bg-card);
+  border:1px solid var(--border-color);
+  border-radius:16px;
+}
+
+/* ======================================================
+   Left
+======================================================= */
+
+.permission-toolbar-info{
+  display:flex;
+  flex-direction:column;
+}
+
+.toolbar-label{
+  font-size:12px;
+  color:var(--text-secondary);
+  margin-bottom:4px;
+}
+
+.toolbar-title{
+  font-size:20px;
+  font-weight:600;
+  color:var(--text-primary);
+}
+
+/* =======================================================
+   Right
+======================================================== */
+
+.permission-toolbar-actions{
+  display:flex;
+  gap:12px;
+}
+
+.toolbar-btn{
+  height:42px;
+  padding:0 18px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  background:var(--bg-main);
+  color:var(--text-primary);
+  cursor:pointer;
+  transition:.25s;
+}
+
+.toolbar-btn:hover{
+  transform:translateY(-2px);
+}
+
+.toolbar-btn.grant:hover{
+  border-color:#22C55E;
+  color:#22C55E;
+}
+
+.toolbar-btn.deny:hover{
+  border-color:#EF4444;
+  color:#EF4444;
+}
+
+.toolbar-btn.reset:hover{
+  border-color:var(--primary-color);
+  color:var(--primary-color);
+}
+
+/* ======================================================
+   Responsive
+======================================================= */
+
+@media(max-width:992px){
+
+.permission-toolbar{
+  flex-direction:column;
+  align-items:flex-start;
+}
+
+.permission-toolbar-actions{
+  width:100%;
+  flex-wrap:wrap;
+}
+
+.toolbar-btn{
+  flex:1;
+  justify-content:center;
+}
+
+}

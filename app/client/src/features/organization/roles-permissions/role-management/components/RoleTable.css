@@ -1,0 +1,183 @@
+/* ==========================================================
+   Role Table
+========================================================== */
+
+.role-table-wrapper{
+  width:100%;
+  overflow-x:auto;
+  background:var(--bg-card);
+  border:1px solid var(--border-color);
+  border-radius:18px;
+}
+
+.role-table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+.role-table thead{
+  background:rgba(255,255,255,0.03);
+}
+
+.role-table thead th{
+  padding:18px 20px;
+  text-align:left;
+  font-size:13px;
+  font-weight:600;
+  color:var(--text-secondary);
+  border-bottom:1px solid var(--border-color);
+  white-space:nowrap;
+}
+
+.role-table tbody tr{
+  transition:.25s;
+}
+
+.role-table tbody tr:hover{
+  background:rgba(124,58,237,.05);
+}
+
+.role-table tbody td{
+  padding:18px 20px;
+  border-bottom:1px solid rgba(255,255,255,.05);
+  color:var(--text-primary);
+  font-size:14px;
+  vertical-align:middle;
+}
+
+.role-table tbody tr:last-child td{
+  border-bottom:none;
+}
+
+/* ==========================================================
+   Role Name
+========================================================== */
+
+.role-name-cell{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.role-avatar{
+  width:42px;
+  height:42px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#7C3AED,#EC4899);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-size:16px;
+  font-weight:700;
+  flex-shrink:0;
+}
+
+.role-name-cell span{
+  font-weight:500;
+}
+
+/* ==========================================================
+   Description
+========================================================== */
+
+.role-description{
+  max-width:260px;
+  color:var(--text-secondary);
+  line-height:1.5;
+}
+
+/* ==========================================================
+   Hierarchy
+========================================================== */
+
+.hierarchy-badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:6px 14px;
+  border-radius:30px;
+  background:rgba(124,58,237,.15);
+  color:#A78BFA;
+  font-size:12px;
+  font-weight:600;
+}
+
+/* ==========================================================
+   Members
+========================================================== */
+
+.member-count{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:42px;
+  height:32px;
+  padding:0 12px;
+  border-radius:8px;
+  background:rgba(255,255,255,.05);
+  color:var(--text-primary);
+  font-weight:600;
+}
+
+/* ==========================================================
+   Status
+========================================================== */
+
+.status-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:7px 14px;
+  border-radius:30px;
+  font-size:12px;
+  font-weight:600;
+}
+
+.status-badge.active{
+  background:rgba(34,197,94,.15);
+  color:#22C55E;
+}
+
+.status-badge.inactive{
+  background:rgba(239,68,68,.15);
+  color:#EF4444;
+}
+
+/* ==========================================================
+   Empty State
+========================================================== */
+
+.role-empty{
+  text-align:center;
+  padding:60px 20px;
+  color:var(--text-secondary);
+  font-size:15px;
+}
+
+/* ==========================================================
+   Responsive
+========================================================== */
+
+@media(max-width:992px){
+
+.role-table{
+  min-width:1000px;
+}
+
+}
+
+@media(max-width:768px){
+
+.role-avatar{
+  width:38px;
+  height:38px;
+  font-size:14px;
+}
+
+.role-table thead th,
+.role-table tbody td{
+  padding:16px;
+}
+
+}

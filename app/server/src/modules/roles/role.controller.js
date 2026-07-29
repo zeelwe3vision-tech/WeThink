@@ -68,6 +68,23 @@ exports.updateRole = async (req, res) => {
   }
 };
 
+exports.cloneRole = async (req, res) => {
+  try {
+    const result = await roleService.cloneRole(req.params.id, req.body);
+
+    if (!result.success) {
+      return res.status(400).json(result);
+    }
+
+    return res.status(201).json(result);
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 exports.deleteRole = async (req, res) => {
   try {
     const result = await roleService.deleteRole(req.params.id);

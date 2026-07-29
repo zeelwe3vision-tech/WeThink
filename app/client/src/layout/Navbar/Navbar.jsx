@@ -1,45 +1,108 @@
-import { Search, Bell } from "lucide-react";
+import { Bell } from "lucide-react";
+import { useLocation } from "react-router-dom";
 import "./Navbar.css";
 
 function Navbar() {
+  const location = useLocation();
+
+  // Dynamic user profile initial
+  const token = JSON.parse(localStorage.getItem("token")) || {};
+  const user = JSON.parse(localStorage.getItem("user")) || {};
+
+  const email = user.email || token.email || "";
+
+  const userInitial = email ? email.charAt(0).toUpperCase() : "U";
+  
+  const breadcrumbs = {
+    "/dashboard": {
+      parent: "Dashboard",
+      child: "Overview",
+    },
+
+    "/organization/employees": {
+      parent: "Organization",
+      child: "Employee List",
+    },
+
+    "/organization/departments": {
+      parent: "Organization",
+      child: "Department List",
+    },
+
+    "/organization/roles": {
+      parent: "Organization",
+      child: "Role Management",
+    },
+
+    "/organization/rbac": {
+      parent: "Organization",
+      child: "RBAC Management",
+    },
+
+    "/tasks": {
+      parent: "Task Management",
+      child: "Tasks",
+    },
+
+    "/attendance": {
+      parent: "Attendance",
+      child: "Attendance",
+    },
+
+    "/leave": {
+      parent: "Leave Management",
+      child: "Leave",
+    },
+
+    "/reports": {
+      parent: "Reports",
+      child: "Reports",
+    },
+
+    "/notifications": {
+      parent: "Notifications",
+      child: "Notifications",
+    },
+
+    "/settings": {
+      parent: "Settings",
+      child: "Settings",
+    },
+
+    "/audit-logs": {
+      parent: "Audit Logs",
+      child: "Audit Logs",
+    },
+  };
+
+  const current = breadcrumbs[location.pathname] || {
+    parent: "",
+    child: "",
+  };
+
   return (
     <header className="navbar">
-      {/* Left */}
-
       <div className="navbar-left">
         <div className="breadcrumb">
-          <span className="breadcrumb-link">Organization</span>
+          <span className="breadcrumb-link">{current.parent}</span>
 
-          <span className="breadcrumb-separator">&gt;</span>
+          {current.child && (
+            <>
+              <span className="breadcrumb-separator">&gt;</span>
 
-          <span className="breadcrumb-active">Employee Info</span>
+              <span className="breadcrumb-active">{current.child}</span>
+            </>
+          )}
         </div>
       </div>
 
-      {/* Right */}
-
       <div className="navbar-right">
-        {/* Search */}
-
-        <div className="search-box">
-          <Search size={18} />
-
-          <input type="text" placeholder="Search..." />
-        </div>
-
-        {/* Notification */}
-
         <button className="icon-btn">
           <Bell size={20} />
-
           <span className="notification-dot"></span>
         </button>
 
-        {/* Profile */}
-
-        <button className="profile-btn">
-          <img src="https://i.pravatar.cc/100" alt="Profile" />
-        </button>
+        <button className="profile-btn">{userInitial}</button>
       </div>
     </header>
   );

@@ -1,0 +1,241 @@
+/* ==========================================================
+   Permission Management Page
+========================================================== */
+
+.permission-management-page{
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+  padding:24px;
+  background:var(--bg-main);
+  min-height:100vh;
+}
+
+/* ==========================================================
+   Layout
+========================================================== */
+
+.permission-layout{
+  display:grid;
+  grid-template-columns:360px 1fr;
+  gap:24px;
+  align-items:flex-start;
+}
+
+/* ==========================================================
+   Left Panel
+========================================================== */
+
+.permission-left-panel{
+  background:var(--bg-card);
+  border:1px solid var(--border-color);
+  border-radius:18px;
+  overflow:hidden;
+  height:calc(100vh - 220px);
+  display:flex;
+  flex-direction:column;
+}
+
+.permission-left-header{
+  padding:20px;
+  border-bottom:1px solid var(--border-color);
+}
+
+.permission-left-title{
+  font-size:18px;
+  font-weight:600;
+  color:var(--text-primary);
+}
+
+.permission-left-subtitle{
+  margin-top:5px;
+  font-size:13px;
+  color:var(--text-secondary);
+}
+
+.permission-left-body{
+  flex:1;
+  overflow-y:auto;
+}
+
+/* ==========================================================
+   Right Panel
+========================================================== */
+
+.permission-right-panel{
+  background:var(--bg-card);
+  border:1px solid var(--border-color);
+  border-radius:18px;
+  overflow:hidden;
+  min-height:calc(100vh - 220px);
+  display:flex;
+  flex-direction:column;
+}
+
+.permission-right-header{
+  padding:20px 24px;
+  border-bottom:1px solid var(--border-color);
+}
+
+.permission-right-title{
+  font-size:20px;
+  font-weight:600;
+  color:var(--text-primary);
+}
+
+.permission-right-subtitle{
+  margin-top:5px;
+  font-size:13px;
+  color:var(--text-secondary);
+}
+
+.permission-right-body{
+  flex:1;
+  padding:24px;
+}
+
+/* ==========================================================
+   Empty State
+========================================================== */
+
+.permission-empty-state{
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:60px 30px;
+}
+
+.permission-empty-state svg{
+  width:70px;
+  height:70px;
+  padding:18px;
+  border-radius:18px;
+  background:rgba(124,58,237,.12);
+  color:var(--primary-color);
+}
+
+.permission-empty-state h3{
+  margin-top:22px;
+  font-size:22px;
+  color:var(--text-primary);
+}
+
+.permission-empty-state p{
+  margin-top:10px;
+  max-width:420px;
+  font-size:14px;
+  line-height:1.7;
+  color:var(--text-secondary);
+}
+
+/* ==========================================================
+   Loading
+========================================================== */
+
+.permission-loading{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:80px;
+}
+
+.permission-spinner{
+  width:42px;
+  height:42px;
+  border:4px solid rgba(124,58,237,.18);
+  border-top-color:var(--primary-color);
+  border-radius:50%;
+  animation:permissionSpin .8s linear infinite;
+}
+
+@keyframes permissionSpin{
+
+from{
+  transform:rotate(0deg);
+}
+
+to{
+  transform:rotate(360deg);
+}
+
+}
+
+/* ==========================================================
+   Scrollbar
+========================================================== */
+
+.permission-left-body::-webkit-scrollbar,
+.permission-right-body::-webkit-scrollbar{
+  width:7px;
+}
+
+.permission-left-body::-webkit-scrollbar-thumb,
+.permission-right-body::-webkit-scrollbar-thumb{
+  background:rgba(124,58,237,.35);
+  border-radius:20px;
+}
+
+.permission-left-body::-webkit-scrollbar-track,
+.permission-right-body::-webkit-scrollbar-track{
+  background:transparent;
+}
+
+/* ==========================================================
+   Responsive
+========================================================== */
+
+@media(max-width:1200px){
+
+.permission-layout{
+  grid-template-columns:320px 1fr;
+}
+
+}
+
+@media(max-width:992px){
+
+.permission-layout{
+  grid-template-columns:1fr;
+}
+
+.permission-left-panel{
+  height:420px;
+}
+
+.permission-right-panel{
+  min-height:650px;
+}
+
+}
+
+@media(max-width:768px){
+
+.permission-management-page{
+  padding:16px;
+  gap:18px;
+}
+
+.permission-right-body{
+  padding:18px;
+}
+
+.permission-left-header,
+.permission-right-header{
+  padding:18px;
+}
+
+.permission-empty-state{
+  padding:40px 20px;
+}
+
+.permission-empty-state h3{
+  font-size:20px;
+}
+
+.permission-empty-state p{
+  font-size:13px;
+}
+}

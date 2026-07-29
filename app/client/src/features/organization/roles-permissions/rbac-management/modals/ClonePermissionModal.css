@@ -1,0 +1,393 @@
+/* ==========================================================
+   Overlay
+========================================================== */
+
+.clone-permission-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999;
+
+  animation: fadeIn 0.25s ease;
+}
+
+/* ==========================================================
+   Modal
+========================================================== */
+
+.clone-permission-modal {
+  width: 540px;
+  max-width: 95%;
+
+  background: #111827;
+
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 25px 60px rgba(0,0,0,.45);
+
+  animation: slideUp .25s ease;
+}
+
+/* ==========================================================
+   Header
+========================================================== */
+
+.clone-permission-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 24px;
+
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.clone-title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.clone-icon {
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 14px;
+
+  background: linear-gradient(
+    135deg,
+    #7C3AED,
+    #EC4899
+  );
+
+  color: #FFFFFF;
+}
+
+.clone-title h2 {
+  margin: 0;
+
+  font-family: Poppins, sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+
+  color: #FFFFFF;
+}
+
+.clone-title p {
+  margin-top: 5px;
+
+  font-family: Poppins, sans-serif;
+  font-size: 13px;
+
+  color: #9CA3AF;
+}
+
+.clone-close-btn {
+  width: 42px;
+  height: 42px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: transparent;
+
+  color: #9CA3AF;
+
+  cursor: pointer;
+
+  transition: .25s;
+}
+
+.clone-close-btn:hover {
+  background: rgba(239,68,68,.15);
+
+  color: #EF4444;
+}
+
+/* ==========================================================
+   Form
+========================================================== */
+
+.clone-permission-form {
+  padding: 24px;
+}
+
+/* ==========================================================
+   Employee Card
+========================================================== */
+
+.clone-info-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  background: #0F172A;
+
+  border: 1px solid rgba(255,255,255,.06);
+
+  border-radius: 14px;
+
+  padding: 18px;
+
+  margin-bottom: 22px;
+}
+
+.info-icon {
+  width: 46px;
+  height: 46px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 12px;
+
+  background: rgba(124,58,237,.18);
+
+  color: #C4B5FD;
+}
+
+.clone-info-card label {
+  display: block;
+
+  margin-bottom: 4px;
+
+  font-family: Poppins, sans-serif;
+  font-size: 12px;
+
+  color: #9CA3AF;
+}
+
+.clone-info-card span {
+  font-family: Poppins, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+
+  color: #FFFFFF;
+}
+
+/* ==========================================================
+   Fields
+========================================================== */
+
+.clone-field {
+  margin-bottom: 20px;
+}
+
+.clone-field label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-family: Poppins, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+
+  color: #FFFFFF;
+}
+
+.clone-field select {
+  width: 100%;
+
+  height: 48px;
+
+  padding: 0 14px;
+
+  background: #0F172A;
+
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+
+  outline: none;
+
+  font-family: Poppins, sans-serif;
+  font-size: 14px;
+
+  color: #FFFFFF;
+
+  transition: .25s;
+}
+
+.clone-field select:focus {
+  border-color: #7C3AED;
+
+  box-shadow: 0 0 0 3px rgba(124,58,237,.18);
+}
+
+/* ==========================================================
+   Checkbox
+========================================================== */
+
+.clone-checkbox {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 28px;
+}
+
+.clone-checkbox input {
+  width: 18px;
+  height: 18px;
+
+  accent-color: #7C3AED;
+
+  cursor: pointer;
+}
+
+.clone-checkbox label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-left: 12px;
+
+  font-family: Poppins, sans-serif;
+  font-size: 14px;
+
+  color: #FFFFFF;
+
+  cursor: pointer;
+}
+
+/* ==========================================================
+   Footer
+========================================================== */
+
+.clone-permission-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.clone-cancel-btn {
+  height: 44px;
+
+  padding: 0 20px;
+
+  border-radius: 10px;
+
+  border: 1px solid rgba(255,255,255,.10);
+
+  background: transparent;
+
+  color: #FFFFFF;
+
+  font-family: Poppins, sans-serif;
+
+  cursor: pointer;
+
+  transition: .25s;
+}
+
+.clone-cancel-btn:hover {
+  background: rgba(255,255,255,.06);
+}
+
+.clone-save-btn {
+  height: 44px;
+
+  padding: 0 20px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: linear-gradient(
+    135deg,
+    #7C3AED,
+    #EC4899
+  );
+
+  color: #FFFFFF;
+
+  font-family: Poppins, sans-serif;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition: .25s;
+}
+
+.clone-save-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 10px 20px rgba(124,58,237,.35);
+}
+
+/* ==========================================================
+   Animation
+========================================================== */
+
+@keyframes fadeIn {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+
+}
+
+@keyframes slideUp {
+
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+/* ==========================================================
+   Responsive
+========================================================== */
+
+@media (max-width:640px){
+
+  .clone-permission-modal{
+    width:95%;
+  }
+
+  .clone-permission-header{
+    padding:20px;
+  }
+
+  .clone-permission-form{
+    padding:20px;
+  }
+
+  .clone-permission-footer{
+    flex-direction:column;
+  }
+
+  .clone-cancel-btn,
+  .clone-save-btn{
+    width:100%;
+    justify-content:center;
+  }
+
+}

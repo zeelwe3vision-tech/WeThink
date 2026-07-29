@@ -1,0 +1,176 @@
+/* ==========================================================
+   Overlay
+========================================================== */
+
+.edit-role-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* ==========================================================
+   Modal
+========================================================== */
+
+.edit-role-modal {
+  width: 640px;
+  background: #111827;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .45);
+}
+
+/* ==========================================================
+   Header
+========================================================== */
+
+.edit-role-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 26px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.edit-role-header h2 {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.edit-close-btn {
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: #9CA3AF;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: .25s;
+}
+
+.edit-close-btn:hover {
+  background: rgba(255,255,255,.08);
+  color: #fff;
+}
+
+/* ==========================================================
+   Body
+========================================================== */
+
+.edit-role-body {
+  padding: 24px 26px;
+}
+
+.edit-form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.edit-form-group label {
+  color: #D1D5DB;
+  font-size: 14px;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.edit-form-group input,
+.edit-form-group textarea,
+.edit-form-group select {
+  width: 100%;
+  background: #0B1220;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+  color: white;
+  padding: 12px 14px;
+  font-size: 14px;
+  outline: none;
+  transition: .25s;
+  font-family: inherit;
+}
+
+.edit-form-group textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.edit-form-group input:focus,
+.edit-form-group textarea:focus,
+.edit-form-group select:focus {
+  border-color: #7C3AED;
+  box-shadow: 0 0 0 3px rgba(124,58,237,.25);
+}
+
+/* ==========================================================
+   Checkbox
+========================================================== */
+
+.edit-role-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.edit-role-checkbox input {
+  width: 18px;
+  height: 18px;
+  accent-color: #7C3AED;
+}
+
+/* ==========================================================
+   Footer
+========================================================== */
+
+.edit-role-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  padding: 22px 26px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.edit-cancel-btn {
+  padding: 11px 22px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.1);
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.edit-cancel-btn:hover {
+  background: rgba(255,255,255,.08);
+}
+
+.edit-save-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+  font-weight: 600;
+  background: linear-gradient(135deg,#7C3AED,#EC4899);
+  transition: .25s;
+}
+
+.edit-save-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(124,58,237,.35);
+}

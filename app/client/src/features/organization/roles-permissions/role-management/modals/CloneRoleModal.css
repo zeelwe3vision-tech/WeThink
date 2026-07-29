@@ -1,0 +1,289 @@
+/* =====================================================
+   Clone Role Overlay
+================================================= */
+
+.clone-role-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.65);
+  backdrop-filter:blur(8px);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  padding:24px;
+}
+
+/* ======================================================
+   Modal
+=======================================================*/
+
+.clone-role-modal{
+  width:650px;
+  max-width:100%;
+  background:var(--bg-card);
+  border:1px solid var(--border-color);
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,.4);
+}
+
+/* ==========================================================
+   Header
+========================================================== */
+
+.clone-role-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:24px 28px;
+  border-bottom:1px solid var(--border-color);
+}
+
+.clone-role-title{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+.clone-role-title svg{
+  width:46px;
+  height:46px;
+  padding:12px;
+  border-radius:14px;
+  background:rgba(124,58,237,.12);
+  color:var(--primary-color);
+}
+
+.clone-role-title h2{
+  font-size:22px;
+  font-weight:600;
+  color:var(--text-primary);
+}
+
+.clone-role-title p{
+  margin-top:4px;
+  font-size:14px;
+  color:var(--text-secondary);
+}
+
+.clone-close-btn{
+  width:40px;
+  height:40px;
+  border:none;
+  border-radius:12px;
+  background:transparent;
+  color:var(--text-secondary);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.clone-close-btn:hover{
+  background:rgba(239,68,68,.12);
+  color:#EF4444;
+}
+
+/* ==========================================================
+   Body
+========================================================== */
+
+.clone-role-body{
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+  padding:28px;
+}
+
+/* ==========================================================
+   Source Role
+========================================================== */
+
+.clone-source-role{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.clone-source-role label{
+  font-size:14px;
+  font-weight:500;
+  color:var(--text-secondary);
+}
+
+.source-role-card{
+  padding:18px;
+  background:var(--bg-main);
+  border:1px solid var(--border-color);
+  border-radius:14px;
+}
+
+.source-role-card strong{
+  display:block;
+  font-size:16px;
+  color:var(--text-primary);
+}
+
+.source-role-card span{
+  display:block;
+  margin-top:6px;
+  font-size:13px;
+  color:var(--text-secondary);
+}
+
+/* ==========================================================
+   Form
+========================================================== */
+
+.clone-form-group{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.clone-form-group label{
+  font-size:14px;
+  font-weight:500;
+  color:var(--text-secondary);
+}
+
+.clone-form-group input,
+.clone-form-group select{
+  width:100%;
+  height:48px;
+  padding:0 16px;
+  border:1px solid var(--border-color);
+  border-radius:14px;
+  background:var(--bg-main);
+  color:var(--text-primary);
+  outline:none;
+  transition:.25s;
+}
+
+.clone-form-group input::placeholder{
+  color:var(--text-muted);
+}
+
+.clone-form-group input:hover,
+.clone-form-group select:hover{
+  border-color:var(--primary-color);
+}
+
+.clone-form-group input:focus,
+.clone-form-group select:focus{
+  border-color:var(--primary-color);
+  box-shadow:0 0 0 3px rgba(124,58,237,.15);
+}
+
+/* ==========================================================
+   Copy Permission
+========================================================== */
+
+.copy-permission{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  cursor:pointer;
+  color:var(--text-primary);
+  font-size:14px;
+}
+
+.copy-permission input{
+  display:none;
+}
+
+.permission-check{
+  width:22px;
+  height:22px;
+  border-radius:6px;
+  border:1px solid var(--border-color);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:var(--bg-main);
+  color:transparent;
+  transition:.25s;
+}
+
+.copy-permission input:checked + .permission-check{
+  background:linear-gradient(90deg,#7C3AED,#EC4899);
+  border-color:transparent;
+  color:#fff;
+}
+
+/* ==========================================================
+   Footer
+========================================================== */
+
+.clone-role-footer{
+  display:flex;
+  justify-content:flex-end;
+  gap:14px;
+  padding:24px 28px;
+  border-top:1px solid var(--border-color);
+}
+
+.cancel-btn{
+  min-width:130px;
+  height:46px;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  background:transparent;
+  color:var(--text-primary);
+  cursor:pointer;
+  transition:.25s;
+}
+
+.cancel-btn:hover{
+  border-color:#EF4444;
+  color:#EF4444;
+}
+
+.clone-btn{
+  min-width:170px;
+  height:46px;
+  border:none;
+  border-radius:12px;
+  background:linear-gradient(90deg,#7C3AED,#EC4899);
+  color:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.clone-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 28px rgba(124,58,237,.35);
+}
+
+/* ==========================================================
+   Responsive
+========================================================== */
+
+@media(max-width:768px){
+
+.clone-role-modal{
+  width:100%;
+}
+
+.clone-role-header,
+.clone-role-body,
+.clone-role-footer{
+  padding:20px;
+}
+
+.clone-role-footer{
+  flex-direction:column-reverse;
+}
+
+.cancel-btn,
+.clone-btn{
+  width:100%;
+}
+}
