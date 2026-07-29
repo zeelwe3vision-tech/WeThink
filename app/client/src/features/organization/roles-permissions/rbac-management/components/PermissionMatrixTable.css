@@ -1,0 +1,137 @@
+.permission-table-container {
+  width: 100%;
+  background: #111827;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  overflow: hidden;
+  font-family: "Poppins", sans-serif;
+}
+
+.permission-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+}
+
+/* HEADER */
+
+.permission-table thead {
+  background: #0f172a;
+}
+
+.permission-table th {
+  height: 48px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.module-heading {
+  text-align: left !important;
+  padding-left: 22px;
+}
+
+.permission-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.permission-heading span {
+  color: #c4b5fd;
+  font-size: 14px;
+}
+
+/* ROW */
+
+.permission-table tbody tr {
+  height: 54px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.permission-table tbody tr:hover {
+  background: rgba(124, 58, 237, 0.05);
+}
+
+/* MODULE */
+
+.module-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 22px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.module-icon {
+  color: #c4b5fd;
+  font-size: 15px;
+}
+
+/* CELLS */
+
+.permission-table td {
+  text-align: center;
+}
+
+/* TOGGLE */
+
+.toggle {
+  width: 34px;
+  height: 18px;
+  border-radius: 20px;
+  border: none;
+  background: #1f2937;
+  position: relative;
+  cursor: pointer;
+  padding: 0;
+  transition: 0.25s;
+}
+
+.toggle span {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #9ca3af;
+  border-radius: 50%;
+  top: 3px;
+  left: 4px;
+  transition: 0.25s;
+}
+
+.toggle.active {
+  background: linear-gradient(135deg, #7c3aed, #ec4899);
+}
+
+.toggle.active span {
+  left: 18px;
+  background: #ffffff;
+}
+
+/* LAST COLUMN */
+
+.permission-table td:last-child .toggle {
+  background: #1f2937;
+}
+
+.permission-table td:last-child .toggle.active {
+  background: linear-gradient(135deg, #7c3aed, #ec4899);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1000px) {
+  .permission-table-container {
+    overflow-x: auto;
+  }
+
+  .permission-table {
+    min-width: 900px;
+  }
+}

@@ -92,7 +92,16 @@ const Sidebar = () => {
                   isActive ? "submenu-item active" : "submenu-item"
                 }
               >
-                Roles & Permissions
+                Role Management
+              </NavLink>
+
+              <NavLink
+                to="/organization/rbac"
+                className={({ isActive }) =>
+                  isActive ? "submenu-item active" : "submenu-item"
+                }
+              >
+                RBAC Management
               </NavLink>
             </div>
           )}

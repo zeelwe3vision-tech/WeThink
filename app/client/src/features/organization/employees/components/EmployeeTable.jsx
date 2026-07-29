@@ -1,12 +1,5 @@
 import { MoreVertical, Mail } from "lucide-react";
 import "./EmployeeTable.css";
-import {
-  ChevronLeft,
-  ChevronRight,
-  ChevronsLeft,
-  ChevronsRight,
-} from "lucide-react";
-
 const getStatusClass = (status) => {
   switch (status) {
     case "Active":
@@ -161,37 +154,6 @@ function EmployeeTable({ employees = [], onOpenDrawer }) {
             )}
           </tbody>
         </table>
-      </div>
-
-      {/* ===========================
-          Pagination
-      ============================ */}
-
-      <div className="employee-pagination">
-        <div className="pagination-text">
-          Showing 1 to {employees.length} of {employees.length} employees
-        </div>
-
-        <div className="pagination-buttons">
-          <button className="pagination-btn">
-            <ChevronsLeft size={18} />
-          </button>
-
-          <button className="pagination-btn">
-            <ChevronLeft size={18} />
-          </button>
-
-          <button className="pagination-btn active">1</button>
-          <button className="pagination-btn">2</button>
-
-          <button className="pagination-btn">
-            <ChevronRight size={18} />
-          </button>
-
-          <button className="pagination-btn">
-            <ChevronsRight size={18} />
-          </button>
-        </div>
       </div>
     </div>
   );

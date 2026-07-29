@@ -146,7 +146,7 @@ function RegisterEmployeeModal({ open, onClose, onSubmit }) {
             <p>Enter employee details to create a new account.</p>
           </div>
 
-          <button className="modal-close-btn">
+          <button className="modal-close-btn" onClick={onClose}>
             <X size={20} />
           </button>
         </div>

@@ -1,13 +1,12 @@
-// Chetan - 23/06/2024 - start
-// import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
+import ToastProvider from "./toast/ToastProvider";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <App />
+    <ToastProvider />
   </BrowserRouter>,
 );
-// Chetan - 23/06/2024 - end

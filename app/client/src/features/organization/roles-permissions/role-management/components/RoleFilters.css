@@ -1,0 +1,92 @@
+/* ==========================================================
+   Role Filters
+========================================================== */
+
+.role-filters{
+    display:flex;
+    align-items:flex-end;
+    gap:20px;
+    margin-bottom:24px;
+}
+
+/* ==========================================================
+   Filter Group
+========================================================== */
+
+.role-filter-group{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.role-filter-group label{
+    font-size:13px;
+    font-weight:500;
+    color:var(--text-secondary);
+}
+
+.role-filter-group select{
+    width:180px;
+    height:44px;
+    padding:0 14px;
+    border-radius:12px;
+    border:1px solid var(--border-color);
+    background:var(--bg-card);
+    color:var(--text-primary);
+    outline:none;
+    transition:.25s;
+    font-size:14px;
+}
+
+.role-filter-group select:hover{
+    border-color:var(--primary-color);
+}
+
+.role-filter-group select:focus{
+    border-color:var(--primary-color);
+    box-shadow:0 0 0 3px rgba(124,58,237,.15);
+}
+
+/* ==========================================================
+   Reset
+========================================================== */
+
+.role-filter-reset{
+    height:44px;
+    padding:0 20px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    border:none;
+    border-radius:12px;
+    background:#1F2937;
+    color:var(--text-primary);
+    cursor:pointer;
+    transition:.25s;
+}
+
+.role-filter-reset:hover{
+    background:rgba(124,58,237,.18);
+    color:var(--primary-color);
+}
+
+/* ==========================================================
+   Responsive
+========================================================== */
+
+@media(max-width:768px){
+
+.role-filters{
+    flex-direction:column;
+    align-items:stretch;
+}
+
+.role-filter-group select{
+    width:100%;
+}
+
+.role-filter-reset{
+    width:100%;
+    justify-content:center;
+}
+}

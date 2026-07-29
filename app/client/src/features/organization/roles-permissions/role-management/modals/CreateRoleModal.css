@@ -1,0 +1,456 @@
+/* ==========================================================
+   Role Modal Overlay
+========================================================== */
+
+.role-modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.65);
+  backdrop-filter:blur(8px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  padding:30px;
+}
+
+/* ==========================================================
+   Role Modal
+========================================================== */
+
+.role-modal{
+  width:1100px;
+  max-width:100%;
+  max-height:92vh;
+  overflow-y:auto;
+  background:var(--bg-card);
+  border:1px solid var(--border-color);
+  border-radius:22px;
+  box-shadow:0 20px 60px rgba(0,0,0,.45);
+}
+
+/* ==========================================================
+   Header
+========================================================== */
+
+.role-modal-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:28px 32px;
+  border-bottom:1px solid var(--border-color);
+}
+
+.role-modal-title{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.role-modal-title svg{
+  width:48px;
+  height:48px;
+  padding:12px;
+  border-radius:14px;
+  background:rgba(124,58,237,.15);
+  color:var(--primary-color);
+}
+
+.role-modal-title h2{
+  font-size:24px;
+  font-weight:600;
+  color:var(--text-primary);
+}
+
+.role-modal-title p{
+  margin-top:4px;
+  font-size:14px;
+  color:var(--text-secondary);
+}
+
+.role-modal-close{
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:12px;
+  background:transparent;
+  color:var(--text-secondary);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.role-modal-close:hover{
+  background:rgba(239,68,68,.12);
+  color:#EF4444;
+}
+
+/* ==========================================================
+   Body
+========================================================== */
+
+.role-modal-body{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:32px;
+  padding:32px;
+}
+
+/* ==========================================================
+   Left Section
+========================================================== */
+
+.role-form-section{
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+}
+
+/* ==========================================================
+   Section Title
+========================================================== */
+
+.role-section-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:16px;
+  font-weight:600;
+  color:var(--text-primary);
+  margin-bottom:6px;
+}
+
+.role-section-title svg{
+  color:var(--primary-color);
+}
+
+/* ==========================================================
+   Form Group
+========================================================== */
+
+.role-form-group{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.role-form-group label{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:14px;
+  font-weight:500;
+  color:var(--text-secondary);
+}
+
+.role-form-group label svg{
+  color:var(--primary-color);
+}
+
+/* ==========================================================
+   Inputs
+========================================================== */
+
+.role-form-group input,
+.role-form-group select,
+.role-form-group textarea{
+  width:100%;
+  border:1px solid var(--border-color);
+  border-radius:14px;
+  background:var(--bg-main);
+  color:var(--text-primary);
+  font-size:14px;
+  outline:none;
+  transition:.25s;
+}
+
+.role-form-group input,
+.role-form-group select{
+  height:48px;
+  padding:0 16px;
+}
+
+.role-form-group textarea{
+  resize:none;
+  padding:14px 16px;
+  min-height:120px;
+}
+
+.role-form-group input::placeholder,
+.role-form-group textarea::placeholder{
+  color:var(--text-muted);
+}
+
+.role-form-group input:hover,
+.role-form-group select:hover,
+.role-form-group textarea:hover{
+  border-color:var(--primary-color);
+}
+
+.role-form-group input:focus,
+.role-form-group select:focus,
+.role-form-group textarea:focus{
+  border-color:var(--primary-color);
+  box-shadow:0 0 0 3px rgba(124,58,237,.15);
+}
+/* ==========================================================
+   Access Channels
+========================================================== */
+
+.access-channel-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.access-card{
+  position:relative;
+  height:110px;
+  border:1px solid var(--border-color);
+  border-radius:18px;
+  background:var(--bg-main);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  color:var(--text-secondary);
+  cursor:pointer;
+  transition:.25s;
+}
+
+.access-card svg:first-child{
+  color:var(--primary-color);
+}
+
+.access-card span{
+  font-size:14px;
+  font-weight:500;
+}
+
+.access-card:hover{
+  border-color:var(--primary-color);
+  transform:translateY(-3px);
+}
+
+.access-card.active{
+  border-color:var(--primary-color);
+  background:rgba(124,58,237,.12);
+  color:var(--text-primary);
+  box-shadow:0 10px 30px rgba(124,58,237,.18);
+}
+
+.access-card .lucide-check{
+  position:absolute;
+  top:12px;
+  right:12px;
+  color:#22C55E;
+}
+
+/* ==========================================================
+   Right Section
+========================================================== */
+
+.role-summary-section{
+  display:flex;
+  flex-direction:column;
+}
+
+.role-summary-card{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  padding:22px;
+  background:var(--bg-main);
+  border:1px solid var(--border-color);
+  border-radius:18px;
+}
+
+.summary-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  padding-bottom:14px;
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+.summary-item:last-child{
+  border-bottom:none;
+  padding-bottom:0;
+}
+
+.summary-item span{
+  font-size:14px;
+  color:var(--text-secondary);
+}
+
+.summary-item strong{
+  font-size:14px;
+  font-weight:600;
+  color:var(--text-primary);
+  text-align:right;
+}
+
+/* ==========================================================
+   Status Switch
+========================================================== */
+
+.status-switch{
+  position:relative;
+  width:52px;
+  height:28px;
+  display:inline-block;
+}
+
+.status-switch input{
+  opacity:0;
+  width:0;
+  height:0;
+}
+
+.slider{
+  position:absolute;
+  inset:0;
+  background:#374151;
+  border-radius:30px;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.slider::before{
+  content:"";
+  position:absolute;
+  width:22px;
+  height:22px;
+  left:3px;
+  top:3px;
+  background:#ffffff;
+  border-radius:50%;
+  transition:.25s;
+}
+
+.status-switch input:checked + .slider{
+  background:linear-gradient(90deg,#7C3AED,#EC4899);
+}
+
+.status-switch input:checked + .slider::before{
+  transform:translateX(24px);
+}
+
+/* ==========================================================
+   Footer
+========================================================== */
+
+.role-modal-footer{
+  display:flex;
+  justify-content:flex-end;
+  gap:16px;
+  padding:24px 32px;
+  border-top:1px solid var(--border-color);
+}
+
+.cancel-btn{
+  min-width:140px;
+  height:48px;
+  border:1px solid var(--border-color);
+  border-radius:14px;
+  background:transparent;
+  color:var(--text-primary);
+  font-size:14px;
+  font-weight:500;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.cancel-btn:hover{
+  border-color:#EF4444;
+  color:#EF4444;
+}
+
+.save-btn{
+  min-width:180px;
+  height:48px;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(90deg,#7C3AED,#EC4899);
+  color:#ffffff;
+  font-size:14px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.save-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 28px rgba(124,58,237,.35);
+}
+
+/* ==========================================================
+   Scrollbar
+========================================================== */
+
+.role-modal::-webkit-scrollbar{
+  width:8px;
+}
+
+.role-modal::-webkit-scrollbar-thumb{
+  background:rgba(124,58,237,.35);
+  border-radius:20px;
+}
+
+.role-modal::-webkit-scrollbar-track{
+  background:transparent;
+}
+
+/* ==========================================================
+   Responsive
+========================================================== */
+
+@media(max-width:992px){
+
+.role-modal{
+  width:100%;
+}
+
+.role-modal-body{
+  grid-template-columns:1fr;
+}
+
+.access-channel-grid{
+  grid-template-columns:1fr;
+}
+
+.role-modal-footer{
+  flex-direction:column-reverse;
+}
+
+.cancel-btn,
+.save-btn{
+  width:100%;
+}
+
+}
+
+@media(max-width:768px){
+
+.role-modal-overlay{
+  padding:15px;
+}
+
+.role-modal-header,
+.role-modal-body,
+.role-modal-footer{
+  padding:20px;
+}
+
+.role-modal-title h2{
+  font-size:20px;
+}
+
+.role-modal-title p{
+  font-size:13px;
+}
+}

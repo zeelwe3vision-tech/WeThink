@@ -1,0 +1,161 @@
+/* ==========================================================
+   Permission Matrix Card
+========================================================== */
+
+.permission-matrix-card {
+  width: 100%;
+  background: #111827;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+/* ==========================================================
+   Header
+========================================================== */
+
+.permission-matrix-header{
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+margin-bottom:22px;
+}
+
+.permission-matrix-header h3{
+margin:0;
+font-family:"Poppins",sans-serif;
+font-size:20px;
+font-weight:600;
+color:#FFFFFF;
+text-align:left;
+}
+
+.permission-matrix-header p{
+  margin-top:6px;
+  margin-bottom:0;
+  font-family:Poppins,sans-serif;
+  font-size:13px;
+  color:#9CA3AF;
+}
+
+.permission-count{
+  padding:8px 18px;
+  background:rgba(124,58,237,.15);
+  border:1px solid rgba(124,58,237,.35);
+  border-radius:30px;
+  color:#C4B5FD;
+  font-size:13px;
+  font-family:Poppins,sans-serif;
+  font-weight:500;
+}
+
+/* ==========================================================
+   Table
+========================================================== */
+
+.permission-table-wrapper{
+  width:100%;
+  overflow-x:auto;
+}
+
+.permission-table{
+  width:100%;
+  border-collapse:collapse;
+  font-family:Poppins,sans-serif;
+}
+
+.permission-table thead tr{
+  background:#0F172A;
+}
+
+.permission-table thead th{
+  padding:16px;
+  text-align:center;
+  color:#FFFFFF;
+  font-size:14px;
+  font-weight:600;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  white-space:nowrap;
+}
+
+.permission-table thead th:first-child{
+  text-align:left;
+}
+
+.permission-table tbody tr{
+  transition:.25s;
+}
+
+.permission-table tbody tr:hover{
+  background:#161D31;
+}
+
+.permission-table tbody td{
+  padding:18px 16px;
+  text-align:center;
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+.permission-table tbody td:first-child{
+  text-align:left;
+}
+
+/* ==========================================================
+   Module Name
+========================================================== */
+
+.module-name{
+  color:#FFFFFF;
+  font-size:14px;
+  font-weight:500;
+}
+
+/* ==========================================================
+   Checkbox
+========================================================== */
+
+.permission-table input[type="checkbox"]{
+  width:18px;
+  height:18px;
+  accent-color:#7C3AED;
+  cursor:pointer;
+}
+
+/* ==========================================================
+   Scrollbar
+========================================================== */
+
+.permission-table-wrapper::-webkit-scrollbar{
+  height:8px;
+}
+
+.permission-table-wrapper::-webkit-scrollbar-track{
+  background:#0F172A;
+}
+
+.permission-table-wrapper::-webkit-scrollbar-thumb{
+  background:#7C3AED;
+  border-radius:20px;
+}
+
+/* ==========================================================
+   Responsive
+========================================================== */
+
+@media(max-width:1200px){
+
+.permission-table{
+    min-width:1000px;
+}
+
+.permission-matrix-header{
+    flex-direction:column;
+    gap:16px;
+}
+
+.permission-count{
+    align-self:flex-start;
+}
+
+}
