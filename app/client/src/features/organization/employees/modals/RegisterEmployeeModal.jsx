@@ -16,6 +16,7 @@ function RegisterEmployeeModal({ open, onClose, onSubmit }) {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
+  const [mobileError, setMobileError] = useState("");
   const [password, setPassword] = useState("");
   const [organizations, setOrganizations] = useState([]);
   const [departments, setDepartments] = useState([]);
@@ -166,12 +167,30 @@ function RegisterEmployeeModal({ open, onClose, onSubmit }) {
 
             <div className="form-group">
               <label>Mobile</label>
+
               <input
                 type="text"
                 placeholder="Mobile Number"
                 value={mobile}
-                onChange={(e) => setMobile(e.target.value)}
+                maxLength={10}
+                onChange={(e) => {
+                  const value = e.target.value.replace(/\D/g, "");
+
+                  if (value.length <= 10) {
+                    setMobile(value);
+
+                    if (value === "" || /^[6-9]\d{9}$/.test(value)) {
+                      setMobileError("");
+                    } else {
+                      setMobileError(
+                        "Mobile number must be exactly 10 digits.",
+                      );
+                    }
+                  }
+                }}
               />
+
+              {mobileError && <span className="form-error">{mobileError}</span>}
             </div>
 
             <div className="form-group">

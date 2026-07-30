@@ -148,6 +148,13 @@
   cursor: pointer;
 }
 
+.form-error{
+  margin-top:6px;
+  color:#F87171;
+  font-size:12px;
+  font-family:"Poppins",sans-serif;
+}
+
 /* ===========================
    Footer
 =========================== */

@@ -6,7 +6,8 @@ import axios from "axios";
    API Configuration
 ========================================================== */
 
-const API = "http://localhost:5000/api";
+// const API = "http://localhost:5000/api";
+const API = "https://wethink.onrender.com/api";
 
 const RBAC_API = `${API}/rbac`;
 
