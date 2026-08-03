@@ -1,0 +1,379 @@
+/* ===================================================
+   Overlay
+=================================================== */
+
+.task-modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(4px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  z-index:1200;
+}
+
+/* ===================================================
+   Modal
+=================================================== */
+
+.task-modal{
+  width:100%;
+  max-width:900px;
+  max-height:90vh;
+  overflow-y:auto;
+  border-radius:18px;
+  background:#111827;
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 20px 60px rgba(0,0,0,.45);
+  font-family:Poppins,sans-serif;
+}
+
+.task-modal::-webkit-scrollbar{
+  width:8px;
+}
+
+.task-modal::-webkit-scrollbar-track{
+  background:#111827;
+}
+
+.task-modal::-webkit-scrollbar-thumb{
+  background:#30384D;
+  border-radius:20px;
+}
+
+.task-modal::-webkit-scrollbar-thumb:hover{
+  background:#47536D;
+}
+
+/* ===================================================
+   Header
+=================================================== */
+
+.task-modal-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:22px 28px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.task-modal-header h2{
+  margin:0;
+  color:#FFFFFF;
+  font-size:22px;
+  font-weight:600;
+}
+
+.task-submit-error{
+  margin-top:20px;
+  padding:12px 14px;
+  border:1px solid rgba(239,68,68,.3);
+  border-radius:10px;
+  background:rgba(239,68,68,.1);
+  color:#F87171;
+  font-family:Poppins,sans-serif;
+  font-size:13px;
+}
+
+.close-btn{
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:12px;
+  background:#161D31;
+  color:#FFFFFF;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.close-btn:hover{
+  background:#7C3AED;
+}
+
+/* ===================================================
+   Form
+=================================================== */
+
+.task-form{
+  padding:28px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:22px;
+}
+
+.full-width{
+  grid-column:1 / -1;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+}
+
+.form-group label{
+  margin-bottom:8px;
+  color:#F3F4F6;
+  font-size:14px;
+  font-weight:500;
+}
+
+/* ===================================================
+   Inputs
+=================================================== */
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+  width:100%;
+  padding:14px 16px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;
+  background:#161D31;
+  color:#FFFFFF;
+  font-size:14px;
+  font-family:Poppins,sans-serif;
+  outline:none;
+  transition:.25s;
+}
+
+.form-group textarea{
+  resize:none;
+  min-height:120px;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder{
+  color:#9CA3AF;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+  border-color:#7C3AED;
+  box-shadow:0 0 0 3px rgba(124,58,237,.18);
+}
+
+.form-group select{
+  cursor:pointer;
+}
+
+.form-group option{
+  background:#111827;
+  color:#FFFFFF;
+}
+
+/* ===================================================
+   Date Field
+=================================================== */
+
+.date-field{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:0 14px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;
+  background:#161D31;
+}
+
+.date-field svg{
+  color:#9CA3AF;
+  flex-shrink:0;
+}
+
+.date-field input{
+  border:none;
+  padding:14px 0;
+  background:transparent;
+  box-shadow:none;
+}
+
+.date-field input:focus{
+  border:none;
+  box-shadow:none;
+}
+
+.date-field input::-webkit-calendar-picker-indicator{
+  cursor:pointer;
+  filter:invert(1);
+}
+
+/* ===================================================
+   Attachment
+=================================================== */
+
+.attachment-box{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:15px 18px;
+  border:2px dashed rgba(124,58,237,.35);
+  border-radius:12px;
+  background:#161D31;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.attachment-box:hover{
+  border-color:#7C3AED;
+  background:rgba(124,58,237,.08);
+}
+
+.attachment-box svg{
+  color:#A855F7;
+}
+
+.attachment-box span{
+  color:#D1D5DB;
+  font-size:14px;
+}
+
+.attachment-box input{
+  display:none;
+}
+
+/* ===================================================
+   Validation
+=================================================== */
+
+.form-error{
+  margin-top:6px;
+  color:#EF4444;
+  font-size:12px;
+  font-weight:500;
+}
+
+/* ===================================================
+   Footer
+=================================================== */
+
+.task-modal-footer{
+  display:flex;
+  justify-content:flex-end;
+  align-items:stretch;
+  gap:12px;
+  margin-top:26px;
+  padding-top:22px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+
+/* ===================================================
+   Buttons
+=================================================== */
+
+.cancel-btn{
+  width:150px;
+  height:44px;
+  margin-top:7px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:10px;
+  background:#161D31;
+  color:#FFFFFF;
+  font-size:14px;
+  font-weight:500;
+  font-family:Poppins,sans-serif;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.cancel-btn:hover:not(:disabled){
+  background:#232D45;
+}
+
+.submit-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:150px;
+  height:44px;
+  padding:0;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(135deg,#7C3AED,#EC4899);
+  color:#FFFFFF;
+  font-size:14px;
+  font-weight:600;
+  line-height:1;
+  font-family:Poppins,sans-serif;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.submit-btn:hover:not(:disabled){
+  transform:translateY(-1px);
+  box-shadow:0 8px 20px rgba(124,58,237,.3);
+}
+
+.cancel-btn:disabled,
+.submit-btn:disabled{
+  opacity:.65;
+  cursor:not-allowed;
+  transform:none;
+  box-shadow:none;
+}
+
+/* ===================================================
+   Responsive
+=================================================== */
+
+@media(max-width:768px){
+  .task-modal{
+    max-height:95vh;
+  }
+
+  .task-form{
+    padding:20px;
+  }
+
+  .task-modal-header{
+    padding:18px 20px;
+  }
+
+  .task-modal-header h2{
+    font-size:20px;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+
+  .full-width{
+    grid-column:auto;
+  }
+
+  .task-modal-footer{
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-end;
+    gap:10px;
+  }
+
+  .cancel-btn{
+    width:110px;
+  }
+
+  .submit-btn{
+    width:160px;
+  }
+}
+
+@media(max-width:480px){
+  .task-modal-footer{
+    flex-direction:column-reverse;
+    align-items:stretch;
+  }
+
+  .cancel-btn,
+  .submit-btn{
+    width:100%;
+  }
+}

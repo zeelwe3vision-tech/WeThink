@@ -1,0 +1,145 @@
+/* ===================================================
+   Page
+=================================================== */
+
+.task-list-page{
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+  padding:24px;
+  min-height:100%;
+  background:transparent;
+}
+
+/* ===================================================
+   Header
+=================================================== */
+
+.task-list-header{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.task-list-header h1{
+  margin:0;
+  color:#FFFFFF;
+  font-size:28px;
+  font-weight:600;
+  font-family:Poppins,sans-serif;
+}
+
+.task-list-header p{
+  margin:8px 0 0;
+  color:#9CA3AF;
+  font-size:14px;
+  line-height:22px;
+  font-family:Poppins,sans-serif;
+}
+
+/* ===================================================
+   Create Button
+=================================================== */
+
+.create-task-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  min-width:160px;
+  height:46px;
+  padding:0 20px;
+  border:none;
+  border-radius:12px;
+  background:linear-gradient(135deg,#7C3AED,#EC4899);
+  color:#FFFFFF;
+  font-size:14px;
+  font-weight:600;
+  font-family:Poppins,sans-serif;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.create-task-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 24px rgba(124,58,237,.35);
+}
+
+.create-task-btn svg{
+  flex-shrink:0;
+}
+
+/* ===================================================
+   Section Spacing
+=================================================== */
+
+.task-list-page .task-filters{
+  margin-bottom:0;
+}
+
+.task-list-page .task-table-container{
+  margin-top:0;
+}
+
+/* ===================================================
+   Responsive
+=================================================== */
+
+@media(max-width:1024px){
+
+  .task-list-page{
+    padding:20px;
+  }
+
+  .task-list-header{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .create-task-btn{
+    width:100%;
+    max-width:220px;
+  }
+
+}
+
+@media(max-width:768px){
+
+  .task-list-page{
+    padding:16px;
+    gap:18px;
+  }
+
+  .task-list-header h1{
+    font-size:24px;
+  }
+
+  .task-list-header p{
+    font-size:13px;
+    line-height:20px;
+  }
+
+  .create-task-btn{
+    width:100%;
+    max-width:none;
+  }
+
+}
+
+@media(max-width:480px){
+
+  .task-list-page{
+    padding:14px;
+  }
+
+  .task-list-header h1{
+    font-size:22px;
+  }
+
+  .create-task-btn{
+    height:44px;
+    font-size:13px;
+  }
+
+}

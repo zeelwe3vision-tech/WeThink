@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import {
   FiHome,
   FiChevronDown,
@@ -14,30 +12,36 @@ import {
   FiShield,
   FiLogOut,
   FiBriefcase,
+  FiList,
 } from "react-icons/fi";
-
 import "./Sidebar.css";
-// import logo from "../../assets/images/wethink-logo.png";
 
 const Sidebar = () => {
-  const [organizationOpen, setOrganizationOpen] = useState(true);
-
+  const location = useLocation();
   const navigate = useNavigate();
 
+  const organizationRouteActive = location.pathname.startsWith("/organization");
+  const taskRouteActive = location.pathname.startsWith("/tasks");
+
+  const [organizationOpen, setOrganizationOpen] = useState(
+    organizationRouteActive,
+  );
+  const [taskManagementOpen, setTaskManagementOpen] = useState(taskRouteActive);
+
   const handleLogout = () => {
-    navigate("/");
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/", { replace: true });
   };
 
   return (
     <aside className="sidebar">
       {/* Logo */}
-
       <div className="sidebar-logo">
         <h2>WeThink</h2>
       </div>
 
       {/* Navigation */}
-
       <nav className="sidebar-menu">
         <NavLink
           to="/dashboard"
@@ -50,13 +54,14 @@ const Sidebar = () => {
         </NavLink>
 
         {/* Organization */}
-
         <div className="menu-dropdown">
           <button
+            type="button"
             className={`menu-item dropdown-btn ${
-              organizationOpen ? "active" : ""
+              organizationRouteActive ? "active" : ""
             }`}
-            onClick={() => setOrganizationOpen(!organizationOpen)}
+            onClick={() => setOrganizationOpen((previous) => !previous)}
+            aria-expanded={organizationOpen}
           >
             <div className="menu-left">
               <FiBriefcase />
@@ -107,15 +112,39 @@ const Sidebar = () => {
           )}
         </div>
 
-        <NavLink
-          to="/tasks"
-          className={({ isActive }) =>
-            isActive ? "menu-item active" : "menu-item"
-          }
-        >
-          <FiClipboard />
-          <span>Task Management</span>
-        </NavLink>
+        {/* Task Management */}
+        <div className="menu-dropdown">
+          <button
+            type="button"
+            className={`menu-item dropdown-btn ${
+              taskRouteActive ? "active" : ""
+            }`}
+            onClick={() => setTaskManagementOpen((previous) => !previous)}
+            aria-expanded={taskManagementOpen}
+          >
+            <div className="menu-left">
+              <FiClipboard />
+              <span>Task Management</span>
+            </div>
+
+            {taskManagementOpen ? <FiChevronDown /> : <FiChevronRight />}
+          </button>
+
+          {taskManagementOpen && (
+            <div className="submenu">
+              <NavLink
+                to="/tasks"
+                end
+                className={({ isActive }) =>
+                  isActive ? "submenu-item active" : "submenu-item"
+                }
+              >
+                <FiList />
+                <span>Task List</span>
+              </NavLink>
+            </div>
+          )}
+        </div>
 
         <NavLink
           to="/attendance"
@@ -179,11 +208,9 @@ const Sidebar = () => {
       </nav>
 
       {/* Logout */}
-
       <div className="sidebar-footer">
-        <button className="logout-btn" onClick={handleLogout}>
+        <button type="button" className="logout-btn" onClick={handleLogout}>
           <FiLogOut />
-
           <span>Logout</span>
         </button>
       </div>

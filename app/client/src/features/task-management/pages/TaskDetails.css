@@ -1,0 +1,662 @@
+/* ===================================================
+   Page Container & Themes
+=================================================== */
+
+.task-details-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 28px 36px;
+  background-color: #070c18;
+  color: #f1f5f9;
+  min-height: 100vh;
+  font-size: 15px;
+  zoom: 1.12; 
+  font-family: "Poppins", sans-serif;
+}
+
+/* ✅ UPDATED SIZES & SPACING FOR BETTER SCALING */
+.task-title-group h1 {
+  font-size: 30px;
+}
+
+.task-card {
+  padding: 26px;
+  border-radius: 16px;
+}
+
+.task-card h2 {
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+.task-card p {
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.status-strip-card {
+  padding: 14px 18px;
+  font-size: 14px;
+  border-radius: 12px;
+}
+
+.attachment-item,
+.dependency-item {
+  padding: 14px 16px;
+  border-radius: 12px;
+}
+
+.summary-row,
+.summary-user {
+  font-size: 14px;
+}
+
+/* ===================================================
+   Header
+=================================================== */
+
+.task-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.task-title-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.task-title-group h1 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.task-code-badge {
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: #1e1b4b;
+  color: #a78bfa;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.edit-task-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #7c3aed;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.edit-task-btn:hover {
+  background: #6d28d9;
+}
+
+/* ===================================================
+   Top Status Strip
+=================================================== */
+
+.task-status-strip {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+
+.status-strip-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  background: #0f172a;
+  color: #94a3b8;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.status-strip-card svg {
+  color: #64748b;
+}
+
+.status-strip-card .flag-icon {
+  color: #ef4444;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #a855f7;
+  box-shadow: 0 0 8px rgba(168, 85, 247, 0.6);
+}
+
+.progress-card {
+  justify-content: space-between;
+}
+
+.strip-progress-track {
+  width: 70px;
+  height: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #1e293b;
+}
+
+.strip-progress-track span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #7c3aed, #ec4899);
+}
+
+/* ===================================================
+   Main Layout Grid
+=================================================== */
+
+.task-details-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 20px;
+  align-items: start;
+}
+
+.task-details-main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.task-details-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ===================================================
+   Cards General Style
+=================================================== */
+
+.task-card {
+  padding: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  background: #0d1527;
+}
+
+.task-card h2 {
+  margin: 0 0 14px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.task-card p {
+  margin: 0;
+  color: #94a3b8;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.task-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.task-card-header h2 {
+  margin: 0;
+}
+
+.card-header-btn,
+.card-header-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: transparent;
+  color: #a78bfa;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.card-header-btn:hover,
+.card-header-link:hover {
+  color: #c4b5fd;
+}
+
+/* ===================================================
+   Resource Grid (Attachments + Dependencies)
+=================================================== */
+
+.task-resource-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* ===================================================
+   Attachments Section
+=================================================== */
+
+.attachment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.attachment-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  background: #0b1120;
+}
+
+.attachment-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.file-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.file-badge.fig {
+  background: #2e1065;
+  color: #a78bfa;
+}
+
+.file-badge.pdf {
+  background: #450a0a;
+  color: #f87171;
+}
+
+.file-badge.png {
+  background: #064e3b;
+  color: #34d399;
+}
+
+.file-badge.default {
+  background: #1e293b;
+  color: #94a3b8;
+}
+
+.attachment-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.attachment-info strong {
+  color: #e2e8f0;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.attachment-info span {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.attachment-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.attachment-actions button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.attachment-actions button:hover {
+  background: #1e293b;
+  color: #e2e8f0;
+}
+
+/* ===================================================
+   Dependencies Section
+=================================================== */
+
+.dependency-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dependency-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  background: #0b1120;
+}
+
+.dependency-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dependency-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #1e293b;
+  color: #94a3b8;
+}
+
+.dependency-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dependency-info span {
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.dependency-info strong {
+  color: #e2e8f0;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.dependency-status {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.dependency-status-completed {
+  background: rgba(6, 78, 59, 0.6);
+  color: #34d399;
+}
+
+.dependency-status-inprogress {
+  background: rgba(30, 58, 138, 0.6);
+  color: #60a5fa;
+}
+
+.dependency-status-todo {
+  background: rgba(30, 41, 59, 0.6);
+  color: #94a3b8;
+}
+
+/* ===================================================
+   Sidebar Summary Panel
+=================================================== */
+
+.summary-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+.summary-row span {
+  color: #64748b;
+}
+
+.summary-row strong {
+  color: #e2e8f0;
+  font-weight: 500;
+}
+
+.summary-value-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #e2e8f0;
+
+}
+
+.summary-value-group svg {
+  color: #64748b;
+}
+
+.summary-value-group .flag-icon {
+  color: #ef4444;
+}
+
+.summary-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 4px 0;
+}
+
+.summary-progress-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.summary-progress-track {
+  width: 100px;
+  height: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #1e293b;
+}
+
+.summary-progress-track span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #7c3aed, #ec4899);
+}
+
+.summary-user {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+.summary-user span {
+  color: #64748b;
+}
+
+.summary-user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.summary-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #7c3aed;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.summary-user-info div {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.summary-user-info strong {
+  color: #e2e8f0;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.summary-user-info small {
+  color: #64748b;
+  font-size: 11px;
+}
+
+/* ===================================================
+   Sidebar Actions Panel
+=================================================== */
+
+.task-actions-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.delete-task-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+  background: rgba(239, 68, 68, 0.05);
+  color: #f87171;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.delete-task-btn:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: #ef4444;
+}
+
+.delete-task-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ===================================================
+   Empty, Loading & Errors
+=================================================== */
+
+.task-section-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 90px;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.task-details-loading,
+.task-details-empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  min-height: 60vh;
+  color: #ffffff;
+}
+
+.task-details-loader {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #7c3aed;
+  border-radius: 50%;
+  animation: taskSpin 0.8s linear infinite;
+}
+
+@keyframes taskSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.task-details-error {
+  padding: 12px 16px;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+  background: rgba(239, 68, 68, 0.1);
+  color: #fca5a5;
+  font-size: 13px;
+}
+
+/* ===================================================
+   Responsive Breakpoints
+=================================================== */
+
+@media (max-width: 1200px) {
+  .task-status-strip {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .task-details-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .task-resource-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .task-status-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .task-details-page {
+    padding: 16px;
+  }
+}

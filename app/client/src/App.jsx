@@ -6,6 +6,8 @@ import Layout from "./layout/Layout";
 import EmployeeInfo from "./features/organization/employees/pages/EmployeeInfo";
 import RoleManagement from "./features/organization/roles-permissions/role-management/pages/RoleManagement";
 import PermissionManagement from "./features/organization/roles-permissions/rbac-management/pages/PermissionManagement";
+import TaskList from "./features/task-management/pages/TaskList";
+import TaskDetails from "./features/task-management/pages/TaskDetails";
 
 function App() {
   return (
@@ -29,6 +31,9 @@ function App() {
         <Route path="/organization/roles" element={<RoleManagement />} />
 
         <Route path="/organization/rbac" element={<PermissionManagement />} />
+
+        <Route path="/tasks" element={<TaskList />} />
+        <Route path="/tasks/:id" element={<TaskDetails />} />
       </Route>
     </Routes>
   );

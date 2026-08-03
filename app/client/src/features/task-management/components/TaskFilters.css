@@ -1,0 +1,190 @@
+/* ==========================================
+   Task Filters
+========================================== */
+.task-filters{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  width:100%;
+  margin-bottom:22px;
+  flex-wrap:wrap;
+}
+
+/* ==========================================
+   Search
+========================================== */
+.filter-search{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  width:320px;
+  height:44px;
+  padding:0 14px;
+  background:#111827;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;
+  transition:.25s;
+}
+
+.filter-search:hover{
+  border-color:#7C3AED;
+}
+
+.filter-search:focus-within{
+  border-color:#7C3AED;
+  box-shadow:0 0 0 3px rgba(124,58,237,.15);
+}
+
+.filter-search svg{
+  color:#9CA3AF;
+  flex-shrink:0;
+}
+
+.filter-search input{
+  width:100%;
+  border:none;
+  outline:none;
+  background:transparent;
+  color:#FFFFFF;
+  font-family:Poppins,sans-serif;
+  font-size:14px;
+}
+
+.filter-search input::placeholder{
+  color:#6B7280;
+}
+
+/* ==========================================
+   Select
+========================================== */
+.filter-item{
+  position:relative;
+}
+
+.filter-item select{
+  width:170px;
+  height:44px;
+  padding:0 38px 0 14px;
+  border:none;
+  outline:none;
+  appearance:none;
+  background:#111827;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;
+  color:#FFFFFF;
+  font-family:Poppins,sans-serif;
+  font-size:14px;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.filter-item select:hover{
+  border-color:#7C3AED;
+}
+
+.filter-item select:focus{
+  border-color:#7C3AED;
+  box-shadow:0 0 0 3px rgba(124,58,237,.15);
+}
+
+.filter-item svg{
+  position:absolute;
+  right:14px;
+  top:50%;
+  transform:translateY(-50%);
+  color:#9CA3AF;
+  pointer-events:none;
+}
+
+/* ==========================================
+   Reset Button
+========================================== */
+.filter-reset-btn{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  height:44px;
+  padding:0 18px;
+  border:none;
+  outline:none;
+  cursor:pointer;
+  border-radius:12px;
+  background:#1F2937;
+  color:#FFFFFF;
+  font-family:Poppins,sans-serif;
+  font-size:14px;
+  font-weight:500;
+  transition:.25s;
+}
+
+.filter-reset-btn:hover{
+  background:#374151;
+}
+
+.filter-reset-btn svg{
+  width:16px;
+  height:16px;
+}
+
+/* ==========================================
+   Total Tasks
+========================================== */
+.filter-total-task{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:#9CA3AF;
+  font-family:Poppins,sans-serif;
+  font-size:14px;
+}
+
+.filter-total-task strong{
+  color:#FFFFFF;
+  font-size:15px;
+  font-weight:600;
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+@media(max-width:1200px){
+  .filter-total-task{
+    width:100%;
+    margin-left:0;
+    justify-content:flex-end;
+  }
+}
+
+@media(max-width:992px){
+  .task-filters{
+    gap:10px;
+  }
+
+  .filter-search{
+    width:100%;
+  }
+
+  .filter-item{
+    width:calc(50% - 5px);
+  }
+
+  .filter-item select{
+    width:100%;
+  }
+}
+
+@media(max-width:640px){
+  .filter-item{
+    width:100%;
+  }
+
+  .filter-reset-btn{
+    width:100%;
+    justify-content:center;
+  }
+
+  .filter-total-task{
+    justify-content:center;
+  }
+}

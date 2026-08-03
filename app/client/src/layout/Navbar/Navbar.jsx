@@ -6,10 +6,11 @@ function Navbar() {
   const location = useLocation();
 
   // Dynamic user profile initial
-  const token = JSON.parse(localStorage.getItem("token")) || {};
-  const user = JSON.parse(localStorage.getItem("user")) || {};
+  // const token = localStorage.getItem("token") || "";
 
-  const email = user.email || token.email || "";
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+
+  const email = user.email || "";
 
   const userInitial = email ? email.charAt(0).toUpperCase() : "U";
   
@@ -41,7 +42,7 @@ function Navbar() {
 
     "/tasks": {
       parent: "Task Management",
-      child: "Tasks",
+      child: "Task List",
     },
 
     "/attendance": {
@@ -75,10 +76,19 @@ function Navbar() {
     },
   };
 
-  const current = breadcrumbs[location.pathname] || {
-    parent: "",
-    child: "",
-  };
+  const isTaskDetails = location.pathname.startsWith("/tasks/");
+
+  const current = isTaskDetails
+    ? {
+        parent: "Task Management",
+        middle: "Task List",
+        child: "Task Details",
+      }
+    : breadcrumbs[location.pathname] || {
+        parent: "",
+        middle: "",
+        child: "",
+      };
 
   return (
     <header className="navbar">
@@ -86,10 +96,16 @@ function Navbar() {
         <div className="breadcrumb">
           <span className="breadcrumb-link">{current.parent}</span>
 
+          {current.middle && (
+            <>
+              <span className="breadcrumb-separator">&gt;</span>
+              <span className="breadcrumb-link">{current.middle}</span>
+            </>
+          )}
+
           {current.child && (
             <>
               <span className="breadcrumb-separator">&gt;</span>
-
               <span className="breadcrumb-active">{current.child}</span>
             </>
           )}

@@ -2,6 +2,10 @@ const supabase = require("../../config/supabase");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+const { OAuth2Client } = require("google-auth-library");
+
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+
 /* =========================================================
    LOGIN
 ========================================================= */
@@ -79,7 +83,7 @@ exports.login = async (email, password) => {
     {
       id: user.id,
       email: user.email,
-      role: user.role,
+      role: user.role_id,
     },
     process.env.JWT_SECRET,
     {
@@ -201,4 +205,100 @@ exports.bootstrap = async (userData) => {
     message: "CEO account created successfully",
     user: data,
   };
+};
+
+exports.googleLogin = async (token) => {
+  try {
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+
+    const payload = ticket.getPayload();
+
+    const { sub, email } = payload;
+
+    // Find existing employee
+    const { data: user, error } = await supabase
+      .from("users")
+      .select("*")
+      .eq("email", email)
+      .single();
+
+    if (error || !user) {
+      return {
+        success: false,
+        message: "Employee is not registered. Please contact HR/Admin.",
+      };
+    }
+
+    if (!user.status) {
+      return {
+        success: false,
+        message: "Account Inactive",
+      };
+    }
+
+    // Save google id if first Google login
+    if (!user.google_id) {
+      await supabase
+        .from("users")
+        .update({
+          google_id: sub,
+          auth_provider: "GOOGLE",
+          last_login: new Date(),
+        })
+        .eq("id", user.id);
+    } else {
+      await supabase
+        .from("users")
+        .update({
+          last_login: new Date(),
+        })
+        .eq("id", user.id);
+    }
+
+    const jwtToken = jwt.sign(
+      {
+        id: user.id,
+        email: user.email,
+        role_id: user.role_id,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1d",
+      },
+    );
+
+    await supabase.from("login_sessions").insert([
+      {
+        user_id: user.id,
+        jwt_token: jwtToken,
+        login_time: new Date(),
+        is_active: true,
+      },
+    ]);
+
+    await supabase.from("audit_logs").insert([
+      {
+        user_id: user.id,
+        action: "GOOGLE_LOGIN",
+        description: "User Logged In Using Google",
+      },
+    ]);
+
+    delete user.password_hash;
+
+    return {
+      success: true,
+      message: "Google Login Successful",
+      token: jwtToken,
+      user,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: error.message,
+    };
+  }
 };

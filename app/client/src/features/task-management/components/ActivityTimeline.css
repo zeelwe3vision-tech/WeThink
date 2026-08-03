@@ -1,0 +1,253 @@
+/* ===================================================
+   Timeline Card
+=================================================== */
+
+.activity-timeline{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.activity-timeline h2{
+  margin:0;
+  color:#FFFFFF;
+  font-size:18px;
+  font-weight:600;
+}
+
+/* ===================================================
+   Timeline List
+=================================================== */
+
+.timeline-list{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.timeline-item{
+  position:relative;
+  display:flex;
+  align-items:flex-start;
+  gap:18px;
+}
+
+/* ===================================================
+   Timeline Icon
+=================================================== */
+
+.timeline-icon{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:rgba(124,58,237,.15);
+  color:#A78BFA;
+  z-index:2;
+}
+
+/* ===================================================
+   Timeline Line
+=================================================== */
+
+.timeline-line{
+  position:absolute;
+  top:42px;
+  left:20px;
+  width:2px;
+  height:calc(100% + 20px);
+  background:rgba(255,255,255,.08);
+}
+
+/* ===================================================
+   Timeline Content
+=================================================== */
+
+.timeline-content{
+  flex:1;
+  padding:16px 18px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;
+  background:#0F172A;
+}
+
+/* ===================================================
+   Top Section
+=================================================== */
+
+.timeline-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
+  margin-bottom:12px;
+}
+
+.timeline-user{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+/* ===================================================
+   Avatar
+=================================================== */
+
+.timeline-avatar,
+.timeline-avatar-placeholder{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  flex-shrink:0;
+}
+
+.timeline-avatar{
+  object-fit:cover;
+}
+
+.timeline-avatar-placeholder{
+  background:#7C3AED;
+  color:#FFFFFF;
+  font-size:15px;
+  font-weight:600;
+}
+
+/* ===================================================
+   User Info
+=================================================== */
+
+.timeline-user-info{
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+}
+
+.timeline-user-info h4{
+  margin:0;
+  color:#FFFFFF;
+  font-size:14px;
+  font-weight:600;
+}
+
+.timeline-user-info span{
+  color:#94A3B8;
+  font-size:12px;
+}
+
+/* ===================================================
+   Time
+=================================================== */
+
+.timeline-time{
+  color:#94A3B8;
+  font-size:12px;
+  white-space:nowrap;
+}
+
+/* ===================================================
+   Message
+=================================================== */
+
+.timeline-message{
+  margin:0;
+  color:#CBD5E1;
+  font-size:14px;
+  line-height:1.7;
+}
+
+/* ===================================================
+   Loading
+=================================================== */
+
+.timeline-loading{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:140px;
+  color:#94A3B8;
+  font-size:15px;
+}
+
+/* ===================================================
+   Empty
+=================================================== */
+
+.timeline-empty{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  min-height:180px;
+  border:1px dashed rgba(255,255,255,.08);
+  border-radius:12px;
+}
+
+.timeline-empty-icon{
+  font-size:34px;
+}
+
+.timeline-empty h3{
+  margin:0;
+  color:#FFFFFF;
+  font-size:18px;
+}
+
+.timeline-empty p{
+  margin:0;
+  color:#94A3B8;
+  font-size:14px;
+  text-align:center;
+}
+
+/* ===================================================
+   Responsive
+=================================================== */
+
+@media(max-width:768px){
+
+  .timeline-top{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .timeline-time{
+    margin-left:54px;
+  }
+
+  .timeline-content{
+    padding:14px;
+  }
+}
+
+@media(max-width:480px){
+
+  .timeline-item{
+    gap:14px;
+  }
+
+  .timeline-icon,
+  .timeline-avatar,
+  .timeline-avatar-placeholder{
+    width:36px;
+    height:36px;
+  }
+
+  .timeline-line{
+    left:17px;
+  }
+
+  .timeline-user-info h4{
+    font-size:13px;
+  }
+
+  .timeline-message{
+    font-size:13px;
+  }
+}
