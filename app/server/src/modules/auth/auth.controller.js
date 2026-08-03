@@ -32,33 +32,3 @@ exports.session = async (req, res) => {
     user: req.user,
   });
 };
-
-exports.bootstrapStatus = async (req, res) => {
-  try {
-    const result = await authService.bootstrapStatus();
-
-    return res.status(200).json(result);
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-  }
-};
-
-exports.bootstrap = async (req, res) => {
-  try {
-    const result = await authService.bootstrap(req.body);
-
-    if (!result.success) {
-      return res.status(400).json(result);
-    }
-
-    return res.status(201).json(result);
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-  }
-};

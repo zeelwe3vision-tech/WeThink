@@ -11,28 +11,14 @@ const roleRoutes = require("./modules/roles/role.routes");
 const app = express();
 
 // Middlewares FIRST
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://wethink.we3vision.com",
-];
-
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin) return callback(null, true);
-
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-
-      callback(new Error("Not allowed by CORS"));
-    },
+    origin: process.env.CLIENT_URL || "http://localhost:5173",
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
-
 app.use(express.json());
 
 // Routes AFTER middleware

@@ -3,25 +3,27 @@ import axios from "axios";
 /* ==========================================================
    LOCAL DEVELOPMENT
 ========================================================== */
-// const API_URL = `http://localhost:5000/api/users`;
+const API_URL = `http://localhost:5000/api/users`;
 
-// const ORGANIZATION_API = `http://localhost:5000/api/organizations`;
+const ORGANIZATION_API = `http://localhost:5000/api/organizations`;
 
-// const DEPARTMENT_API = `http://localhost:5000/api/departments`;
+const DEPARTMENT_API = `http://localhost:5000/api/departments`;
 
-// const ROLE_API = `http://localhost:5000/api/roles`;
+const ROLE_API = `http://localhost:5000/api/roles`;
 
 /* ==========================================================
    PRODUCTION (UNCOMMENT AFTER DEPLOYMENT)
 ========================================================== */
 
-const API = "https://wethink.onrender.com/api";
+// const API = import.meta.env.VITE_API_URL;
 
-const API_URL = `${API}/users`;
-const ORGANIZATION_API = `${API}/organizations`;
-const DEPARTMENT_API = `${API}/departments`;
-const ROLE_API = `${API}/roles`;
-const MANAGER_API = `${API}/users/managers`;
+// const API_URL = `${API}/users`;
+
+// const ORGANIZATION_API = `${API}/organizations`;
+
+// const DEPARTMENT_API = `${API}/departments`;
+
+// const ROLE_API = `${API}/roles`;
 
 /* ==========================================================
    Employees
@@ -84,6 +86,6 @@ export const getRoles = async () => {
 ========================================================== */
 
 export const getManagers = async () => {
-  const response = await axios.get(MANAGER_API);
+  const response = await axios.get(`${API_URL}/managers`);
   return response.data;
 };
