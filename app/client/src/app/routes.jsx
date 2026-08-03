@@ -17,6 +17,11 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: <Dashboard />,
   },
+  // department route dev 03-08-2026//
+  {
+    path:"organization/department",
+    element: <Department/>
+  }
 ]);
 
 export default router;

@@ -14,6 +14,9 @@ const ROLE_API = `http://localhost:5000/api/roles`;
 /* ==========================================================
    PRODUCTION (UNCOMMENT AFTER DEPLOYMENT)
 ========================================================== */
+//deepak add this line  start - 03/08/2026//
+const API = "http://localhost:5000/api";
+//deepak add this line End - 03/08/2026//
 
 // const API = import.meta.env.VITE_API_URL;
 

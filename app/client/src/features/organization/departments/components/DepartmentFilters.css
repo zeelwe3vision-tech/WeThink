@@ -1,0 +1,158 @@
+/* ==========================================================
+   Dev - 28/07/26 - Start
+   Department Filters
+========================================================== */
+
+/* Filter Container */
+
+.department-filters{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-bottom:25px;
+    padding:20px;
+    border-radius:16px;
+    background:rgba(22,24,36,.75);
+    box-shadow:0 4px 30px rgba(0,0,0,.10);
+    backdrop-filter:blur(2px);
+    -webkit-backdrop-filter:blur(2px);
+
+    border:1px solid rgba(255,255,255,.08);
+
+}
+
+/* ==========================================
+   Search Box
+========================================== */
+.search-box{
+    flex:1;
+    min-width:280px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 16px;
+    border-radius:12px;
+    background:#1b2030;
+    border:1px solid rgba(255,255,255,.08);
+
+}
+
+.search-box svg{
+    color:#8b5cf6;
+
+}
+
+.search-box input{
+
+    flex:1;
+    border:none;
+    outline:none;
+    background:transparent;
+    color:#ffffff;
+    font-size:14px;
+
+}
+
+.search-box input::placeholder{
+
+    color:#94a3b8;
+
+}
+
+/* ==========================================
+   Dropdown
+========================================== */
+
+.department-filters select{
+    min-width:180px;
+    padding:12px 14px;
+    border-radius:12px;
+    outline:none;
+    cursor:pointer;
+    color:#ffffff;
+    background:#1b2030;
+    border:1px solid rgba(255,255,255,.08);
+    font-size:14px;
+    transition:.30s;
+
+}
+
+.department-filters select:hover{
+
+    border-color:#8b5cf6;
+
+}
+
+.department-filters select:focus{
+    border-color:#ec4899;
+}
+
+/* Option */
+
+.department-filters option{
+
+    background:#1b2030;
+    color:#ffffff;
+
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media(max-width:992px){
+
+.department-filters{
+flex-direction:column;
+align-items:stretch;
+}
+
+.search-box{
+min-width:100%;
+
+}
+
+.department-filters select{
+width:100%;
+}
+
+.filter-btn{
+width:100%;
+justify-content:center;
+}
+}
+.reset-btn {
+    height: 42px;
+    min-width: 110px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    background: linear-gradient(
+        135deg,
+        #7c3aed,
+        #ec4899
+    );
+
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.reset-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(236, 72, 153, 0.35);
+}
+
+.reset-btn:active {
+    transform: scale(0.97);
+}
+/* ==========================================================
+   Dev - 28/07/26 - End
+========================================================== */

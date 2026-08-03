@@ -1,0 +1,164 @@
+/* ==========================================================
+   Dev - 28/07/26 - Start
+   Department Table
+========================================================== */
+
+/* Table Container */
+
+.department-table-container{
+    width:100%;
+    overflow-x:auto;
+    padding:20px;
+    border-radius:16px;
+    background:rgba(22,24,36,.75);
+    box-shadow:0 4px 30px rgba(0,0,0,.10);
+    backdrop-filter:blur(2px);
+    -webkit-backdrop-filter:blur(2px);
+    border:1px solid rgba(255,255,255,.08);
+
+}
+
+/* Table */
+
+.department-table{
+    width:100%;
+    border-collapse:collapse;
+    table-layout:fixed;
+}
+
+/* Table Header */
+
+.department-table thead{
+    background:#1d2232;
+
+}
+
+.department-table th{
+    padding:18px 16px;
+    color:#ffffff;
+    text-align:center;
+    vertical-align:center;
+    font-size:14px;
+    font-weight:600;
+    white-space:nowrap;
+
+}
+
+/* Table Body */
+
+.department-table td{
+    padding:18px 16px;
+    color:#d1d5db;
+    text-align:center;
+    vertical-align:center;
+    font-size:14px;
+    border-bottom:1px solid rgba(255,255,255,.06);
+
+}
+
+/* Hover */
+
+.department-table tbody tr{
+    transition:.30s;
+
+}
+
+.department-table tbody tr:hover{
+    background:#1b2030;
+}
+
+/* Status Badge */
+
+.status-badge{
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:6px 14px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+
+}
+
+/* Active */
+
+.status-badge.active{
+    background:#16a34a;
+    color:#ffffff;
+}
+
+/* Inactive */
+
+.status-badge.inactive{
+    background:#dc2626;
+    color:#ffffff;
+
+}
+
+/* Action Buttons */
+
+.department-actions{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+}
+
+/* Common Button */
+
+.action-btn {
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.view-btn {
+  background: #2563eb;
+}
+
+.edit-btn {
+  background: #f59e0b;
+}
+
+.table-delete-btn {
+  background: red !important;
+}
+
+/* Empty Data */
+.no-data{
+
+    text-align:center;
+    padding:35px;
+    color:#94a3b8;
+    font-size:15px;
+
+}
+
+/* Responsive */
+
+@media(max-width:992px){
+
+.department-table-container{
+
+padding:15px;
+
+}
+
+.department-table{
+
+min-width:900px;
+
+}
+
+}
+
+/* ==========================================================
+   Dev - 28/07/26 - End
+========================================================== */

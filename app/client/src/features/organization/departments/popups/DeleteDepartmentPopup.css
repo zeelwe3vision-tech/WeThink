@@ -1,0 +1,62 @@
+/* Dev - 28/07/26 - Start */
+
+.popup-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:1000;
+}
+
+.delete-popup{
+    width:420px;
+    background:#171822;
+    border-radius:12px;
+    padding:30px;
+    text-align:center;
+}
+
+.delete-popup h2{
+    color:#fff;
+    margin-bottom:15px;
+}
+
+.delete-popup p{
+    color:#cbd5e1;
+    line-height:1.6;
+}
+
+.popup-buttons{
+    display:flex;
+    justify-content:flex-end;
+    gap:12px;
+    margin-top:30px;
+
+}
+
+.cancel-btn{
+    border:none;
+    padding:10px 22px;
+    border-radius:8px;
+    background:#555;
+    color:#fff;
+    cursor:pointer;
+
+}
+
+.delete-btn{
+    border:none;
+    padding:10px 22px;
+    border-radius:8px;
+    background:#dc2626;
+    color:#fff;
+    cursor:pointer;
+
+}
+.delete-btn:hover{
+    background:#b91c1c;
+}
+
+/* Dev - 28/07/26 - End */
