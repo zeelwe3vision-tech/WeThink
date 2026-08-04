@@ -109,16 +109,19 @@ exports.updateDepartment = async (req, res) => {
 
 exports.deleteDepartment = async (req, res) => {
   try {
-    const result = await departmentService.deleteDepartment(
-      req.params.id
-    );
+    const result = await departmentService.deleteDepartment(req.params.id);
+
+    console.log(result);
 
     if (!result.success) {
       return res.status(400).json(result);
     }
+
     return res.status(200).json(result);
 
   } catch (error) {
+    console.error(error);
+
     return res.status(500).json({
       success: false,
       message: error.message,
@@ -136,19 +139,14 @@ exports.searchDepartments = async (req, res) => {
 
   try {
 
-    const { search } = req.query;
-
+    const { search } = req.params;
     const result = await departmentService.searchDepartments(search);
-
     return res.status(200).json(result);
-
   } catch (error) {
-
     return res.status(500).json({
       success: false,
       message: error.message,
     });
-
   }
 
 };

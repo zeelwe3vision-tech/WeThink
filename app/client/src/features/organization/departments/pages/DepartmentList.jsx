@@ -109,13 +109,16 @@ const handleSearch = async (value) => {
 
   const result = await departmentService.searchDepartments(value);
 
-    console.log("Search Response:", result);
-    if (result.departments.length > 0) {
-  console.log(result.departments[0]);
-}
+  console.log("Search Response:", result);
 
-    if (result.success) {
-  setDepartments(result.departments);
+if (result.success) {
+  setDepartments(result.departments || []);
+
+  if (result.departments && result.departments.length > 0) {
+    console.log(result.departments[0]);
+  }
+} else {
+  toast.error(result.message);
 }
 
 };

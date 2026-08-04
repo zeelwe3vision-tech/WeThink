@@ -64,8 +64,8 @@ export const getDepartmentById = async (id) => {
 export const searchDepartments = async (search) => {
 
   const response = await fetch(
-    `${BASE_URL}/search?search=${search}`
-  );
+  `${BASE_URL}/search/${search}`
+);
 
   const result = await response.json();
 
@@ -125,7 +125,6 @@ export const updateDepartment = async (id, departmentData) => {
     headers: {
 
       "Content-Type": "application/json",
-
     },
 
     body: JSON.stringify(departmentData),
@@ -151,9 +150,4 @@ export const deleteDepartment = async (id) => {
   return await response.json();
 
 };
-
-
 // Deepak - 28/07/2026 - End
-// Deepak - 29/07/26 - Start
-
-// Deepak - 29/07/26 - End

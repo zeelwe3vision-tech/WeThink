@@ -5,6 +5,9 @@ import Dashboard from "./features/dashboard/pages/Dashboard";
 import RequestAccess from "./features/auth/pages/RequestAccess";
 import Layout from "./layout/Layout";
 import EmployeeInfo from "./features/organization/employees/pages/EmployeeInfo";
+// Dev Add this line - 03/08/2026
+import DepartmentList from "./features/organization/departments/pages/DepartmentList";
+// Dev Add this line - 03/08/2026
 
 
 function App() {

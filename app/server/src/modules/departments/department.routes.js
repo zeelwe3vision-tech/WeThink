@@ -15,48 +15,27 @@ const {
 } = require("./department.controller");
 
   //router.get("/", getDepartments);//
-  // Deepak - 03-08-2026 - Start//
 router.get("/", departmentController.getDepartments);
-router.get("/:id",departmentController.getDepartmentById);
-// deepak - 03/08/26 - end
-router.post("/", createDepartment);
-router.put("/:id", updateDepartment);
-router.delete("/:id", deleteDepartment);  
 
-// Deepak - 03-08-2026 - Start//
 // Search
-router.get(
-  "/search",
-  departmentController.searchDepartments
-);
+router.get("/search/:search", departmentController.searchDepartments);
 
 // Status
-router.get(
-  "/status/:status",
-  departmentController.getDepartmentsByStatus
-);
+router.get("/status/:status", departmentController.getDepartmentsByStatus);
 
 // Category
-router.get(
-  "/category/:category",
-  departmentController.getDepartmentsByCategory
-);
+router.get("/category/:category", departmentController.getDepartmentsByCategory);
 
 // Check Name
-router.get(
-  "/check-name/:departmentName",
-  departmentController.checkDepartmentName
-);
+router.get("/check-name/:departmentName", departmentController.checkDepartmentName);
 
 // Check Code
-router.get(
-  "/check-code/:departmentCode",
-  departmentController.checkDepartmentCode
-);
+router.get("/check-code/:departmentCode", departmentController.checkDepartmentCode);
 
-// LAST lo undali
-router.get("/:id", getDepartmentById);
+// Get By Id (LAST)
+router.get("/:id", departmentController.getDepartmentById);
 
-
-// Deepak - 03/08/2026 - End
+router.post("/", createDepartment);
+router.put("/:id", updateDepartment);
+router.delete("/:id", deleteDepartment);
 module.exports = router;

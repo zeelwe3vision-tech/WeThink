@@ -94,7 +94,7 @@ const handleSubmit = async () => {
       "f35fdd21-4fed-43b6-bb05-7b0542025cfa",
     status: status === "Active",
 
-    createdOn: createdOn || new Date().toISOString(),
+    createdOn,
   };
 
   // Parent Component ki pampisthunnam

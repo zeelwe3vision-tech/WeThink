@@ -181,6 +181,7 @@ exports.createDepartment = async (departmentData) => {
     description,
     organizationId,
     status,
+    createdOn,
   } = departmentData;
 
   const { data, error } = await supabase
@@ -194,7 +195,7 @@ exports.createDepartment = async (departmentData) => {
         description,
         organization_id: organizationId,
         status,
-        createdOn,
+        created_at: createdOn || new Date(),
       },
     ])
     .select();
@@ -262,14 +263,36 @@ console.log("Received departmentData:", departmentData);
     department: data[0],
   };
 
-};
-
-// ======================================
-// Delete Department
-// ======================================
+}
 
 exports.deleteDepartment = async (id) => {
 
+  console.log("Delete ID:", id);
+
+  // Check if any users are assigned
+  const { data: users, error: userError } = await supabase
+    .from("users")
+    .select("id")
+    .eq("department_id", id);
+
+  if (userError) {
+    return {
+      success: false,
+      message: userError.message,
+    };
+  }
+
+  console.log("Users:", users);
+
+  if (users.length > 0) {
+    return {
+      success: false,
+      message:
+        "Cannot delete department. Employees are assigned to this department.",
+    };
+  }
+
+  // Delete department
   const { error } = await supabase
     .from("departments_new")
     .delete()
@@ -286,8 +309,8 @@ exports.deleteDepartment = async (id) => {
     success: true,
     message: "Department deleted successfully",
   };
-
 };
+
 // ======================================
 // Search Departments
 // ======================================

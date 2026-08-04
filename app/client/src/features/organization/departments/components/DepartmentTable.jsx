@@ -128,9 +128,7 @@ function DepartmentTable({
 
                 {/* Actions */}
                 <td>
-
                   <div className="action-buttons">
-
                     {/* View */}
 
                     <button
@@ -144,20 +142,16 @@ function DepartmentTable({
 
                     {/* Edit */}
                     <button
-                      className="action-btn edit-btn"
-                      onClick={() =>
-                        handleEditDepartment(department)
+                      className="action-btn table-edit-btn"
+                      onClick={() => handleEditDepartment(department)
                       }
-
                     >
                       <Pencil size={16}/>
-
                     </button>
 
                     {/* Delete */}
                     <button
                       className="action-btn table-delete-btn"
-
                       onClick={() =>
                         handleDeleteClick(department)
                       }
