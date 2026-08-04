@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
-
 import Login from "../pages/Login";
 import RequestAccess from "../pages/RequestAccess";
 import Dashboard from "../pages/Dashboard";
+import Department from "../../organization/departments/pages/Department"; 
 
 const router = createBrowserRouter([
   {

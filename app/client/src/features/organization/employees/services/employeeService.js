@@ -11,24 +11,19 @@ const DEPARTMENT_API = `http://localhost:5000/api/departments`;
 
 const ROLE_API = `http://localhost:5000/api/roles`;
 
-// const MANAGER_API = `http://localhost:5000/api/users/managers`;
+const MANAGER_API = `http://localhost:5000/api/users/managers`;
 
 /* ==========================================================
    PRODUCTION (UNCOMMENT AFTER DEPLOYMENT)
 ========================================================== */
-//deepak add this line  start - 03/08/2026//
-const API = "http://localhost:5000/api";
-//deepak add this line End - 03/08/2026//
 
-// const API = import.meta.env.VITE_API_URL;
+// const API = "https://wethink.onrender.com/api";
 
 // const API_URL = `${API}/users`;
-
 // const ORGANIZATION_API = `${API}/organizations`;
-
 // const DEPARTMENT_API = `${API}/departments`;
-
 // const ROLE_API = `${API}/roles`;
+// const MANAGER_API = `${API}/users/managers`;
 
 /* ==========================================================
    Employees
@@ -91,6 +86,6 @@ export const getRoles = async () => {
 ========================================================== */
 
 export const getManagers = async () => {
-  const response = await axios.get(`${API_URL}/managers`);
+  const response = await axios.get(MANAGER_API);
   return response.data;
 };

@@ -98,16 +98,16 @@ exports.createUser = async (userData) => {
   ---------------------------------------- */
 
   const passwordHash = await bcrypt.hash(password, 10);
-// start - deepak 03/08/2026// 
+  // start - deepak 03/08/2026//
   console.log("================================");
   console.log("departmentId:", departmentId);
   console.log("organizationId:", organizationId);
   console.log("Insert Data:", {
-  department_id: departmentId,
-  organization_id: organizationId,
-});
-console.log("================================");
-// end - deepak 03/08/2026//
+    department_id: departmentId,
+    organization_id: organizationId,
+  });
+  console.log("================================");
+  // end - deepak 03/08/2026//
   /* ----------------------------------------
      Insert User
   ---------------------------------------- */
@@ -136,23 +136,23 @@ console.log("================================");
     ])
     .select()
     .single();
-// Replaced Deepak - 03/08/2026 - Start//
+  // Replaced Deepak - 03/08/2026 - Start//
   if (error) {
-  console.log("Supabase Error:", error);
+    console.log("Supabase Error:", error);
 
-  return {
-    success: false,
-    message: error.message,
-  };
-}
-// Replaced Deepak - 03/08/2026 - End//
+    return {
+      success: false,
+      message: error.message,
+    };
+  }
+  // Replaced Deepak - 03/08/2026 - End//
 
   return {
     success: true,
     message: "User created successfully",
     user: data,
   };
-};;
+};
 
 exports.getAllUsers = async () => {
   const [usersResult, organizationsResult, departmentsResult, rolesResult] =
@@ -237,7 +237,6 @@ exports.getAllUsers = async () => {
     users,
   };
 };
-
 
 exports.getUserById = async (id) => {
   const [
