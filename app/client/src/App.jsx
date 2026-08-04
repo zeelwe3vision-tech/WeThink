@@ -8,6 +8,10 @@ import RoleManagement from "./features/organization/roles-permissions/role-manag
 import PermissionManagement from "./features/organization/roles-permissions/rbac-management/pages/PermissionManagement";
 import TaskList from "./features/task-management/pages/TaskList";
 import TaskDetails from "./features/task-management/pages/TaskDetails";
+// Dev Add this line - 03/08/2026
+import DepartmentList from "./features/organization/departments/pages/DepartmentList";
+// Dev Add this line - 03/08/2026
+
 
 function App() {
   return (
@@ -34,6 +38,7 @@ function App() {
 
         <Route path="/tasks" element={<TaskList />} />
         <Route path="/tasks/:id" element={<TaskDetails />} />
+        <Route path="/organization/departments" element={<DepartmentList />} />
       </Route>
     </Routes>
   );

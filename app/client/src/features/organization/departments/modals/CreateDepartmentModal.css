@@ -1,0 +1,140 @@
+/* ==========================================================
+   Dev - 28/07/26 - Start
+========================================================== */
+
+/* Overlay */
+
+.drawer-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    display:flex;
+    justify-content:flex-end;
+    z-index:999;
+}
+
+/* Drawer */
+
+.department-drawer{
+    width:450px;
+    height:100vh;
+    background:#171822;
+    padding:30px;
+    overflow-y:auto;
+    box-shadow:-8px 0 30px rgba(0,0,0,.35);
+    animation:slideIn .35s ease;
+
+}
+
+/* Animation */
+
+@keyframes slideIn{
+
+from{
+transform:translateX(100%);
+}
+
+to{
+transform:translateX(0);
+}
+}
+
+/* Title */
+
+.department-drawer h2{
+    color:#fff;
+    font-size:24px;
+    margin-bottom:30px;
+
+}
+
+/* Form */
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    margin-bottom:20px;
+}
+
+.form-group label{
+    color:#d1d5db;
+    margin-bottom:8px;
+    font-size:14px;
+    font-weight:600;
+}
+
+.form-group input,
+.form-group select{
+    height:46px;
+    border:none;
+    outline:none;
+    border-radius:10px;
+    padding:0 14px;
+    background:#242634;
+    color:#fff;
+    font-size:14px;
+}
+
+.form-group input::placeholder{
+    color:#888;
+}
+
+.form-group input:disabled{
+    opacity:.75;
+    cursor:not-allowed;
+}
+
+/* Buttons */
+
+.drawer-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.cancel-btn{
+    border:none;
+    cursor:pointer;
+    padding:12px 24px;
+    border-radius:10px;
+    background:#444;
+    color:#fff;
+    transition:.3s;
+    flex:1;
+    height:44px;
+}
+
+.cancel-btn:hover{
+    background:#555;
+}
+
+.submit-btn{
+    border:none;
+    cursor:pointer;
+    padding:12px 24px;
+    border-radius:10px;
+    background:#7c3aed;
+    color:#fff;
+    transition:.3s;
+    flex:1;
+    height:44px;
+}
+
+.submit-btn:hover{
+    background:#6d28d9;
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+.department-drawer{
+width:100%;
+}
+
+}
+
+/* ==========================================================
+   Dev - 28/07/26 - End
+========================================================== */

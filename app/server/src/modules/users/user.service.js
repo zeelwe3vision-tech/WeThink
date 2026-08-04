@@ -12,6 +12,10 @@ const createLookupMap = (data, keyField = "id") => {
 };
 
 exports.createUser = async (userData) => {
+  //deepak - 03/08/2026 - Start//
+  console.log("Received Payload:", userData);
+  console.log("Department ID:", userData.departmentId);
+  //deepak - 03/08/2026 - End//
   const {
     employeeId,
     firstName,
@@ -19,12 +23,10 @@ exports.createUser = async (userData) => {
     email,
     mobile,
     password,
-
     organizationId,
     departmentId,
     roleId,
     managerId,
-
     designation,
     joiningDate,
     employmentType,
@@ -96,7 +98,16 @@ exports.createUser = async (userData) => {
   ---------------------------------------- */
 
   const passwordHash = await bcrypt.hash(password, 10);
-
+// start - deepak 03/08/2026// 
+  console.log("================================");
+  console.log("departmentId:", departmentId);
+  console.log("organizationId:", organizationId);
+  console.log("Insert Data:", {
+  department_id: departmentId,
+  organization_id: organizationId,
+});
+console.log("================================");
+// end - deepak 03/08/2026//
   /* ----------------------------------------
      Insert User
   ---------------------------------------- */
@@ -111,7 +122,6 @@ exports.createUser = async (userData) => {
         email,
         mobile,
         password_hash: passwordHash,
-
         organization_id: organizationId || null,
         department_id: departmentId || null,
         role_id: finalRoleId || null,
@@ -126,13 +136,16 @@ exports.createUser = async (userData) => {
     ])
     .select()
     .single();
-
+// Replaced Deepak - 03/08/2026 - Start//
   if (error) {
-    return {
-      success: false,
-      message: error.message,
-    };
-  }
+  console.log("Supabase Error:", error);
+
+  return {
+    success: false,
+    message: error.message,
+  };
+}
+// Replaced Deepak - 03/08/2026 - End//
 
   return {
     success: true,

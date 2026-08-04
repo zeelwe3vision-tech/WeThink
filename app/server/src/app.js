@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-
 const authRoutes = require("./modules/auth/auth.routes");
 const userRoutes = require("./modules/users/user.routes");
 const organizationRoutes = require("./modules/organizations/organization.routes");
@@ -32,6 +31,14 @@ app.use(
 
       return callback(new Error("Not allowed by CORS"));
     },
+    credentials: true,
+  }),
+);
+
+// Middlewares FIRST
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL || "http://localhost:5173",
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],

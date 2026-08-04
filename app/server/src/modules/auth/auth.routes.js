@@ -10,6 +10,7 @@ const {
   bootstrapStatus,
   bootstrap,
 } = require("./auth.controller");
+const { login, logout, session } = require("./auth.controller");
 
 // Validation
 const { loginValidation } = require("./auth.validation");
@@ -22,9 +23,9 @@ router.post("/google", googleLogin);
 router.post("/logout", verifyToken, logout);
 router.get("/session", verifyToken, session);
 
-
 // Bootstrap
 router.get("/bootstrap-status", bootstrapStatus);
 router.post("/bootstrap", bootstrap);
 
+module.exports = router;
 module.exports = router;

@@ -133,8 +133,14 @@ function EmployeeInfo() {
 
       return true;
     } catch (error) {
+      // deepak changed chetan sir // 03/08/2026 - end
+      console.log("Backend Response:", error.response?.data);
       console.error(error);
-      alert("Registration Failed");
+      // deepak changed chetan sir // 03/08/2026 - end 
+  alert(JSON.stringify(error.response?.data));
+     // console.error(error);
+    //  alert("Registration Failed");
+
       return false;
     }
   };
