@@ -31,7 +31,8 @@ function Login() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        // "http://localhost:5000/api/auth/login",
+        "http://wethink.onrender.com/api/auth/login",
         {
           email,
           password,
@@ -56,7 +57,8 @@ function Login() {
   const handleGoogleLogin = async (credentialResponse) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/google",
+        // "http://localhost:5000/api/auth/google",
+        "http://wethink.onrender.com/api/auth/google",
         {
           token: credentialResponse.credential,
         },
