@@ -32,7 +32,7 @@ function Login() {
     try {
       const response = await axios.post(
         // "http://localhost:5000/api/auth/login",
-        "http://wethink.onrender.com/api/auth/login",
+        "https://wethink.onrender.com/api/auth/login",
         {
           email,
           password,
@@ -58,7 +58,7 @@ function Login() {
     try {
       const response = await axios.post(
         // "http://localhost:5000/api/auth/google",
-        "http://wethink.onrender.com/api/auth/google",
+        "https://wethink.onrender.com/api/auth/google",
         {
           token: credentialResponse.credential,
         },
@@ -80,7 +80,6 @@ function Login() {
   return (
     <div className="login-page">
       <div className="login-card">
-
         {/* Logo */}
 
         <div className="login-logo">
@@ -96,9 +95,7 @@ function Login() {
 
         <h1 className="login-title">Welcome Back</h1>
 
-        <p className="login-subtitle">
-          Sign in to continue to your workspace
-        </p>
+        <p className="login-subtitle">Sign in to continue to your workspace</p>
 
         <Session
           selectedRole={selectedRole}
@@ -110,7 +107,6 @@ function Login() {
         </div>
 
         <form onSubmit={handleSubmit} className="login-form">
-
           <div className="input-group">
             <Mail className="input-icon" size={20} />
 
@@ -141,11 +137,7 @@ function Login() {
               className="toggle-password"
               onClick={() => setShowPassword(!showPassword)}
             >
-              {showPassword ? (
-                <EyeOff size={20} />
-              ) : (
-                <Eye size={20} />
-              )}
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
           </div>
 
@@ -156,29 +148,19 @@ function Login() {
                 checked={rememberMe}
                 onChange={(e) => setRememberMe(e.target.checked)}
               />
-
               <span className="checkbox-box">✓</span>
-
               Remember me for 30 days
             </label>
 
-            <Link
-              to="/request-access"
-              className="request-access"
-            >
+            <Link to="/request-access" className="request-access">
               Request Access
             </Link>
           </div>
 
-          <button
-            type="submit"
-            className="sign-in-btn"
-          >
+          <button type="submit" className="sign-in-btn">
             Sign In
-
             <ArrowRight size={18} />
           </button>
-
         </form>
 
         <div className="divider divider--or">
@@ -202,7 +184,6 @@ function Login() {
           <LockFooter size={14} />
           Your data is safe and encrypted
         </p>
-
       </div>
     </div>
   );
