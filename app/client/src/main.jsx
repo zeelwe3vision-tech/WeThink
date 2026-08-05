@@ -1,6 +1,4 @@
-// Chetan - 23/06/2024 - start
-// import { StrictMode } from "react";
-import {Toaster} from "react-hot-toast"; // Deepak - 03/08/2024 //
+import {Toaster} from "react-hot-toast";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
