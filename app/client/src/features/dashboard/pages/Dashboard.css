@@ -1,236 +1,359 @@
-/* ==========================
-   Dashboard
-========================== */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* ===================================================
+   Main Dashboard Container (Scaled for 75%-100% Zoom)
+=================================================== */
 
 .dashboard-container {
   display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 20px;      
+  margin: 0 !important;    
+  max-width: 100% !important;
+  width: 100% !important;
+  background-color: #050814;
+  color: #f1f5f9;
   min-height: 100vh;
-  background:
-    radial-gradient(circle at 15% 85%, rgba(168,85,247,.15), transparent 45%),
-    radial-gradient(circle at 85% 20%, rgba(236,24,116,.15), transparent 45%),
-    #05050a;
-  font-family: "Inter", sans-serif;
+  box-sizing: border-box;
+  font-family: poppins, sans-serif;
+
+  zoom: 1.1; 
 }
 
-/* ==========================
-   Sidebar
-========================== */
+/* ===================================================
+   Hero Banner
+=================================================== */
 
-.sidebar {
-  width: 280px;
-  background: rgba(15,14,22,.95);
-  border-right: 1px solid rgba(255,255,255,.08);
+.hero-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 44px 56px;
+  background: linear-gradient(135deg, #090c24 0%, #101436 100%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 25px 18px;
+  gap: 10px;
+  max-width: 580px;
+  z-index: 2;
 }
 
-.logo {
-  text-align: center;
-  margin-bottom: 35px;
+.hero-subtitle {
+  color: #94a3b8;
+  font-size: 18px;
+  font-weight: 400;
 }
 
-.logo h2 {
-  color: white;
-  font-size: 28px;
+.hero-title {
+  margin: 0;
+  font-size: 48px;
   font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
-.menu {
-  list-style: none;
+.hero-we {
+  color: #ffffff;
 }
 
-.menu li {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  color: #b6b4c5;
-  padding: 14px 18px;
-  margin-bottom: 8px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: .3s;
+.hero-think {
+  background: linear-gradient(90deg, #818cf8 0%, #c084fc 50%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.menu li:hover {
-  background: rgba(236,24,116,.12);
-  color: white;
+.hero-description {
+  margin: 10px 0 0 0;
+  color: #cbd5e1;
+  font-size: 17px;
+  line-height: 1.5;
 }
 
-.menu li.active {
-  background: linear-gradient(90deg,#ec1874,#7c3aed);
-  color: white;
+.hero-subtext {
+  margin: 14px 0 0 0;
+  color: #94a3b8;
+  font-size: 15px;
 }
 
-/* ==========================
-   Logout
-========================== */
-
-.logout-btn {
-  width: 100%;
+.hero-graphic {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 14px;
-  border: none;
-  border-radius: 12px;
-  background: linear-gradient(90deg,#ec1874,#7c3aed);
-  color: white;
-  font-size: 15px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: .3s;
+  z-index: 1;
 }
 
-.logout-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(236,24,116,.35);
+/* ===================================================
+   4 Feature/Mission Cards Grid
+=================================================== */
+
+.mission-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
 }
 
-/* ==========================
-   Main
-========================== */
-
-.dashboard-main {
-  flex: 1;
-  padding: 30px;
-}
-
-/* ==========================
-   Header
-========================== */
-
-.dashboard-header {
+.mission-card {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  padding: 28px 30px;
+  background: #0d1527;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.mission-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.card-icon-badge {
+  display: flex;
   align-items: center;
-  margin-bottom: 35px;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  margin-bottom: 22px;
 }
 
-.dashboard-header h1 {
-  color: white;
-  font-size: 34px;
-  font-weight: 800;
+.card-icon-badge.purple {
+  background: rgba(139, 92, 246, 0.15);
+  color: #a78bfa;
 }
 
-.dashboard-header p {
-  color: #9a95a8;
+.card-icon-badge.pink {
+  background: rgba(236, 72, 153, 0.15);
+  color: #f472b6;
+}
+
+.card-icon-badge.indigo {
+  background: rgba(99, 102, 241, 0.15);
+  color: #818cf8;
+}
+
+.card-icon-badge.rose {
+  background: rgba(244, 63, 94, 0.15);
+  color: #fb7185;
+}
+
+.mission-card h3 {
+  margin: 0 0 12px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.mission-card p {
+  margin: 0 0 28px 0;
+  color: #94a3b8;
+  font-size: 14.5px;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.card-accent-bar {
+  height: 4px;
+  width: 48px;
+  border-radius: 999px;
+}
+
+.card-accent-bar.purple {
+  background: #7c3aed;
+}
+
+.card-accent-bar.pink {
+  background: #db2777;
+}
+
+.card-accent-bar.indigo {
+  background: #4f46e5;
+}
+
+.card-accent-bar.rose {
+  background: #e11d48;
+}
+
+/* ===================================================
+   Bottom Section: About & Why WeThink Card
+=================================================== */
+
+.about-section-card {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 48px;
+  padding: 38px 44px;
+  background: #0d1527;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+}
+
+.about-left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.about-left h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.about-left p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.about-tagline {
+  color: #a78bfa;
+  font-size: 15px;
+  font-weight: 600;
   margin-top: 6px;
 }
 
-/* ==========================
-   Cards
-========================== */
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: 22px;
-  margin-bottom: 35px;
-}
-
-.card {
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 16px;
-  padding: 25px;
-  backdrop-filter: blur(16px);
-  transition: .3s;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  border-color: #ec1874;
-}
-
-.card h3 {
-  color: #b7b4c6;
-  font-size: 16px;
-  margin-bottom: 15px;
-}
-
-.card h2 {
-  color: white;
-  font-size: 34px;
-}
-
-/* ==========================
-   Content
-========================== */
-
-.dashboard-content {
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
+.about-right {
+  display: flex;
+  flex-direction: column;
   gap: 22px;
 }
 
-.content-card {
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 16px;
-  padding: 25px;
-  backdrop-filter: blur(16px);
+.about-right h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
 }
 
-.content-card h3 {
-  color: white;
-  margin-bottom: 20px;
+.why-columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  position: relative;
 }
 
-.content-card ul {
-  list-style: none;
+.why-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 14px;
+  position: relative;
 }
 
-.content-card li {
-  color: #bdb9c9;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(255,255,255,.06);
+.why-col:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 10%;
+  height: 80%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.07);
 }
 
-.content-card li:last-child {
-  border-bottom: none;
+.why-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  margin-bottom: 14px;
 }
 
-/* ==========================
-   Responsive
-========================== */
-
-@media(max-width:1100px){
-
-.cards{
-grid-template-columns:repeat(2,1fr);
+.why-icon.purple {
+  background: rgba(139, 92, 246, 0.12);
+  color: #a78bfa;
 }
 
-.dashboard-content{
-grid-template-columns:1fr;
+.why-icon.pink {
+  background: rgba(236, 72, 153, 0.12);
+  color: #f472b6;
 }
 
+.why-icon.indigo {
+  background: rgba(99, 102, 241, 0.12);
+  color: #818cf8;
 }
 
-@media(max-width:768px){
-
-.dashboard-container{
-flex-direction:column;
+.why-col h4 {
+  margin: 0 0 8px 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
 }
 
-.sidebar{
-width:100%;
+.why-col p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
-.cards{
-grid-template-columns:1fr;
+/* ===================================================
+   Footer
+=================================================== */
+
+.dashboard-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0 12px 0;
+  color: #64748b;
+  font-size: 13px;
 }
 
-.dashboard-header h1{
-font-size:28px;
+/* ===================================================
+   Responsive Breakpoints
+=================================================== */
+
+@media (max-width: 1280px) {
+  .mission-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-section-card {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
 }
 
+@media (max-width: 850px) {
+  .dashboard-container {
+    padding: 20px 24px;
+  }
+
+  .hero-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 36px 28px;
+  }
+
+  .hero-content {
+    align-items: center;
+  }
+
+  .why-columns {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .why-col:not(:last-child)::after {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .mission-grid {
+    grid-template-columns: 1fr;
+  }
 }

@@ -6,65 +6,37 @@ const supabase = require("../../config/supabase");
 // Employee Count
 // ======================================
 
-exports.getDepartments = async (
-  status = "",
-  category = "",
-  sortBy = ""
-) => {
-
-  let query = supabase
-    .from("departments_new")
-    .select("*");
+exports.getDepartments = async (status = "", category = "", sortBy = "") => {
+  let query = supabase.from("departments").select("*");
 
   // Status Filter
   if (status) {
-    query = query.eq(
-      "status",
-      status === "Active"
-    );
+    query = query.eq("status", status === "Active");
   }
 
   // Category Filter
   if (category) {
-    query = query.eq(
-      "category",
-      category
-    );
+    query = query.eq("category", category);
   }
 
   // Sort
   if (sortBy === "az") {
-    query = query.order(
-      "department_name",
-      { ascending: true }
-    );
+    query = query.order("department_name", { ascending: true });
   }
 
   if (sortBy === "za") {
-    query = query.order(
-      "department_name",
-      { ascending: false }
-    );
+    query = query.order("department_name", { ascending: false });
   }
 
   if (sortBy === "newest") {
-    query = query.order(
-      "created_at",
-      { ascending: false }
-    );
+    query = query.order("created_at", { ascending: false });
   }
 
   if (sortBy === "oldest") {
-    query = query.order(
-      "created_at",
-      { ascending: true }
-    );
+    query = query.order("created_at", { ascending: true });
   }
 
-  const {
-    data: departments,
-    error,
-  } = await query;
+  const { data: departments, error } = await query;
 
   if (error) {
     return {
@@ -77,11 +49,9 @@ exports.getDepartments = async (
   // Get Employees
   // ======================================
 
-  const {data: users,error: userError,} = await supabase
+  const { data: users, error: userError } = await supabase
     .from("users")
-    .select(
-      "department_id, organization_id"
-    );
+    .select("department_id, organization_id");
 
   if (userError) {
     return {
@@ -97,45 +67,33 @@ exports.getDepartments = async (
   const employeeCountMap = {};
 
   users.forEach((user) => {
-
     if (!user.department_id) {
       return;
     }
 
-    const key =
-      `${user.organization_id}_${user.department_id}`;
+    const key = `${user.organization_id}_${user.department_id}`;
 
-    employeeCountMap[key] =
-      (employeeCountMap[key] || 0) + 1;
-
+    employeeCountMap[key] = (employeeCountMap[key] || 0) + 1;
   });
-    // ======================================
+  // ======================================
   // Merge Employee Count
   // ======================================
 
-const finalDepartments = departments.map((department) => {
+  const finalDepartments = departments.map((department) => {
+    const employeeKey = `${department.organization_id}_${department.id}`;
 
-  const employeeKey =
-    `${department.organization_id}_${department.id}`;
+    return {
+      ...department,
 
-  return {
-    ...department,
-
-    employees:
-      employeeCountMap[employeeKey] || 0,
-
-  };
-
-});
+      employees: employeeCountMap[employeeKey] || 0,
+    };
+  });
 
   return {
-
     success: true,
 
     departments: finalDepartments,
-
   };
-
 };
 
 // ======================================
@@ -143,36 +101,29 @@ const finalDepartments = departments.map((department) => {
 // ======================================
 
 exports.getDepartmentById = async (id) => {
-
   const { data, error } = await supabase
-    .from("departments_new")
+    .from("departments")
     .select("*")
     .eq("id", id)
     .single();
 
   if (error) {
-
     return {
       success: false,
       message: "Department not found",
     };
-
   }
 
   return {
-
     success: true,
     department: data,
-
   };
-
 };
 // ======================================
 // Create Department
 // ======================================
 
 exports.createDepartment = async (departmentData) => {
-
   const {
     departmentName,
     departmentCode,
@@ -185,7 +136,7 @@ exports.createDepartment = async (departmentData) => {
   } = departmentData;
 
   const { data, error } = await supabase
-    .from("departments_new")
+    .from("departments")
     .insert([
       {
         department_name: departmentName,
@@ -212,14 +163,13 @@ exports.createDepartment = async (departmentData) => {
     message: "Department created successfully",
     department: data[0],
   };
-
 };
 
 // ======================================
 // Update Department
 // ======================================
 exports.updateDepartment = async (id, departmentData) => {
-console.log("Received departmentData:", departmentData);
+  console.log("Received departmentData:", departmentData);
   const {
     departmentName,
     departmentCode,
@@ -233,7 +183,7 @@ console.log("Received departmentData:", departmentData);
   console.log("createdOn:", createdOn);
 
   const { data, error } = await supabase
-    .from("departments_new")
+    .from("departments")
     .update({
       department_name: departmentName,
       department_code: departmentCode,
@@ -247,8 +197,8 @@ console.log("Received departmentData:", departmentData);
     })
     .eq("id", id)
     .select();
-    console.log("Updated Data:", data);
-    console.log("Update Error:", error);
+  console.log("Updated Data:", data);
+  console.log("Update Error:", error);
 
   if (error) {
     return {
@@ -262,11 +212,9 @@ console.log("Received departmentData:", departmentData);
     message: "Department updated successfully",
     department: data[0],
   };
-
-}
+};
 
 exports.deleteDepartment = async (id) => {
-
   console.log("Delete ID:", id);
 
   // Check if any users are assigned
@@ -293,10 +241,7 @@ exports.deleteDepartment = async (id) => {
   }
 
   // Delete department
-  const { error } = await supabase
-    .from("departments_new")
-    .delete()
-    .eq("id", id);
+  const { error } = await supabase.from("departments").delete().eq("id", id);
 
   if (error) {
     return {
@@ -316,12 +261,11 @@ exports.deleteDepartment = async (id) => {
 // ======================================
 
 exports.searchDepartments = async (search) => {
-
   const { data, error } = await supabase
-    .from("departments_new")
+    .from("departments")
     .select("*")
     .or(
-      `department_name.ilike.*${search}*,department_code.ilike.*${search}*,category.ilike.*${search}*,description.ilike.*${search}*`
+      `department_name.ilike.*${search}*,department_code.ilike.*${search}*,category.ilike.*${search}*,description.ilike.*${search}*`,
     );
 
   if (error) {
@@ -335,7 +279,6 @@ exports.searchDepartments = async (search) => {
     success: true,
     departments: data,
   };
-
 };
 
 // ======================================
@@ -343,14 +286,10 @@ exports.searchDepartments = async (search) => {
 // ======================================
 
 exports.getDepartmentsByStatus = async (status) => {
-
   const { data, error } = await supabase
-    .from("departments_new")
+    .from("departments")
     .select("*")
-    .eq(
-      "status",
-      status === "Active"
-    );
+    .eq("status", status === "Active");
 
   if (error) {
     return {
@@ -363,7 +302,6 @@ exports.getDepartmentsByStatus = async (status) => {
     success: true,
     departments: data,
   };
-
 };
 
 // ======================================
@@ -371,9 +309,8 @@ exports.getDepartmentsByStatus = async (status) => {
 // ======================================
 
 exports.getDepartmentsByCategory = async (category) => {
-
   const { data, error } = await supabase
-    .from("departments_new")
+    .from("departments")
     .select("*")
     .eq("category", category);
 
@@ -388,7 +325,6 @@ exports.getDepartmentsByCategory = async (category) => {
     success: true,
     departments: data,
   };
-
 };
 
 // ======================================
@@ -396,9 +332,8 @@ exports.getDepartmentsByCategory = async (category) => {
 // ======================================
 
 exports.checkDepartmentName = async (departmentName) => {
-
   const { data, error } = await supabase
-    .from("departments_new")
+    .from("departments")
     .select("id")
     .eq("department_name", departmentName)
     .maybeSingle();
@@ -414,7 +349,6 @@ exports.checkDepartmentName = async (departmentName) => {
     success: true,
     exists: !!data,
   };
-
 };
 
 // ======================================
@@ -422,9 +356,8 @@ exports.checkDepartmentName = async (departmentName) => {
 // ======================================
 
 exports.checkDepartmentCode = async (departmentCode) => {
-
   const { data, error } = await supabase
-    .from("departments_new")
+    .from("departments")
     .select("id")
     .eq("department_code", departmentCode)
     .maybeSingle();
@@ -440,6 +373,5 @@ exports.checkDepartmentCode = async (departmentCode) => {
     success: true,
     exists: !!data,
   };
-
 };
 //deepak - 03/08/2026 - End//

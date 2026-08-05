@@ -12,7 +12,7 @@ import supabase from "../../config/supabase.js";
 // Prathi query lo "departments" ani malli malli rayakunda
 // okasari variable lo store chesamu.
 
-const TABLE_NAME = "departments_new"; // changes this line department to department_new//29-07-26 - dev
+const TABLE_NAME = "departments"; // changes this line department to department_new//29-07-26 - dev
 
 // Get All Departments
 // Use:
@@ -33,11 +33,7 @@ const getAllDepartments = async () => {
 // Department Details Drawer open cheyyadaniki
 
 const getDepartmentById = async (id) => {
-  return await supabase
-    .from(TABLE_NAME)
-    .select("*")
-    .eq("id", id)
-    .single();
+  return await supabase.from(TABLE_NAME).select("*").eq("id", id).single();
 };
 
 // Get Department By Name
@@ -67,7 +63,6 @@ const getDepartmentByCode = async (departmentCode) => {
     .maybeSingle();
 };
 
-
 // Create Department
 
 // Use:
@@ -80,7 +75,6 @@ const createDepartment = async (departmentData) => {
     .select()
     .single();
 };
-
 
 // Update Department
 // Use:
@@ -95,17 +89,13 @@ const updateDepartment = async (id, departmentData) => {
     .single();
 };
 
-
 // Delete Department
 
 // Use:
 // Delete popup lo Confirm button click chesinappudu
 
 const deleteDepartment = async (id) => {
-  return await supabase
-    .from(TABLE_NAME)
-    .delete()
-    .eq("id", id);
+  return await supabase.from(TABLE_NAME).delete().eq("id", id);
 };
 
 // Search Departments
@@ -118,7 +108,7 @@ const searchDepartments = async (search) => {
     .from(TABLE_NAME)
     .select("*")
     .or(
-      `department_name.ilike.%${search}%,department_code.ilike.%${search}%,department_head.ilike.%${search}%`
+      `department_name.ilike.%${search}%,department_code.ilike.%${search}%,department_head.ilike.%${search}%`,
     );
 };
 
@@ -128,10 +118,7 @@ const searchDepartments = async (search) => {
 // Status Filter dropdown change chesinappudu
 
 const getDepartmentsByStatus = async (status) => {
-  return await supabase
-    .from(TABLE_NAME)
-    .select("*")
-    .eq("status", status);
+  return await supabase.from(TABLE_NAME).select("*").eq("status", status);
 };
 
 // Filter By Category
@@ -140,10 +127,7 @@ const getDepartmentsByStatus = async (status) => {
 // Category Filter dropdown change chesinappudu
 
 const getDepartmentsByCategory = async (category) => {
-  return await supabase
-    .from(TABLE_NAME)
-    .select("*")
-    .eq("category", category);
+  return await supabase.from(TABLE_NAME).select("*").eq("category", category);
 };
 
 // Export Functions

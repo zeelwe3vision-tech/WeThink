@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+
 const authRoutes = require("./modules/auth/auth.routes");
 const userRoutes = require("./modules/users/user.routes");
 const organizationRoutes = require("./modules/organizations/organization.routes");
@@ -78,6 +79,7 @@ app.use("/api/users", userRoutes);
 
 app.use("/api/organizations", organizationRoutes);
 
+//app.use("/api/departments", departmentRoutes);//
 app.use("/api/departments", departmentRoutes);
 
 app.use("/api/roles", roleRoutes);
