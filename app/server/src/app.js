@@ -15,8 +15,8 @@ const app = express();
 ========================================================= */
 
 const allowedOrigins = [
-  "https://wethink.we3vision.com",
   "http://localhost:5173",
+  "https://wethink.we3vision.com",
 ];
 
 app.use(
@@ -79,7 +79,6 @@ app.use("/api/users", userRoutes);
 
 app.use("/api/organizations", organizationRoutes);
 
-//app.use("/api/departments", departmentRoutes);//
 app.use("/api/departments", departmentRoutes);
 
 app.use("/api/roles", roleRoutes);

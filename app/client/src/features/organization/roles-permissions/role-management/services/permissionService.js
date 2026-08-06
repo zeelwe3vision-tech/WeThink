@@ -6,9 +6,9 @@ import axios from "axios";
    API Configuration
 ========================================================== */
 
-const API = "https://wethink.onrender.com/api";
+// const API = "https://wethink.onrender.com/api";
 
-// const API = "http://localhost:5000/api";
+const API = "http://localhost:5000/api";
 
 const PERMISSION_API = `${API}/permissions`;
 const ROLE_API = `${API}/roles`;
