@@ -19,25 +19,6 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.googleLogin = async (req, res) => {
-  try {
-    const { token } = req.body;
-
-    const result = await authService.googleLogin(token);
-
-    if (!result.success) {
-      return res.status(401).json(result);
-    }
-
-    return res.status(200).json(result);
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-  }
-};
-
 exports.logout = async (req, res) => {
   return res.status(200).json({
     success: true,

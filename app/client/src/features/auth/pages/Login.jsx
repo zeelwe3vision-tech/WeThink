@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { GoogleLogin } from "@react-oauth/google";
 import Session from "../components/Session";
 import "./Login.css";
 import axios from "axios";
@@ -31,49 +30,22 @@ function Login() {
 
     try {
       const response = await axios.post(
-        // "http://localhost:5000/api/auth/login",
-        "https://wethink.onrender.com/api/auth/login",
+        "http://localhost:5000/api/auth/login",
+        // "https://wethink.onrender.com/api/auth/login",
         {
-          email,
+          email: email.trim(),
           password,
         },
       );
 
-      if (response.data.success) {
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("user", JSON.stringify(response.data.user));
+      console.log(response.data);
 
+      if (response.data.success) {
         navigate("/dashboard");
       }
     } catch (error) {
+      console.log(error.response?.data);
       alert(error.response?.data?.message || "Login Failed");
-    }
-  };
-
-  /* ===========================
-     Google Login
-  =========================== */
-
-  const handleGoogleLogin = async (credentialResponse) => {
-    try {
-      const response = await axios.post(
-        // "http://localhost:5000/api/auth/google",
-        "https://wethink.onrender.com/api/auth/google",
-        {
-          token: credentialResponse.credential,
-        },
-      );
-
-      if (response.data.success) {
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("user", JSON.stringify(response.data.user));
-
-        navigate("/dashboard");
-      }
-    } catch (error) {
-      console.error("Google Login Error:", error.response?.data);
-
-      alert(error.response?.data?.message || "Google Login Failed");
     }
   };
 
@@ -101,10 +73,6 @@ function Login() {
           selectedRole={selectedRole}
           setSelectedRole={setSelectedRole}
         />
-
-        <div className="divider">
-          <span>OR LOGIN WITH EMAIL</span>
-        </div>
 
         <form onSubmit={handleSubmit} className="login-form">
           <div className="input-group">
@@ -163,23 +131,6 @@ function Login() {
           </button>
         </form>
 
-        <div className="divider divider--or">
-          <span>OR</span>
-        </div>
-
-        {/* Google Login */}
-
-        <div className="google-login-wrapper">
-          <GoogleLogin
-            onSuccess={handleGoogleLogin}
-            onError={() => alert("Google Login Failed")}
-            theme="outline"
-            size="large"
-            width="100%"
-            text="continue_with"
-          />
-        </div>
-
         <p className="login-footer">
           <LockFooter size={14} />
           Your data is safe and encrypted
@@ -190,5 +141,3 @@ function Login() {
 }
 
 export default Login;
-
-// https://wethink.onrender.com/api/auth/google
