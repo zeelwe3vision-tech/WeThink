@@ -30,8 +30,8 @@ function Login() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        // "https://wethink.onrender.com/api/auth/login",
+        // "http://localhost:5000/api/auth/login",
+        "https://wethink.onrender.com/api/auth/login",
         {
           email: email.trim(),
           password,
@@ -41,6 +41,23 @@ function Login() {
       console.log(response.data);
 
       if (response.data.success) {
+        const token =
+          response.data.token ||
+          response.data.accessToken ||
+          response.data.data?.token;
+
+        if (token) {
+          localStorage.setItem("token", token);
+        }
+
+        // Optional: Store user profile if returned by your API
+        if (response.data.user || response.data.data?.user) {
+          localStorage.setItem(
+            "user",
+            JSON.stringify(response.data.user || response.data.data?.user),
+          );
+        }
+
         navigate("/dashboard");
       }
     } catch (error) {

@@ -1,91 +1,107 @@
 import axios from "axios";
-/*
-=========================================================
- Task Service
- Module : Task Management
-=========================================================
-*/
-const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000/api/tasks",
 
+/* =========================================================
+   API Configuration
+========================================================= */
+
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
+if (!API_BASE_URL) {
+  throw new Error("VITE_API_URL is not configured");
+}
+
+const API = axios.create({
+  baseURL: `${API_BASE_URL.replace(/\/$/, "")}/api/tasks`,
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-/*
-=========================================================
- Attach JWT Token Automatically
-=========================================================
-*/
+/* =========================================================
+   Attach JWT Token Automatically
+========================================================= */
+
 API.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
+    let token = localStorage.getItem("token");
 
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+    // Clean token if wrapped in quotes
+    if (token && (token.startsWith('"') || token.startsWith("'"))) {
+      token = token.slice(1, -1);
     }
+
+    if (!token) {
+      return Promise.reject({
+        isAuthError: true,
+        message: "Authentication token is missing. Please login again.",
+      });
+    }
+
+    config.headers.Authorization = `Bearer ${token}`;
 
     return config;
   },
   (error) => Promise.reject(error),
 );
 
-/*
-=========================================================
- Response Handler
-=========================================================
-*/
+/* =========================================================
+   Response Handler
+========================================================= */
+
 API.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      console.error("Unauthorized Access");
+      return Promise.reject({
+        isAuthError: true,
+        status: 401,
+        message:
+          error.response?.data?.message ||
+          "Your session has expired. Please login again.",
+      });
     }
 
     return Promise.reject(error);
   },
 );
 
-/*
-=========================================================
- Get All Tasks
-=========================================================
-*/
+/* =========================================================
+   Get All Tasks
+========================================================= */
 
 export const getTasks = async (params = {}) => {
   const response = await API.get("/", {
     params,
   });
+
   return response.data;
 };
 
-/*
-=========================================================
- Get Single Task
-=========================================================
-*/
+/* =========================================================
+   Get Single Task
+========================================================= */
+
 export const getTaskById = async (taskId) => {
   const response = await API.get(`/${taskId}`);
+
   return response.data;
 };
 
-/*
-=========================================================
- Create Task
-=========================================================
-*/
+/* =========================================================
+   Create Task
+========================================================= */
+
 export const createTask = async (taskData) => {
   const formData = new FormData();
 
   Object.keys(taskData).forEach((key) => {
     if (key === "attachments") {
-      taskData.attachments.forEach((file) => {
+      taskData.attachments?.forEach((file) => {
         formData.append("attachments", file);
       });
     } else if (Array.isArray(taskData[key])) {
       formData.append(key, JSON.stringify(taskData[key]));
-    } else {
+    } else if (taskData[key] !== undefined && taskData[key] !== null) {
       formData.append(key, taskData[key]);
     }
   });
@@ -99,22 +115,21 @@ export const createTask = async (taskData) => {
   return response.data;
 };
 
-/*
-=========================================================
- Update Task
-=========================================================
-*/
+/* =========================================================
+   Update Task
+========================================================= */
+
 export const updateTask = async (taskId, taskData) => {
   const formData = new FormData();
 
   Object.keys(taskData).forEach((key) => {
     if (key === "attachments") {
-      taskData.attachments.forEach((file) => {
+      taskData.attachments?.forEach((file) => {
         formData.append("attachments", file);
       });
     } else if (Array.isArray(taskData[key])) {
       formData.append(key, JSON.stringify(taskData[key]));
-    } else {
+    } else if (taskData[key] !== undefined && taskData[key] !== null) {
       formData.append(key, taskData[key]);
     }
   });
@@ -128,44 +143,41 @@ export const updateTask = async (taskId, taskData) => {
   return response.data;
 };
 
-/*
-=========================================================
- Delete Task
-=========================================================
-*/
+/* =========================================================
+   Delete Task
+========================================================= */
+
 export const deleteTask = async (taskId) => {
   const response = await API.delete(`/${taskId}`);
+
   return response.data;
 };
 
-/*
-=========================================================
- Change Task Status
-=========================================================
-*/
+/* =========================================================
+   Change Task Status
+========================================================= */
+
 export const updateTaskStatus = async (taskId, status) => {
   const response = await API.patch(`/${taskId}/status`, {
     status,
   });
+
   return response.data;
 };
 
-/*
-=========================================================
- Complete Task
-=========================================================
-*/
+/* =========================================================
+   Complete Task
+========================================================= */
+
 export const completeTask = async (taskId) => {
   const response = await API.patch(`/${taskId}/complete`);
 
   return response.data;
 };
 
-/*
-=========================================================
- Upload Attachments
-=========================================================
-*/
+/* =========================================================
+   Upload Attachments
+========================================================= */
 
 export const uploadAttachments = async (taskId, files) => {
   const formData = new FormData();
@@ -183,35 +195,34 @@ export const uploadAttachments = async (taskId, files) => {
   return response.data;
 };
 
-/*
-=========================================================
- Remove Attachment
-=========================================================
-*/
+/* =========================================================
+   Remove Attachment
+========================================================= */
+
 export const removeAttachment = async (taskId, attachmentId) => {
   const response = await API.delete(`/${taskId}/attachments/${attachmentId}`);
+
   return response.data;
 };
 
-/*
-=========================================================
- Activity Timeline
-=========================================================
-*/
+/* =========================================================
+   Activity Timeline
+========================================================= */
 
 export const getTaskTimeline = async (taskId) => {
   const response = await API.get(`/${taskId}/timeline`);
+
   return response.data;
 };
 
-/*
-=========================================================
- Dependencies
-=========================================================
-*/
+/* =========================================================
+   Dependencies
+========================================================= */
 
 export const getDependencies = async (taskId) => {
   const response = await API.get(`/${taskId}/dependencies`);
+
   return response.data;
 };
+
 export default API;

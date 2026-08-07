@@ -1,9 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  X,
-  Calendar,
-  Paperclip,
-} from "lucide-react";
+import { X, Calendar, Paperclip } from "lucide-react";
 import { createTask } from "../services/taskService";
 import { validateTask } from "../utils/taskValidation";
 import "./CreateTaskModal.css";
@@ -29,7 +25,6 @@ function CreateTaskModal({
   modules = [],
   dependencies = [],
 }) {
-
   const modalRef = useRef(null);
 
   const [form, setForm] = useState(initialForm);
@@ -133,12 +128,24 @@ function CreateTaskModal({
 
       onClose();
     } catch (error) {
+      const isAuthError =
+        error?.isAuthError === true || error?.response?.status === 401;
+
       const message =
-        error.response?.data?.message ||
-        error.message ||
+        error?.message ||
+        error?.response?.data?.message ||
         "Unable to create task";
 
-      console.error("Create task failed:", error.response?.data || error);
+      if (isAuthError) {
+        setErrors((previous) => ({
+          ...previous,
+          submit: message,
+        }));
+
+        return;
+      }
+
+      console.error("Create task failed:", error);
 
       setErrors((previous) => ({
         ...previous,
@@ -233,7 +240,7 @@ function CreateTaskModal({
                 <span className="form-error">{errors.module}</span>
               )}
             </div>
-            
+
             <div className="form-group">
               <label>Priority</label>
 
