@@ -41,6 +41,7 @@ function Login() {
       console.log(response.data);
 
       if (response.data.success) {
+        // ✅ ADD THIS: Store JWT token in localStorage
         const token =
           response.data.token ||
           response.data.accessToken ||

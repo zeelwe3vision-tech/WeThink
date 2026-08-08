@@ -1,10 +1,1 @@
-{
-  "name": "wethink",
-  "private": true,
-  "version": "1.0.0",
-  "scripts": {
-    "client": "npm --prefix app/client run dev",
-    "server": "npm --prefix app/server run dev",
-    "client:build": "npm --prefix app/client run build"
-  }
-}
+{}
