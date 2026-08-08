@@ -1,16 +1,10 @@
 {
-  "name": "...",
+  "name": "wethink",
   "private": true,
-  "version": "...",
+  "version": "1.0.0",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    ...
-  },
-  "devDependencies": {
-    ...
+    "client": "npm --prefix app/client run dev",
+    "server": "npm --prefix app/server run dev",
+    "client:build": "npm --prefix app/client run build"
   }
 }
