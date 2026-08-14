@@ -326,9 +326,7 @@ function RegisterEmployeeModal({ open, onClose, onSubmit }) {
                         <strong>
                           {manager.first_name} {manager.last_name}
                         </strong>
-
                         <br />
-
                         <small>{manager.designation}</small>
                       </div>
                     ))}
@@ -341,6 +339,7 @@ function RegisterEmployeeModal({ open, onClose, onSubmit }) {
               <input
                 type="date"
                 value={joiningDate}
+                min={new Date().toLocaleDateString("en-CA")}
                 onChange={(e) => setJoiningDate(e.target.value)}
               />
             </div>

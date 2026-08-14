@@ -1,4 +1,4 @@
-import { Search } from "lucide-react";
+import { Search, ChevronDown } from "lucide-react";
 import "./EmployeeFilters.css";
 
 function EmployeeFilters({
@@ -14,10 +14,9 @@ function EmployeeFilters({
 }) {
   return (
     <div className="employee-filters">
-      {/* Search */}
-
-      <div className="filter-search">
-        <Search size={18} />
+      {/* Search Bar */}
+      <div className="employee-filter-search">
+        <Search size={18} strokeWidth={2} />
 
         <input
           type="text"
@@ -27,57 +26,85 @@ function EmployeeFilters({
         />
       </div>
 
-      {/* Status */}
+      {/* Status Select */}
+      <div className="employee-filter-item">
+        <div className="employee-filter-select-wrapper">
+          <select value={status} onChange={(e) => setStatus(e.target.value)}>
+            <option value="All">All Status</option>
 
-      <div className="filter-item">
-        <label>Status</label>
+            <option value="Active">Active</option>
 
-        <select value={status} onChange={(e) => setStatus(e.target.value)}>
-          <option>All Status</option>
-          <option>Active</option>
-          <option>Inactive</option>
-          <option>On Leave</option>
-        </select>
+            <option value="Inactive">Inactive</option>
+
+            <option value="On Leave">On Leave</option>
+          </select>
+
+          <ChevronDown
+            className="employee-filter-dropdown-icon"
+            size={16}
+            strokeWidth={2}
+          />
+        </div>
       </div>
 
-      {/* Department */}
+      {/* Department Select */}
+      <div className="employee-filter-item">
+        <div className="employee-filter-select-wrapper">
+          <select
+            value={department}
+            onChange={(e) => setDepartment(e.target.value)}
+          >
+            <option value="All">All Department</option>
 
-      <div className="filter-item">
-        <label>Department</label>
+            <option value="IT">IT</option>
 
-        <select
-          value={department}
-          onChange={(e) => setDepartment(e.target.value)}
-        >
-          <option>All Department</option>
-          <option>IT</option>
-          <option>HR</option>
-          <option>Finance</option>
-          <option>Sales</option>
-        </select>
+            <option value="HR">HR</option>
+
+            <option value="Finance">Finance</option>
+
+            <option value="Sales">Sales</option>
+          </select>
+
+          <ChevronDown
+            className="employee-filter-dropdown-icon"
+            size={16}
+            strokeWidth={2}
+          />
+        </div>
       </div>
 
-      {/* Sort */}
+      {/* Sort Select */}
+      <div className="employee-filter-item">
+        <div className="employee-filter-select-wrapper">
+          <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+            <option value="Newest">Newest</option>
 
-      <div className="filter-item">
-        <label>Sort By</label>
+            <option value="A-Z">A-Z</option>
 
-        <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-          <option>Newest</option>
-          <option>A-Z</option>
-          <option>Z-A</option>
-        </select>
+            <option value="Z-A">Z-A</option>
+          </select>
+
+          <ChevronDown
+            className="employee-filter-dropdown-icon"
+            size={16}
+            strokeWidth={2}
+          />
+        </div>
       </div>
 
-      {/* Reset */}
-
-      <button className="reset-btn" onClick={onReset}>
+      {/* Reset Button */}
+      <button
+        type="button"
+        className="employee-filter-reset-btn"
+        onClick={onReset}
+      >
         Reset
       </button>
 
-      {/* Apply */}
-
-      <button className="apply-btn">Apply</button>
+      {/* Apply Button */}
+      <button type="button" className="employee-filter-apply-btn">
+        Apply
+      </button>
     </div>
   );
 }

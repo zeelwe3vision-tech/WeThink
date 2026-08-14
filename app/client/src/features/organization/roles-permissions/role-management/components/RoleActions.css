@@ -1,5 +1,5 @@
 /* ==========================================================
-   Role Actions
+   Role Actions Container
 ========================================================== */
 
 .role-actions {
@@ -10,88 +10,115 @@
 }
 
 /* ==========================================================
-   Action Button
+   Action Button - Base Style
 ========================================================== */
 
 .role-action-btn {
-  width: 38px;
-  height: 38px;
-  display: flex;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--border-color);
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--text-primary);
+
+  padding: 0;
+  margin: 0;
+
+  border-radius: 9px;
   cursor: pointer;
-  transition: all 0.25s ease;
+  box-sizing: border-box;
+
+  transition: all 0.2s ease;
+}
+
+.role-action-btn svg {
+  width: 17px;
+  height: 17px;
+  color: #ffffff;
+  stroke: #ffffff;
+  flex-shrink: 0;
 }
 
 /* ==========================================================
-   Hover
+   1. View Button (Slate / White Border & Tint)
 ========================================================== */
 
-.role-action-btn:hover {
-  transform: translateY(-2px);
-  border-color: var(--primary-color);
-  background: rgba(124, 58, 237, 0.15);
-  box-shadow: 0 0 14px rgba(124, 58, 237, 0.25);
+.role-action-btn.view {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.03);
 }
-
-/* ==========================================================
-   View
-========================================================== */
 
 .role-action-btn.view:hover {
-  color: #38BDF8;
-  border-color: #38BDF8;
-  box-shadow: 0 0 14px rgba(56, 189, 248, 0.25);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
 }
 
 /* ==========================================================
-   Edit
+   2. Edit Button (Amber / Gold Border & Glow)
 ========================================================== */
+
+.role-action-btn.edit {
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  box-shadow: inset 0 0 10px rgba(245, 158, 11, 0.08);
+}
 
 .role-action-btn.edit:hover {
-  color: #F59E0B;
-  border-color: #F59E0B;
-  box-shadow: 0 0 14px rgba(245, 158, 11, 0.25);
+  background: rgba(245, 158, 11, 0.22);
+  border-color: rgba(245, 158, 11, 0.7);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.25);
 }
 
 /* ==========================================================
-   Clone
+   3. Clone Button (Purple / Violet Border & Glow)
 ========================================================== */
+
+.role-action-btn.clone {
+  background: rgba(168, 85, 247, 0.14);
+  border: 1px solid rgba(168, 85, 247, 0.45);
+  box-shadow: inset 0 0 10px rgba(168, 85, 247, 0.08);
+}
 
 .role-action-btn.clone:hover {
-  color: var(--primary-color);
-  border-color: var(--primary-color);
-  box-shadow: 0 0 14px rgba(124, 58, 237, 0.35);
+  background: rgba(168, 85, 247, 0.25);
+  border-color: rgba(168, 85, 247, 0.7);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(168, 85, 247, 0.25);
 }
 
 /* ==========================================================
-   Delete
+   4. Delete Button (Red / Crimson Border & Glow)
 ========================================================== */
 
+.role-action-btn.delete {
+  background: rgba(239, 68, 68, 0.14);
+  border: 1px solid rgba(239, 68, 68, 0.45);
+  box-shadow: inset 0 0 10px rgba(239, 68, 68, 0.08);
+}
+
 .role-action-btn.delete:hover {
-  color: #EF4444;
-  border-color: #EF4444;
-  box-shadow: 0 0 14px rgba(239, 68, 68, 0.25);
+  background: rgba(239, 68, 68, 0.25);
+  border-color: rgba(239, 68, 68, 0.7);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.25);
 }
 
 /* ==========================================================
-   Active
+   Active & Focus
 ========================================================== */
 
 .role-action-btn:active {
-  transform: scale(0.95);
+  transform: scale(0.93);
 }
 
-/* ==========================================================
-   Focus
-========================================================== */
-
 .role-action-btn:focus-visible {
-  outline: 2px solid var(--primary-color);
+  outline: 2px solid #7c3aed;
   outline-offset: 2px;
 }
 
@@ -100,14 +127,14 @@
 ========================================================== */
 
 @media (max-width: 768px) {
-
   .role-actions {
-    gap: 8px;
+    gap: 6px;
   }
 
   .role-action-btn {
-    width: 34px;
-    height: 34px;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
   }
-
 }

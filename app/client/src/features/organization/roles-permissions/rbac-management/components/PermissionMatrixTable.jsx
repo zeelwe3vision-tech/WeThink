@@ -1,6 +1,23 @@
+import { useRef } from "react";
+
 import "./PermissionMatrixTable.css";
 
-function PermissionMatrixTable({ permissions, onPermissionChange }) {
+const INDIVIDUAL_PERMISSIONS = [
+  "view",
+  "create",
+  "edit",
+  "delete",
+  "assign",
+  "approve",
+];
+
+function PermissionMatrixTable({ permissions = [], onPermissionChange }) {
+  /*
+   * Stores the permission combination that existed
+   * before the user manually enabled "All".
+   */
+  const previousPermissionState = useRef({});
+
   const columns = [
     {
       key: "view",
@@ -38,10 +55,144 @@ function PermissionMatrixTable({ permissions, onPermissionChange }) {
     },
   ];
 
-  const handleToggle = (index, key) => {
-    const updated = !permissions[index][key];
+  /* =========================================================
+     Get Stable Row Key
+  ========================================================= */
 
-    onPermissionChange(index, key, updated);
+  const getRowKey = (permission, index) => {
+    return permission?.module || index;
+  };
+
+  /* =========================================================
+     Check Whether Entire Row Is Enabled
+  ========================================================= */
+
+  const getAllState = (permission) => {
+    return INDIVIDUAL_PERMISSIONS.every(
+      (permissionKey) => permission?.[permissionKey] === true,
+    );
+  };
+
+  /* =========================================================
+     Toggle Permission
+  ========================================================= */
+
+  const handleToggle = (index, key) => {
+    const currentRow = permissions[index];
+
+    if (!currentRow || !onPermissionChange) {
+      return;
+    }
+
+    const rowKey = getRowKey(currentRow, index);
+
+    /* =======================================================
+       ALL Toggle
+    ======================================================= */
+
+    if (key === "all") {
+      const allCurrentlyEnabled = getAllState(currentRow);
+
+      /*
+       * ALL currently OFF
+       *
+       * Save current permission combination first,
+       * then enable every permission.
+       */
+      if (!allCurrentlyEnabled) {
+        previousPermissionState.current[rowKey] = {
+          view: currentRow.view === true,
+          create: currentRow.create === true,
+          edit: currentRow.edit === true,
+          delete: currentRow.delete === true,
+          assign: currentRow.assign === true,
+          approve: currentRow.approve === true,
+        };
+
+        const updatedRow = {
+          ...currentRow,
+
+          view: true,
+          create: true,
+          edit: true,
+          delete: true,
+          assign: true,
+          approve: true,
+
+          all: true,
+        };
+
+        onPermissionChange(index, "all", true, updatedRow);
+
+        return;
+      }
+
+      /*
+       * ALL currently ON
+       *
+       * Restore the permission combination that
+       * existed before "All" was enabled.
+       */
+      const previousState = previousPermissionState.current[rowKey];
+
+      if (previousState) {
+        const updatedRow = {
+          ...currentRow,
+          ...previousState,
+        };
+
+        updatedRow.all = getAllState(updatedRow);
+
+        onPermissionChange(index, "all", updatedRow.all, updatedRow);
+
+        delete previousPermissionState.current[rowKey];
+
+        return;
+      }
+
+      /*
+       * Fallback:
+       *
+       * All six permissions were enabled manually,
+       * so there is no stored previous state.
+       * Clicking All OFF disables all six.
+       */
+      const updatedRow = {
+        ...currentRow,
+
+        view: false,
+        create: false,
+        edit: false,
+        delete: false,
+        assign: false,
+        approve: false,
+
+        all: false,
+      };
+
+      onPermissionChange(index, "all", false, updatedRow);
+
+      return;
+    }
+
+    /* =======================================================
+       Individual Permission Toggle
+    ======================================================= */
+
+    const updatedRow = {
+      ...currentRow,
+      [key]: !currentRow[key],
+    };
+
+    /*
+     * Automatically:
+     *
+     * all six ON  → All ON
+     * any one OFF → All OFF
+     */
+    updatedRow.all = getAllState(updatedRow);
+
+    onPermissionChange(index, key, updatedRow[key], updatedRow);
   };
 
   return (
@@ -64,30 +215,46 @@ function PermissionMatrixTable({ permissions, onPermissionChange }) {
         </thead>
 
         <tbody>
-          {permissions.map((permission, index) => (
-            <tr key={permission.module}>
-              <td className="module-name">
-                {permission.icon && (
-                  <span className="module-icon">{permission.icon}</span>
-                )}
+          {permissions.map((permission, index) => {
+            /*
+             * "All" is always derived from the
+             * six actual permission values.
+             */
+            const isAllActive = getAllState(permission);
 
-                {permission.module}
-              </td>
+            return (
+              <tr key={permission.module || index}>
+                <td className="module-name">
+                  {permission.icon && (
+                    <span className="module-icon">{permission.icon}</span>
+                  )}
 
-              {columns.map((column) => (
-                <td key={column.key}>
-                  <button
-                    className={
-                      permission[column.key] ? "toggle active" : "toggle"
-                    }
-                    onClick={() => handleToggle(index, column.key)}
-                  >
-                    <span></span>
-                  </button>
+                  {permission.module}
                 </td>
-              ))}
-            </tr>
-          ))}
+
+                {columns.map((column) => {
+                  const isActive =
+                    column.key === "all"
+                      ? isAllActive
+                      : permission[column.key] === true;
+
+                  return (
+                    <td key={column.key}>
+                      <button
+                        type="button"
+                        className={isActive ? "toggle active" : "toggle"}
+                        onClick={() => handleToggle(index, column.key)}
+                        aria-pressed={isActive}
+                        aria-label={`${permission.module} ${column.label} permission`}
+                      >
+                        <span />
+                      </button>
+                    </td>
+                  );
+                })}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

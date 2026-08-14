@@ -1,124 +1,146 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
 /* ==========================================
-   Filter Container
+   Filter Container Grid
 ========================================== */
 
 .employee-filters {
   width: 100%;
   display: grid;
-  grid-template-columns:
-    minmax(320px, 2.2fr)
-    minmax(180px, 1fr)
-    minmax(180px, 1fr)
-    minmax(180px, 1fr)
-    100px
-    110px;
-  gap: 22px;
-  align-items: end;
-  padding: 26px 28px;
+  grid-template-columns: 2.2fr 1fr 1fr 1fr 100px 110px;
+  gap: 14px;
+  align-items: center;
+  padding: 20px 24px;
   background: #111827;
-  border: 1px solid rgba(255,255,255,.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 18px;
   margin-bottom: 28px;
   font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
 }
 
 /* ==========================================
-   Search
+   Search Input
 ========================================== */
 
-.filter-search {
-  height: 56px;
+.employee-filter-search {
+  height: 52px;
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 0 18px;
-  background: #0F172A;
-  border: 1px solid rgba(255,255,255,.08);
+  padding: 0 16px;
+  background: #0f172a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
-  transition: .25s;
+  box-sizing: border-box;
+  transition: 0.25s;
 }
 
-.filter-search:focus-within {
-  border-color: #7C3AED;
-  box-shadow: 0 0 0 3px rgba(124,58,237,.15);
+.employee-filter-search:focus-within {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
 }
 
-.filter-search svg {
-  color: #8B94A7;
+.employee-filter-search svg {
+  color: #8b94a7;
+  flex-shrink: 0;
 }
 
-.filter-search input {
+.employee-filter-search input {
   width: 100%;
   border: none;
   outline: none;
   background: transparent;
-
   color: #ffffff;
   font-size: 14px;
   font-family: "Poppins", sans-serif;
 }
 
-.filter-search input::placeholder {
-  color: #6B7280;
+.employee-filter-search input::placeholder {
+  color: #6b7280;
 }
 
 /* ==========================================
-   Dropdown
+   Dropdown Item & Select Wrapper
 ========================================== */
 
-.filter-item {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.employee-filter-item {
+  width: 100%;
 }
 
-.filter-item label {
-  color: #9CA3AF;
-  font-size: 13px;
-  font-weight: 500;
-  margin-left: 2px;
+.employee-filter-select-wrapper {
+  position: relative;
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
 }
 
-.filter-item select {
-  height: 56px;
-  padding: 0 18px;
-  background: #0F172A;
-  border: 1px solid rgba(255,255,255,.08);
+.employee-filter-select-wrapper select {
+  width: 100%;
+  height: 52px;
+  padding: 0 38px 0 16px;
+  background: #0f172a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   outline: none;
   color: #ffffff;
   font-size: 14px;
   font-family: "Poppins", sans-serif;
   cursor: pointer;
-  transition: .25s;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  box-sizing: border-box;
+  transition: 0.25s;
 }
 
-.filter-item select:hover,
-.filter-item select:focus {
-  border-color: #7C3AED;
+.employee-filter-select-wrapper select:hover,
+.employee-filter-select-wrapper select:focus {
+  border-color: #7c3aed;
+}
+
+.employee-filter-select-wrapper select option {
+  background: #0f172a;
+  color: #ffffff;
+}
+
+/* Chevron Arrow Locked Inside the Right Edge */
+
+.employee-filter-dropdown-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.employee-filter-select-wrapper:hover .employee-filter-dropdown-icon {
+  color: #ffffff;
 }
 
 /* ==========================================
    Reset Button
 ========================================== */
 
-.reset-btn {
-  height: 56px;
+.employee-filter-reset-btn {
+  height: 52px;
+  width: 100%;
   border-radius: 12px;
-  border: 1px solid rgba(255,255,255,.08);
-  background: #0F172A;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #0f172a;
   color: #ffffff;
   font-size: 14px;
   font-weight: 600;
   font-family: "Poppins", sans-serif;
   cursor: pointer;
-  transition: .25s;
+  transition: 0.25s;
+  box-sizing: border-box;
 }
 
-.reset-btn:hover {
-  border-color: #7C3AED;
+.employee-filter-reset-btn:hover {
+  border-color: #7c3aed;
   background: #182235;
 }
 
@@ -126,22 +148,24 @@
    Apply Button
 ========================================== */
 
-.apply-btn {
-  height: 56px;
+.employee-filter-apply-btn {
+  height: 52px;
+  width: 100%;
   border: none;
   border-radius: 12px;
-  background: linear-gradient(135deg,#7C3AED,#EC4899);
+  background: linear-gradient(135deg, #7c3aed, #ec4899);
   color: #ffffff;
   font-size: 14px;
   font-weight: 600;
   font-family: "Poppins", sans-serif;
   cursor: pointer;
-  transition: .25s;
+  transition: 0.25s;
+  box-sizing: border-box;
 }
 
-.apply-btn:hover {
+.employee-filter-apply-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 24px rgba(124,58,237,.35);
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.35);
 }
 
 /* ==========================================
@@ -149,25 +173,26 @@
 ========================================== */
 
 @media (max-width: 1300px) {
-
   .employee-filters {
     grid-template-columns: 1fr 1fr;
+    gap: 14px;
   }
-  .filter-search {
+
+  .employee-filter-search {
     grid-column: 1 / -1;
   }
 }
 
 @media (max-width: 768px) {
-
   .employee-filters {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
 
-  .filter-search,
-  .filter-item,
-  .reset-btn,
-  .apply-btn {
+  .employee-filter-search,
+  .employee-filter-item,
+  .employee-filter-reset-btn,
+  .employee-filter-apply-btn {
     width: 100%;
   }
 }

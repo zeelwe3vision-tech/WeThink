@@ -48,30 +48,23 @@ const ROLES = [
   },
 ];
 
-function Session({ selectedRole, setSelectedRole }) {
+function Session() {
   return (
     <div className="role-grid">
       {ROLES.map((role) => {
         const Icon = role.icon;
-        const isSelected = selectedRole === role.key;
 
         return (
-          <button
-            type="button"
-            key={role.key}
-            className={`role-card ${
-              isSelected ? "role-card--selected" : ""
-            }`}
-            onClick={() => setSelectedRole(role.key)}
-          >
+          <div key={role.key} className="role-card">
             <Icon className="role-icon" size={26} strokeWidth={2} />
+
             <span className="role-label">{role.label}</span>
+
             <span className="role-desc">{role.desc}</span>
-          </button>
+          </div>
         );
       })}
     </div>
   );
 }
-
 export default Session;

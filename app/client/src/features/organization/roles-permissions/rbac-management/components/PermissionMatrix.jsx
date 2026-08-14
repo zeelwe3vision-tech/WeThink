@@ -1,73 +1,189 @@
 import "./PermissionMatrix.css";
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
+
+const INDIVIDUAL_PERMISSIONS = [
+  "view",
+  "create",
+  "edit",
+  "delete",
+  "assign",
+  "approve",
+];
 
 function PermissionMatrix({ permissions = [], setPermissions }) {
-  /* ==========================================================
+  /*
+   * Stores the permission state that existed
+   * before the user manually enabled "All".
+   *
+   * Example:
+   * Dashboard => {
+   *   view: true,
+   *   create: false,
+   *   ...
+   * }
+   */
+  const previousPermissionState = useRef({});
+
+  /* =========================================================
+     Get Row Key
+  ========================================================= */
+
+  const getRowKey = (row, index) => {
+    return row?.module || index;
+  };
+
+  /* =========================================================
+     Check Whether All Individual Permissions Are Enabled
+  ========================================================= */
+
+  const areAllPermissionsEnabled = (row) => {
+    return INDIVIDUAL_PERMISSIONS.every(
+      (permissionKey) => row?.[permissionKey] === true,
+    );
+  };
+
+  /* =========================================================
      Toggle Single Permission
-  ========================================================== */
+  ========================================================= */
 
   const handleToggle = (index, field) => {
-    const updated = [...permissions];
+    setPermissions((previousPermissions) =>
+      previousPermissions.map((row, rowIndex) => {
+        if (rowIndex !== index) {
+          return row;
+        }
 
-    updated[index][field] = !updated[index][field];
+        const updatedRow = {
+          ...row,
+          [field]: !row[field],
+        };
 
-    // Update ALL checkbox automatically
+        /*
+         * Automatically turn "All" ON only when
+         * all six individual permissions are ON.
+         *
+         * Automatically turn "All" OFF when
+         * any individual permission is OFF.
+         */
+        updatedRow.all = areAllPermissionsEnabled(updatedRow);
 
-    updated[index].all =
-      updated[index].view &&
-      updated[index].create &&
-      updated[index].edit &&
-      updated[index].delete &&
-      updated[index].assign &&
-      updated[index].approve;
-
-    setPermissions(updated);
+        return updatedRow;
+      }),
+    );
   };
 
-  /* ==========================================================
+  /* =========================================================
      Toggle Complete Row
-  ========================================================== */
+  ========================================================= */
 
   const handleToggleAll = (index) => {
-    const updated = [...permissions];
+    setPermissions((previousPermissions) =>
+      previousPermissions.map((row, rowIndex) => {
+        if (rowIndex !== index) {
+          return row;
+        }
 
-    const value = !updated[index].all;
+        const rowKey = getRowKey(row, index);
 
-    updated[index] = {
-      ...updated[index],
+        /*
+         * Do not trust row.all alone.
+         * Derive current All state from the
+         * six actual permissions.
+         */
+        const allCurrentlyEnabled = areAllPermissionsEnabled(row);
 
-      all: value,
+        /* =================================================
+             ALL IS CURRENTLY OFF
+             Save current permissions, then enable everything
+          ================================================= */
 
-      view: value,
-      create: value,
-      edit: value,
-      delete: value,
-      assign: value,
-      approve: value,
-    };
+        if (!allCurrentlyEnabled) {
+          previousPermissionState.current[rowKey] = {
+            view: row.view === true,
+            create: row.create === true,
+            edit: row.edit === true,
+            delete: row.delete === true,
+            assign: row.assign === true,
+            approve: row.approve === true,
+          };
 
-    setPermissions(updated);
+          return {
+            ...row,
+
+            view: true,
+            create: true,
+            edit: true,
+            delete: true,
+            assign: true,
+            approve: true,
+
+            all: true,
+          };
+        }
+
+        /* =================================================
+             ALL IS CURRENTLY ON
+             Restore state from before "All" was enabled
+          ================================================= */
+
+        const previousState = previousPermissionState.current[rowKey];
+
+        if (previousState) {
+          const restoredRow = {
+            ...row,
+            ...previousState,
+          };
+
+          restoredRow.all = areAllPermissionsEnabled(restoredRow);
+
+          delete previousPermissionState.current[rowKey];
+
+          return restoredRow;
+        }
+
+        /* =================================================
+             FALLBACK
+
+             This happens when all six permissions were enabled
+             manually instead of through the "All" button.
+
+             In that case clicking All OFF disables everything.
+          ================================================= */
+
+        return {
+          ...row,
+
+          view: false,
+          create: false,
+          edit: false,
+          delete: false,
+          assign: false,
+          approve: false,
+
+          all: false,
+        };
+      }),
+    );
   };
 
-  /* ==========================================================
+  /* =========================================================
      Count Permissions
-  ========================================================== */
+  ========================================================= */
 
   const totalGranted = useMemo(() => {
     return permissions.reduce((total, row) => {
       return (
         total +
-        [
-          row.view,
-          row.create,
-          row.edit,
-          row.delete,
-          row.assign,
-          row.approve,
-        ].filter(Boolean).length
+        INDIVIDUAL_PERMISSIONS.filter(
+          (permissionKey) => row[permissionKey] === true,
+        ).length
       );
     }, 0);
   }, [permissions]);
+
+  /* =========================================================
+     Render
+  ========================================================= */
 
   return (
     <div className="permission-matrix-card">
@@ -110,81 +226,89 @@ function PermissionMatrix({ permissions = [], setPermissions }) {
           </thead>
 
           <tbody>
-            {permissions.map((row, index) => (
-              <tr key={row.module}>
-                <td className="module-name">{row.module}</td>
+            {permissions.map((row, index) => {
+              /*
+               * Always calculate All from the
+               * six actual permission values.
+               */
+              const isAllEnabled = areAllPermissionsEnabled(row);
 
-                {/* ALL */}
+              return (
+                <tr key={row.module || index}>
+                  <td className="module-name">{row.module}</td>
 
-                <td>
-                  <input
-                    type="checkbox"
-                    checked={row.all}
-                    onChange={() => handleToggleAll(index)}
-                  />
-                </td>
+                  {/* ALL */}
 
-                {/* VIEW */}
+                  <td>
+                    <input
+                      type="checkbox"
+                      checked={isAllEnabled}
+                      onChange={() => handleToggleAll(index)}
+                    />
+                  </td>
 
-                <td>
-                  <input
-                    type="checkbox"
-                    checked={row.view}
-                    onChange={() => handleToggle(index, "view")}
-                  />
-                </td>
+                  {/* VIEW */}
 
-                {/* CREATE */}
+                  <td>
+                    <input
+                      type="checkbox"
+                      checked={row.view === true}
+                      onChange={() => handleToggle(index, "view")}
+                    />
+                  </td>
 
-                <td>
-                  <input
-                    type="checkbox"
-                    checked={row.create}
-                    onChange={() => handleToggle(index, "create")}
-                  />
-                </td>
+                  {/* CREATE */}
 
-                {/* EDIT */}
+                  <td>
+                    <input
+                      type="checkbox"
+                      checked={row.create === true}
+                      onChange={() => handleToggle(index, "create")}
+                    />
+                  </td>
 
-                <td>
-                  <input
-                    type="checkbox"
-                    checked={row.edit}
-                    onChange={() => handleToggle(index, "edit")}
-                  />
-                </td>
+                  {/* EDIT */}
 
-                {/* DELETE */}
+                  <td>
+                    <input
+                      type="checkbox"
+                      checked={row.edit === true}
+                      onChange={() => handleToggle(index, "edit")}
+                    />
+                  </td>
 
-                <td>
-                  <input
-                    type="checkbox"
-                    checked={row.delete}
-                    onChange={() => handleToggle(index, "delete")}
-                  />
-                </td>
+                  {/* DELETE */}
 
-                {/* ASSIGN */}
+                  <td>
+                    <input
+                      type="checkbox"
+                      checked={row.delete === true}
+                      onChange={() => handleToggle(index, "delete")}
+                    />
+                  </td>
 
-                <td>
-                  <input
-                    type="checkbox"
-                    checked={row.assign}
-                    onChange={() => handleToggle(index, "assign")}
-                  />
-                </td>
+                  {/* ASSIGN */}
 
-                {/* APPROVE */}
+                  <td>
+                    <input
+                      type="checkbox"
+                      checked={row.assign === true}
+                      onChange={() => handleToggle(index, "assign")}
+                    />
+                  </td>
 
-                <td>
-                  <input
-                    type="checkbox"
-                    checked={row.approve}
-                    onChange={() => handleToggle(index, "approve")}
-                  />
-                </td>
-              </tr>
-            ))}
+                  {/* APPROVE */}
+
+                  <td>
+                    <input
+                      type="checkbox"
+                      checked={row.approve === true}
+                      onChange={() => handleToggle(index, "approve")}
+                    />
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

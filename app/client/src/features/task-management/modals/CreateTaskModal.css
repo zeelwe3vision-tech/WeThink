@@ -240,6 +240,40 @@
   display:none;
 }
 
+/* ✅ ADD THESE STYLES TO EditTaskModal.css */
+
+.attachment-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.attachment-wrapper .attachment-box {
+  flex: 1;
+}
+
+.remove-file-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+  background: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.remove-file-btn:hover {
+  background: rgba(239, 68, 68, 0.25);
+  color: #ef4444;
+  border-color: #ef4444;
+}
+
 /* ===================================================
    Validation
 =================================================== */

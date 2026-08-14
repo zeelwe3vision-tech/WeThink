@@ -69,8 +69,12 @@ function EmployeeInfo() {
   const filteredEmployees = useMemo(() => {
     let data = [...employees];
 
+    /* ==========================================
+     Search
+  ========================================== */
+
     if (search.trim() !== "") {
-      const keyword = search.toLowerCase();
+      const keyword = search.trim().toLowerCase();
 
       data = data.filter((employee) => {
         return (
@@ -82,15 +86,29 @@ function EmployeeInfo() {
       });
     }
 
+    /* ==========================================
+     Status
+     "All" means no status filtering
+  ========================================== */
+
     if (statusFilter !== "All") {
       data = data.filter((employee) => employee.status === statusFilter);
     }
+
+    /* ==========================================
+     Department
+     "All" means no department filtering
+  ========================================== */
 
     if (departmentFilter !== "All") {
       data = data.filter(
         (employee) => employee.department === departmentFilter,
       );
     }
+
+    /* ==========================================
+     Sort
+  ========================================== */
 
     if (sortBy === "A-Z") {
       data.sort((a, b) =>
@@ -103,6 +121,12 @@ function EmployeeInfo() {
         (b.first_name || "").localeCompare(a.first_name || ""),
       );
     }
+
+    /*
+     * "Newest" keeps the original employee
+     * order unless you already receive employees
+     * newest-first from the API.
+     */
 
     return data;
   }, [employees, search, statusFilter, departmentFilter, sortBy]);

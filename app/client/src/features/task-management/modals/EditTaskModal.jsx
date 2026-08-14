@@ -17,6 +17,14 @@ const initialForm = {
   attachment: null,
 };
 
+// Helper function to format any date into YYYY-MM-DD required by <input type="date">
+const formatDateForInput = (value) => {
+  if (!value) return "";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+  return date.toISOString().split("T")[0];
+};
+
 function EditTaskModal({
   open,
   task,
@@ -34,16 +42,21 @@ function EditTaskModal({
 
   useEffect(() => {
     if (open && task) {
+      const start = formatDateForInput(
+        task.startDate || task.start_date || task.created_at,
+      );
+      const due = formatDateForInput(task.dueDate || task.due_date);
+
       setForm({
         title: task.title || "",
         description: task.description || "",
-        project: task.project || "",
-        module: task.module || "",
+        project: task.project || task.project_id || "",
+        module: task.module || task.module_id || "",
         priority: task.priority || "Medium",
         status: task.status || "To Do",
-        startDate: task.startDate || "",
-        dueDate: task.dueDate || "",
-        dependency: task.dependency || "",
+        startDate: start,
+        dueDate: due,
+        dependency: task.dependency || task.dependency_id || "",
         attachment: null,
       });
       setErrors({});
@@ -76,6 +89,15 @@ function EditTaskModal({
   const handleChange = (e) => {
     const { name, value } = e.target;
 
+    // Validate due date cannot be set before starting date
+    if (name === "dueDate" && form.startDate && value < form.startDate) {
+      setErrors((prev) => ({
+        ...prev,
+        dueDate: "Due date cannot be earlier than starting date",
+      }));
+      return;
+    }
+
     setForm((prev) => ({
       ...prev,
       [name]: value,
@@ -98,8 +120,27 @@ function EditTaskModal({
     }));
   };
 
+  // ✅ ADD THIS HANDLER INSIDE EditTaskModal
+  const handleRemoveFile = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setForm((prev) => ({
+      ...prev,
+      attachment: null,
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Additional due date validation check before submit
+    if (form.dueDate && form.startDate && form.dueDate < form.startDate) {
+      setErrors((prev) => ({
+        ...prev,
+        dueDate: "Due date cannot be earlier than starting date",
+      }));
+      return;
+    }
 
     const validation = validateTask(form);
 
@@ -114,11 +155,11 @@ function EditTaskModal({
       const response = await updateTask(task.id, form);
 
       if (response.success) {
-        onSuccess(response.task);
+        onSuccess(response.task || response.data);
         onClose();
       }
     } catch (error) {
-      console.error(error);
+      console.error("Update task failed:", error);
     } finally {
       setLoading(false);
     }
@@ -200,6 +241,7 @@ function EditTaskModal({
                 ))}
               </select>
             </div>
+
             <div className="form-group">
               <label>Priority</label>
 
@@ -226,17 +268,19 @@ function EditTaskModal({
               </select>
             </div>
 
+            {/* Starting Date - Disabled (Not Editable) */}
             <div className="form-group">
               <label>Starting Date</label>
 
-              <div className="date-field">
+              <div className="date-field disabled">
                 <Calendar size={18} />
 
                 <input
                   type="date"
                   name="startDate"
                   value={form.startDate}
-                  onChange={handleChange}
+                  disabled
+                  readOnly
                 />
               </div>
 
@@ -245,6 +289,7 @@ function EditTaskModal({
               )}
             </div>
 
+            {/* Due Date - Min date set to Starting Date */}
             <div className="form-group">
               <label>Due Date</label>
 
@@ -255,6 +300,7 @@ function EditTaskModal({
                   type="date"
                   name="dueDate"
                   value={form.dueDate}
+                  min={form.startDate}
                   onChange={handleChange}
                 />
               </div>
@@ -282,22 +328,37 @@ function EditTaskModal({
               </select>
             </div>
 
+            {/* ✅ REPLACE ATTACHMENT FIELD WITH THIS */}
             <div className="form-group full-width">
               <label>Attachment</label>
 
-              <label className="attachment-box">
-                <Paperclip size={18} />
+              <div className="attachment-wrapper">
+                <label className="attachment-box">
+                  <Paperclip size={18} />
 
-                <span>
-                  {form.attachment
-                    ? form.attachment.name
-                    : task?.attachmentName || "Choose File"}
-                </span>
+                  <span>
+                    {form.attachment
+                      ? form.attachment.name
+                      : task?.attachmentName || "Choose File"}
+                  </span>
 
-                <input type="file" hidden onChange={handleFile} />
-              </label>
+                  <input type="file" hidden onChange={handleFile} />
+                </label>
+
+                {form.attachment && (
+                  <button
+                    type="button"
+                    className="remove-file-btn"
+                    onClick={handleRemoveFile}
+                    title="Remove selected file"
+                  >
+                    <X size={16} />
+                  </button>
+                )}
+              </div>
             </div>
           </div>
+
           <div className="task-modal-footer">
             <button
               type="button"

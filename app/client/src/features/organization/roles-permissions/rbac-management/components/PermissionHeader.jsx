@@ -2,15 +2,29 @@ import "./PermissionHeader.css";
 import { Users, RotateCcw } from "lucide-react";
 
 function PermissionHeader({
-  employees,
+  employees = [],
   selectedEmployee,
   onSelectEmployee,
   onResetPermission,
 }) {
+  const handleEmployeeChange = (e) => {
+    const employeeId = e.target.value;
+
+    if (!employeeId) {
+      onSelectEmployee(null);
+      return;
+    }
+
+    const employee = employees.find(
+      (item) => String(item.id) === String(employeeId),
+    );
+
+    onSelectEmployee(employee || null);
+  };
+
   return (
     <>
       {/* Page Header */}
-
       <div className="permission-page-header">
         <h1 className="permission-title">RBAC Management</h1>
 
@@ -20,7 +34,6 @@ function PermissionHeader({
       </div>
 
       {/* Employee Selection Card */}
-
       <div className="employee-selection-card">
         <label className="selection-label">Select Employee</label>
 
@@ -30,22 +43,21 @@ function PermissionHeader({
 
             <select
               value={selectedEmployee?.id || ""}
-              onChange={(e) => onSelectEmployee(e.target.value)}
+              onChange={handleEmployeeChange}
             >
               <option value="">Select Employee</option>
 
               {employees.map((employee) => (
                 <option key={employee.id} value={employee.id}>
                   {employee.first_name} {employee.last_name}
-                  {" ("}
-                  {employee.employee_code}
-                  {")"}
+                  {employee.employee_id ? ` (${employee.employee_id})` : ""}
                 </option>
               ))}
             </select>
           </div>
 
           <button
+            type="button"
             className="permission-reset-btn"
             disabled={!selectedEmployee}
             onClick={onResetPermission}

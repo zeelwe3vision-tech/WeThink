@@ -114,25 +114,19 @@ function CreateRoleModal({ open, onClose, onSave, role = null }) {
                 value={formData.hierarchy}
                 onChange={(e) => handleChange("hierarchy", e.target.value)}
               >
-                <option value="">Select Level</option>
-
-                <option value="1">Level 1</option>
-
-                <option value="2">Level 2</option>
-
-                <option value="3">Level 3</option>
-
-                <option value="4">Level 4</option>
-
-                <option value="5">Level 5</option>
+                <option value="All">All Levels</option>
+                <option value="1">Level 1 - CEO</option>
+                <option value="2">Level 2 - HR</option>
+                <option value="3">Level 3 - Admin</option>
+                <option value="4">Level 4 - Manager</option>
+                <option value="5">Level 5 - Team Leader</option>
+                <option value="6">Level 6 - Employee</option>
               </select>
             </div>
 
             {/* Parent Role */}
-
             <div className="role-form-group">
               <label>Parent Role</label>
-
               <select
                 value={formData.parentRole}
                 onChange={(e) => handleChange("parentRole", e.target.value)}

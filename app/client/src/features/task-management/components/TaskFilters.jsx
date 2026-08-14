@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Search, RotateCcw, ChevronDown } from "lucide-react";
 
 import "./TaskFilters.css";
@@ -13,11 +13,9 @@ function TaskFilters({
 }) {
   const [searchValue, setSearchValue] = useState(filters.search || "");
 
-  /*
-  ----------------------------------
-  Debounced Search
-  ----------------------------------
-  */
+  /* =========================================================
+     Debounced Search
+  ========================================================= */
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -30,11 +28,9 @@ function TaskFilters({
     return () => clearTimeout(timer);
   }, [searchValue, setFilters]);
 
-  /*
-  ----------------------------------
-  Dropdown Change
-  ----------------------------------
-  */
+  /* =========================================================
+     Dropdown Change
+  ========================================================= */
 
   const handleChange = (field, value) => {
     setFilters((prev) => ({
@@ -43,11 +39,9 @@ function TaskFilters({
     }));
   };
 
-  /*
-  ----------------------------------
-  Reset Filters
-  ----------------------------------
-  */
+  /* =========================================================
+     Reset Filters
+  ========================================================= */
 
   const handleReset = () => {
     setSearchValue("");
@@ -60,9 +54,8 @@ function TaskFilters({
   return (
     <div className="task-filters">
       {/* Search */}
-
-      <div className="filter-search">
-        <Search size={18} />
+      <div className="task-filter-search">
+        <Search size={18} strokeWidth={2} />
 
         <input
           type="text"
@@ -73,92 +66,108 @@ function TaskFilters({
       </div>
 
       {/* Status */}
+      <div className="task-filter-item">
+        <div className="task-filter-select-wrapper">
+          <select
+            value={filters.status}
+            onChange={(e) => handleChange("status", e.target.value)}
+          >
+            <option value="">All Status</option>
+            <option value="todo">To Do</option>
+            <option value="inprogress">In Progress</option>
+            <option value="review">Review</option>
+            <option value="completed">Completed</option>
+          </select>
 
-      <div className="filter-item">
-        <select
-          value={filters.status}
-          onChange={(e) => handleChange("status", e.target.value)}
-        >
-          <option value="">All Status</option>
-
-          <option value="todo">To Do</option>
-
-          <option value="inprogress">In Progress</option>
-
-          <option value="review">Review</option>
-
-          <option value="completed">Completed</option>
-        </select>
-
-        <ChevronDown size={18} />
+          <ChevronDown
+            className="task-filter-dropdown-icon"
+            size={16}
+            strokeWidth={2}
+          />
+        </div>
       </div>
 
       {/* Priority */}
+      <div className="task-filter-item">
+        <div className="task-filter-select-wrapper">
+          <select
+            value={filters.priority}
+            onChange={(e) => handleChange("priority", e.target.value)}
+          >
+            <option value="">All Priority</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
 
-      <div className="filter-item">
-        <select
-          value={filters.priority}
-          onChange={(e) => handleChange("priority", e.target.value)}
-        >
-          <option value="">All Priority</option>
-
-          <option value="high">High</option>
-
-          <option value="medium">Medium</option>
-
-          <option value="low">Low</option>
-        </select>
-
-        <ChevronDown size={18} />
+          <ChevronDown
+            className="task-filter-dropdown-icon"
+            size={16}
+            strokeWidth={2}
+          />
+        </div>
       </div>
 
       {/* Assignee */}
+      <div className="task-filter-item">
+        <div className="task-filter-select-wrapper">
+          <select
+            value={filters.assignee}
+            onChange={(e) => handleChange("assignee", e.target.value)}
+          >
+            <option value="">All Assignee</option>
 
-      <div className="filter-item">
-        <select
-          value={filters.assignee}
-          onChange={(e) => handleChange("assignee", e.target.value)}
-        >
-          <option value="">All Assignee</option>
+            {assignees.map((user) => (
+              <option key={user.id} value={user.id}>
+                {user.first_name} {user.last_name}
+              </option>
+            ))}
+          </select>
 
-          {assignees.map((user) => (
-            <option key={user.id} value={user.id}>
-              {user.first_name} {user.last_name}
-            </option>
-          ))}
-        </select>
-
-        <ChevronDown size={18} />
+          <ChevronDown
+            className="task-filter-dropdown-icon"
+            size={16}
+            strokeWidth={2}
+          />
+        </div>
       </div>
 
       {/* Project */}
+      <div className="task-filter-item">
+        <div className="task-filter-select-wrapper">
+          <select
+            value={filters.project}
+            onChange={(e) => handleChange("project", e.target.value)}
+          >
+            <option value="">All Project</option>
 
-      <div className="filter-item">
-        <select
-          value={filters.project}
-          onChange={(e) => handleChange("project", e.target.value)}
-        >
-          <option value="">All Project</option>
+            {projects.map((project) => (
+              <option key={project.id} value={project.id}>
+                {project.project_name}
+              </option>
+            ))}
+          </select>
 
-          {projects.map((project) => (
-            <option key={project.id} value={project.id}>
-              {project.project_name}
-            </option>
-          ))}
-        </select>
-
-        <ChevronDown size={18} />
+          <ChevronDown
+            className="task-filter-dropdown-icon"
+            size={16}
+            strokeWidth={2}
+          />
+        </div>
       </div>
-      {/* Reset Button */}
 
-      <button type="button" className="filter-reset-btn" onClick={handleReset}>
+      {/* Reset */}
+      <button
+        type="button"
+        className="task-filter-reset-btn"
+        onClick={handleReset}
+      >
         <RotateCcw size={16} />
         <span>Reset</span>
       </button>
-      
-      {/* Total Tasks */}
 
-      <div className="filter-total-task">
+      {/* Total Tasks */}
+      <div className="task-filter-total">
         <span>Total Tasks:</span>
         <strong>{totalTasks}</strong>
       </div>

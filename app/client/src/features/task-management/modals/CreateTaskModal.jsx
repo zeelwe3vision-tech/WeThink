@@ -59,6 +59,15 @@ function CreateTaskModal({
   const handleChange = (e) => {
     const { name, value } = e.target;
 
+    // Validate due date cannot be set before starting date
+    if (name === "dueDate" && form.startDate && value < form.startDate) {
+      setErrors((prev) => ({
+        ...prev,
+        dueDate: "Due date cannot be earlier than starting date",
+      }));
+      return;
+    }
+
     setForm((prev) => ({
       ...prev,
       [name]: value,
@@ -81,8 +90,26 @@ function CreateTaskModal({
     }));
   };
 
+  const handleRemoveFile = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setForm((prev) => ({
+      ...prev,
+      attachment: null,
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Due date validation check before submission
+    if (form.dueDate && form.startDate && form.dueDate < form.startDate) {
+      setErrors((prev) => ({
+        ...prev,
+        dueDate: "Due date cannot be earlier than starting date",
+      }));
+      return;
+    }
 
     const validationErrors = validateTask(form);
 
@@ -286,6 +313,7 @@ function CreateTaskModal({
               )}
             </div>
 
+            {/* Due Date with min={form.startDate} constraint */}
             <div className="form-group">
               <label>Due Date</label>
 
@@ -296,6 +324,7 @@ function CreateTaskModal({
                   type="date"
                   name="dueDate"
                   value={form.dueDate}
+                  min={form.startDate}
                   onChange={handleChange}
                 />
               </div>
@@ -323,18 +352,32 @@ function CreateTaskModal({
               </select>
             </div>
 
+            {/* Attachment field with Remove Button */}
             <div className="form-group full-width">
               <label>Attachment</label>
 
-              <label className="attachment-box">
-                <Paperclip size={18} />
+              <div className="attachment-wrapper">
+                <label className="attachment-box">
+                  <Paperclip size={18} />
 
-                <span>
-                  {form.attachment ? form.attachment.name : "Choose File"}
-                </span>
+                  <span>
+                    {form.attachment ? form.attachment.name : "Choose File"}
+                  </span>
 
-                <input type="file" hidden onChange={handleFile} />
-              </label>
+                  <input type="file" hidden onChange={handleFile} />
+                </label>
+
+                {form.attachment && (
+                  <button
+                    type="button"
+                    className="remove-file-btn"
+                    onClick={handleRemoveFile}
+                    title="Remove selected file"
+                  >
+                    <X size={16} />
+                  </button>
+                )}
+              </div>
             </div>
           </div>
 

@@ -35,9 +35,9 @@ function RoleManagement() {
 
   const [search, setSearch] = useState("");
 
-  const [statusFilter, setStatusFilter] = useState("");
+  const [statusFilter, setStatusFilter] = useState("All");
 
-  const [hierarchyFilter, setHierarchyFilter] = useState("");
+  const [hierarchyFilter, setHierarchyFilter] = useState("All");
 
   const [selectedRole, setSelectedRole] = useState(null);
 
@@ -87,15 +87,18 @@ function RoleManagement() {
 
   const filteredRoles = useMemo(() => {
     return roles.filter((role) => {
+      const keyword = search.trim().toLowerCase();
+
       const searchMatch =
-        role.role_name.toLowerCase().includes(search.toLowerCase()) ||
-        role.role_code.toLowerCase().includes(search.toLowerCase());
+        keyword === "" ||
+        (role.role_name || "").toLowerCase().includes(keyword) ||
+        (role.role_code || "").toLowerCase().includes(keyword);
 
       const statusMatch =
-        statusFilter === "" ? true : String(role.status) === statusFilter;
+        statusFilter === "All" ? true : String(role.status) === statusFilter;
 
       const hierarchyMatch =
-        hierarchyFilter === ""
+        hierarchyFilter === "All"
           ? true
           : String(role.hierarchy_level) === hierarchyFilter;
 
@@ -205,10 +208,10 @@ function RoleManagement() {
 
   const handleReset = () => {
     setSearch("");
-    setStatusFilter("");
-    setHierarchyFilter("");
+    setStatusFilter("All");
+    setHierarchyFilter("All");
   };
-
+  
   return (
     <div className="role-management-page">
       {/* ======================================================
