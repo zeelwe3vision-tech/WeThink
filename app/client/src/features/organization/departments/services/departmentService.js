@@ -1,8 +1,8 @@
 // Deepak - 28/07/2026 - Start
 
-const BASE_URL = "http://localhost:5000/api/departments";
+// const BASE_URL = "http://localhost:5000/api/departments";
 
-// const BASE_URL = "https://wethink.onrender.com/api/departments";
+const BASE_URL = "https://wethink.onrender.com/api/departments";
 
 // ======================================
 // Get All Departments

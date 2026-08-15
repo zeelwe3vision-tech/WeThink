@@ -5,17 +5,13 @@
   width: 100%;
   background: #0a0f1f;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   padding: 0 28px;
-
   position: sticky;
   top: 0;
   z-index: 100;
-
   font-family: "Poppins", sans-serif;
 }
 
